@@ -2,66 +2,63 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
+use App\Models\User;
+use App\Models\ITRModel;
+use App\Models\ProductModel;
+use App\Models\MaterialModel;
+use App\Models\StockCountModel;
 use Illuminate\Database\Seeder;
-use Database\Seeders\UsersSeeder;
-use Database\Seeders\SatuanSeeder;
-use Database\Seeders\CategoriesSeeder;
-use Database\Seeders\RolesPermissionsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call([
-            RolesPermissionsSeeder::class,
-            UsersSeeder::class,
-            CategoriesSeeder::class,
-            SatuanSeeder::class
+        User::factory()->create([
+            'name' => 'Central Admin',
+            'email' => 'centraladmin@gmail.com',
+            'role' => 'admin_pengajuan',
+            'password' => '123456'
         ]);
+        User::factory()->create([
+            'name' => 'Main Storage',
+            'email' => 'mainstorage@gmail.com',
+            'role' => 'admin_gudang',
+            'password' => '123456'
+        ]);
+        User::factory()->create([
+            'name' => 'Sub Storage',
+            'email' => 'substorage@gmail.com',
+            'role' => 'admin_gudang',
+            'password' => '123456'
+        ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+            'password' => '123456'
+        ]);
+        User::factory()->create([
+            'name' => 'Kepala Perusahaan',
+            'email' => 'kepalaperusahaan@gmail.com',
+            'role' => 'kepala_perusahaan',
+            'password' => '123456'
+        ]);
+        // User::factory()->create([
+        //     'name' => 'AdminGudang3',
+        //     'email' => 'admingudang3@gmail.com',
+        //     'role' => 'admin_gudang',
+        //     'password' => '123456'
+        // ]);
 
-        Product::create([
-            'kategori_id' => 1,
-            'satuan_id' => 1,
-            'kode' => 1100,
-            'nama_produk' => "Sabun Nuvo",
-            "harga" => 4000,
-            "stok" => 200
-        ]);
+        // MaterialModel::factory(20)->create();
 
-        Product::create([
-            'kategori_id' => 2,
-            'satuan_id' => 1,
-            'kode' => 1200,
-            'nama_produk' => "Indomie Mie Soto",
-            "harga" => 4000,
-            "stok" => 150,
-            "diskon" => 10
-        ]);
+        // StockCountModel::factory(20)->create();
 
-        Product::create([
-            'kategori_id' => 3,
-            'satuan_id' => 3,
-            'kode' => 1300,
-            'nama_produk' => "Beras A",
-            "harga" => 20000,
-            "stok" => 500,
-            "diskon" => 5
-        ]);
+        // ITRModel::factory(20)->create();
 
-        Product::create([
-            'kategori_id' => 4,
-            'satuan_id' => 4,
-            'kode' => 1400,
-            'nama_produk' => "Minyak Goreng Mama Suka",
-            "harga" => 30000,
-            "stok" => 500,
-            "diskon" => 0
-        ]);
+        // ProductModel::factory(20)->create();
     }
 }
