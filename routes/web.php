@@ -14,6 +14,7 @@ use App\Http\Controllers\ExpiredController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataKapalController;
 use App\Http\Controllers\StockCountController;
 
 /*
@@ -39,24 +40,24 @@ Route::middleware(['auth'])->group(function () {
 
         if ($notification) {
             // Mark the notification as read
-            
+
             // Do something with the notification, if needed
-            if(str_contains($notification->data['message'], 'Material')) {
+            if (str_contains($notification->data['message'], 'Material')) {
                 $notification->markAsRead();
                 return redirect()->route('materialReqs');
             }
 
-            if(str_contains($notification->data['message'], 'Stock Count')) {
+            if (str_contains($notification->data['message'], 'Stock Count')) {
                 $notification->markAsRead();
                 return redirect()->route('stockCounts');
             }
 
-            if(str_contains($notification->data['message'], 'ITR')) {
+            if (str_contains($notification->data['message'], 'ITR')) {
                 $notification->markAsRead();
                 return redirect()->route('itr');
             }
 
-            if(str_contains($notification->data['message'], 'DO')) {
+            if (str_contains($notification->data['message'], 'DO')) {
                 $notification->markAsRead();
                 return redirect()->route('do');
             }
@@ -72,12 +73,16 @@ Route::middleware(['auth'])->group(function () {
     })->name('markasread-all');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     /* Report */
     Route::get('/report', function () {
         return view('admin/report');
     });
-    
+
+    // data kapal
+    Route::resource('data-kapal', DataKapalController::class);
+
+
     // Material Request
     Route::get('/materialreq', [MaterialController::class, 'index'])->name('materialReqs');
     Route::get('/create-material', [MaterialController::class, 'indexcreate']);
@@ -87,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/update-material/{materialId}', [MaterialController::class, 'update'])->name('updateMaterial');
     Route::get('/update-index-material/{materialId}', [MaterialController::class, 'edit'])->name('updateIndexMaterial');
     Route::get('/material-pdf/{id}', [MaterialController::class, 'generatepdf'])->name('material-pdf');
-    
+
     // product
     Route::middleware(['auth', 'role:admin_gudang'])->group(function () {
         Route::get('/product', [ProductController::class, 'index'])->name('products');
@@ -109,9 +114,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/activeDO/{id}', [ExpiredController::class, 'activeDO'])->name('activeDO');
 
         Route::get('/reporting', [ReportController::class, 'index'])->name('reporting');
-
     });
-    
+
     // ITR
     Route::get('/ITR', [ITRController::class, 'index'])->name('itr');
     Route::get('/ITR-In', [ITRController::class, 'ITRIn'])->name('itrIn');
@@ -122,7 +126,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-ITR/{itrId}', [ITRController::class, 'edit'])->name('editItr');
     Route::put('/update-ITR/{itrId}', [ITRController::class, 'update'])->name('updateItr');
     Route::get('/itr-pdf/{id}', [ITRController::class, 'generatepdf'])->name('itr-pdf');
-    
+
     // Stock Count
     Route::get('/stockcount', [StockCountController::class, 'index'])->name('stockCounts');
     Route::get('/create-stock', [StockCountController::class, 'indexcreate']);
@@ -142,7 +146,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-DO/{id}', [DOController::class, 'edit'])->name('editDO');
     Route::put('/update-DO/{id}', [DOController::class, 'update'])->name('updateDO');
     Route::get('/DO-pdf/{id}', [DOController::class, 'generatepdf'])->name('DO-pdf');
-    
+
     // logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
@@ -153,5 +157,4 @@ Route::middleware(['auth', 'role:admin_pengajuan'])->group(function () {
     Route::put('/approvematerial/{id}', [MaterialController::class, 'approve'])->name('approveMaterial');
     Route::put('/approvestock/{id}', [StockCountController::class, 'approve'])->name('approveStock');
     Route::put('/approveDO/{id}', [DOController::class, 'approve'])->name('approveDO');
-
 });

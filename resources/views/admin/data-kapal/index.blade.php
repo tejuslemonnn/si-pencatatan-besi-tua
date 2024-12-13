@@ -2,37 +2,6 @@
 @section('title', 'Interwarehouse Transfer Request')
 
 @section('content')
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Interwarehouse Transfer Request In</h1>
-
-    {{-- @if (auth()->user()->role != 'admin_pengajuan')
-        <div class="my-3">
-            <a href="/create-ITR" class="btn btn-secondary">Create</a>
-        </div>
-    @endif --}}
-
-    {{-- <div class="mb-3">
-        <form action="/ITR">
-            <div class="row">
-                <div class="col-md-2 col-12">
-                    <label for="from_date">Start Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control " id="from_date" name="from_date" value="{{ date('Y-m-d') }}">
-                </div>
-
-                <div class="col-md-2 col-12">
-                    <label for="to_date">End Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control " id="to_date" name="to_date">
-                </div>
-
-                <div class="col-md-2 col-12">
-                    <label for="">Filter</label><br>
-                    <button type="submit" class="btn btn-secondary">Submit</button>
-                    <a href="/ITR" class="btn btn-warning">Refresh</a>
-                </div>
-
-            </div>
-        </form>
-    </div> --}}
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -46,7 +15,7 @@
             <input type="text" class="form-control" id="min" name="min">
         </div>
 
-        <div class="col-md-2 col-12">
+        <div class="col-md-2 col-12 mb-2">
             <label for="to_date">End Date<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="max" name="max">
         </div>
@@ -55,11 +24,8 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>ITR No</th>
-                    <th>Source Warehouse</th>
-                    <th>Date</th>
-                    <th>Destination Warehouse</th>
-                    <th>Status</th>
+                    <th>Nama Kapal</th>
+                    <th>Tanggal Datang</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -70,21 +36,15 @@
                 @foreach ($data as $row)
                     <tr>
                         <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
-                        <td>
-                            {{ $row->itr_no }}
-                        </td>
 
-                        <td>{{ $row->sourceWarehouse->name }}</td>
-                        <td>{{ $row->schedule }}</td>
-                        <td>
-                            {{ $row->destinationWarehouse->name }}
-                        </td>
-                        {{-- <td><button type="submit" class="btn btn-warning text-dark">Waitting Approval</button></td> --}}
-                        @if ($row->status == 0)
-                            <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button></td>
+                        <td>{{ $row->nama_kapal }}</td>
+                        <td>{{ $row->tanggal_datang }}</td>
+                        {{-- @if ($row->status == 0)
+                            <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
+                            </td>
                         @else
                             <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
-                        @endif
+                        @endif --}}
                         <td>
                             <a href="/view-ITR/{{ $row->id }}" class="btn btn-info"><i class="fas fa-eye"></i>
                                 Detail</a>
@@ -112,6 +72,6 @@
         </table>
 
         {{ $data->links() }}
-    </div>
 
+    </div>
 @endsection

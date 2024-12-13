@@ -9503,6 +9503,18 @@ button.bg-dark:focus {
   text-align: center !important;
 }
 
+.text-purple{
+  color: #5C55BF !important;
+}
+
+.nav-link.text-purple {
+  color: #5C55BF !important;
+}
+
+.nav-link.text-purple i{
+  color: inherit;
+}
+
 @media (min-width: 576px) {
   .text-sm-left {
     text-align: left !important;
@@ -10131,6 +10143,189 @@ a:focus {
 }
 
 .sidebar .nav-item.dropdown .dropdown-toggle::after,
+.topnav .nav-item.dropdown .dropdown-toggle::after {
+  width: 1rem;
+  text-align: center;
+  float: right;
+  vertical-align: 0;
+  border: 0;
+  font-weight: 900;
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+}
+
+.sidebar .nav-item.dropdown.show .dropdown-toggle::after,
+.topnav .nav-item.dropdown.show .dropdown-toggle::after {
+  content: '\f107';
+}
+
+.sidebar .nav-item .nav-link,
+.topnav .nav-item .nav-link {
+  position: relative;
+}
+
+.sidebar .nav-item .nav-link .badge-counter,
+.topnav .nav-item .nav-link .badge-counter {
+  position: absolute;
+  transform: scale(0.7);
+  transform-origin: top right;
+  right: .25rem;
+  margin-top: -.25rem;
+}
+
+.sidebar .nav-item .nav-link .img-profile,
+.topnav .nav-item .nav-link .img-profile {
+  height: 2rem;
+  width: 2rem;
+}
+
+.topnav {
+  height: 3rem;
+}
+
+.topnav-sidebar{
+  width: 6.5rem;
+}
+
+.topnav .navbar-search {
+  width: 25rem;
+}
+
+.topnav .navbar-search input {
+  font-size: 0.85rem;
+  height: auto;
+}
+
+.topnav .topnav-divider {
+  width: 0;
+  border-right: 1px solid #e3e6f0;
+  height: calc(4.375rem - 2rem);
+  margin: auto 1rem;
+}
+
+.topnav .nav-item .nav-link {
+  height: 4.375rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+
+.topnav .nav-item .nav-link:focus {
+  outline: none;
+}
+
+.topnav .nav-item:focus {
+  outline: none;
+}
+
+.topnav .dropdown {
+  position: static;
+}
+
+.topnav .dropdown .dropdown-menu {
+  width: calc(100% - 1.5rem);
+  right: 0.75rem;
+}
+
+.topnav .dropdown-list {
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+
+.topnav .dropdown-list .dropdown-header {
+  background-color: #4e73df;
+  border: 1px solid #4e73df;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #fff;
+}
+
+.topnav .dropdown-list .dropdown-item {
+  white-space: normal;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 1px solid #e3e6f0;
+  border-right: 1px solid #e3e6f0;
+  border-bottom: 1px solid #e3e6f0;
+  line-height: 1.3rem;
+}
+
+.topnav .dropdown-list .dropdown-item .dropdown-list-image {
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.topnav .dropdown-list .dropdown-item .dropdown-list-image img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.topnav .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
+  background-color: #eaecf4;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0.125rem solid #fff;
+}
+
+.topnav .dropdown-list .dropdown-item .text-truncate {
+  max-width: 10rem;
+}
+
+.topnav .dropdown-list .dropdown-item:active {
+  background-color: #eaecf4;
+  color: #3a3b45;
+}
+
+@media (min-width: 576px) {
+  .topnav .dropdown {
+    position: relative;
+  }
+  .topnav .dropdown .dropdown-menu {
+    width: auto;
+    right: 0;
+  }
+  .topnav .dropdown-list {
+    width: 20rem !important;
+  }
+  .topnav .dropdown-list .dropdown-item .text-truncate {
+    max-width: 13.375rem;
+  }
+  .topnav-sidebar{
+    width: 14rem;
+  }
+}
+
+.topnav.navbar-dark .navbar-nav .nav-item .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.topnav.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+  color: #fff;
+}
+
+.topnav.navbar-dark .navbar-nav .nav-item .nav-link:active {
+  color: #fff;
+}
+
+.topnav.navbar-light .navbar-nav .nav-item .nav-link {
+  color: #d1d3e2;
+}
+
+.topnav.navbar-light .navbar-nav .nav-item .nav-link:hover {
+  color: #b7b9cc;
+}
+
+.topnav.navbar-light .navbar-nav .nav-item .nav-link:active {
+  color: #858796;
+}
+
+.sidebar .nav-item.dropdown .dropdown-toggle::after,
 .topbar .nav-item.dropdown .dropdown-toggle::after {
   width: 1rem;
   text-align: center;
@@ -10174,14 +10369,6 @@ a:focus {
 .topbar #sidebarToggleTop {
   height: 2.5rem;
   width: 2.5rem;
-}
-
-.topbar #sidebarToggleTop:hover {
-  background-color: #eaecf4;
-}
-
-.topbar #sidebarToggleTop:active {
-  background-color: #dddfeb;
 }
 
 .topbar .navbar-search {
@@ -10630,7 +10817,7 @@ a:focus {
 }
 
 .sidebar-light hr.sidebar-divider {
-  border-top: 1px solid #eaecf4;
+    border-top: 1px solid rgba(0, 0, 0,0.6);
 }
 
 .sidebar-light .sidebar-heading {

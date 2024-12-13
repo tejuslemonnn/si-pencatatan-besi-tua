@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DataKapal extends Model
 {
     use HasFactory;
+
+    protected $table = 'data_kapals';
+
+    protected $guarded = [];
 }

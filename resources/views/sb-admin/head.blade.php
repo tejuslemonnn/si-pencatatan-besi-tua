@@ -17,10 +17,14 @@
     <!-- Custom styles for this template-->
     <link href="vendor/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     {{-- Font Awesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <link rel="stylesheet" href="{{ asset('font-awesome/all.min.css') }}"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/sb-admin-2.min.css') }}">
@@ -30,13 +34,15 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
     <style>
         .select2-selection__rendered {
-        line-height: 41px !important;
-    }
-    .select2-container .select2-selection--single {
-        height: 45px !important;
-    }
-    .select2-selection__arrow {
-        height: 44px !important;
-    }
+            line-height: 41px !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 45px !important;
+        }
+
+        .select2-selection__arrow {
+            height: 44px !important;
+        }
     </style>
 </head>
