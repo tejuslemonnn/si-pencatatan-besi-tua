@@ -25,19 +25,37 @@
         // Generate the full URL for the "create" route
         $createRouteUrl = Route::has($createRouteName) ? route($createRouteName) : '#';
 
+        // Determine if the current route ends with ".index"
         $showCreateButton = Str::endsWith($currentRouteName, '.index');
+
+        // If not ".index", create variable for back to ".index"
+        $indexRouteName = Str::before($currentRouteName, '.') . '.index';
+
+        // Generate the full URL for the "index" route
+        $backToIndexUrl = Route::has($indexRouteName) ? route($indexRouteName) : '#';
 
     @endphp
     @if ($showCreateButton)
         <div class="mr-3">
 
-
-            <a href="{{ $createRouteUrl }}" class="btn btn-secondary">
+            <a href="{{ $createRouteUrl }}" class="btn bg-purple text-white">
                 <i class="fas fa-plus"></i> Create
             </a>
 
 
         </div>
+    @else
+        <div>
+            <a href="{{ route($indexRouteName) }}" class="btn btn-danger mr-2"> <i class="fas fa-arrow-left"> </i>
+                Back</a>
+            <button type="button" class="btn btn-primary" id="submit_button"> <i class="fas fa-check">
+                </i>Save</button>
+        </div>
+        <script>
+            document.getElementById('submit_button').addEventListener('click', function() {
+                document.getElementById('add_form').submit();
+            });
+        </script>
     @endif
 
 

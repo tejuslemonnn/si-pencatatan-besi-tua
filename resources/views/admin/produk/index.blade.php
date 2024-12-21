@@ -15,7 +15,7 @@
             <input type="text" class="form-control" id="min" name="min">
         </div>
 
-        <div class="col-md-2 col-12 mb-2">
+        <div class="col-md-2 col-12 mb-4">
             <label for="to_date">End Date<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="max" name="max">
         </div>
@@ -24,8 +24,11 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Kode</th>
                     <th>Nama Kapal</th>
-                    <th>Tanggal Datang</th>
+                    <th>Kategori</th>
+                    <th>Berat</th>
+                    <th>Jumlah</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,8 +40,11 @@
                     <tr>
                         <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
 
-                        <td>{{ $row->nama_kapal }}</td>
-                        <td>{{ $row->tanggal_datang }}</td>
+                        <td>{{ $row->kode }}</td>
+                        <td>{{ $row->nama }}</td>
+                        <td>{{ $row->kategori->nama }}</td>
+                        <td>{{ $row->berat }}</td>
+                        <td>{{ $row->qty }}</td>
                         {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                             </td>
@@ -46,15 +52,15 @@
                             <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
                         @endif --}}
                         <td>
-                            <a href="{{ route('data-kapal.show', ['data_kapal' => $row->id]) }}" class="btn btn-info"><i
+                            <a href="{{ route('produk.show', ['produk' => $row->id]) }}" class="btn btn-info"><i
                                     class="fas fa-eye"></i>
                                 Detail</a>
 
                             @if (auth()->user()->role == 'admin' && $row->status != 1)
-                                <a href="{{ route('data-kapal.edit', ['data_kapal' => $row->id]) }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i> Edit
+                                <a href="{{ route('produk.edit', ['produk' => $row->id]) }}" class="btn btn-warning"><i
+                                        class="fas fa-edit"></i> Edit
                                 </a>
-                                <form action="{{ route('data-kapal.destroy', ['data_kapal' => $row->id]) }}" method="POST"
+                                <form action="{{ route('produk.destroy', ['produk' => $row->id]) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')

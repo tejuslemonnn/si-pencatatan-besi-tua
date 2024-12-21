@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataKapalController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\StockCountController;
 
 /*
@@ -81,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
 
     // data kapal
     Route::resource('data-kapal', DataKapalController::class);
+    Route::resource('produk', ProdukController::class);
 
 
     // Material Request

@@ -11,18 +11,34 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!--
+
     <div class="sidebar-heading">
-        Interface
-    </div> -->
+        Produk
+    </div>
 
     <li class="nav-item">
-        <a class="nav-link {{ url()->current() == route('data-kapal.index') ? 'text-purple' : '' }}"
+        <a class="nav-link {{ request()->routeIs('data-kapal.*') ? 'text-purple' : '' }}"
             href="{{ route('data-kapal.index') }}">
             {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
-            <i class="fa-solid fa-ship {{ url()->current() == route('data-kapal.index') ? 'text-purple' : '' }}"></i>
+            <i class="fa-solid fa-ship {{ request()->routeIs('data-kapal.*') ? 'text-purple' : '' }}"></i>
             <span class="font-weight-bold">Data Kapal</span></a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"
+            href="{{ route('produk.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Produk</span></a>
+    </li>
+
+    <div class="sidebar-heading">
+        DO
+    </div>
+
+    <div class="sidebar-heading">
+        Laporan
+    </div>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExpired"

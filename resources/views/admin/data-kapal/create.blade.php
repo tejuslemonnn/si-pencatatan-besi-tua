@@ -1,10 +1,11 @@
 @extends('sb-admin/app')
-@section('title', 'Create Material Request')
+@section('title', 'Create Data Kapal')
 
 @section('content')
     <!-- Page Heading -->
     <form action="{{ route('data-kapal.store') }}" method="POST" id="add_form">
         @csrf
+        <button type="submit" class="btn btn-primary d-none" id="submit_button">Submit</button>
 
         @if (session('error'))
             <div class="alert alert-danger mt-3">
@@ -21,13 +22,6 @@
                 </ul>
             </div>
         @endif
-        <div class="d-flex justify-content-lg-end">
-            <div>
-                <a href="{{ route('data-kapal.index') }}" class="btn btn-danger mr-2"> <i class="fas fa-arrow-left"> </i>
-                    Back</a>
-                <button type="submit" class="btn btn-primary" id="add_btn"> <i class="fas fa-check"> </i>Save</button>
-            </div>
-        </div>
 
         <div class="from-group col-12 my-2">
             <label for="nama_kapal">Nama Kapal</label>

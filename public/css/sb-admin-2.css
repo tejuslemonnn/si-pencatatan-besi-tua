@@ -9959,6 +9959,10 @@ a:focus {
   background-size: cover;
 }
 
+.bg-purple{
+  background-color: #5C55BF !important;
+}
+
 .bg-gray-100 {
   background-color: #f8f9fc !important;
 }

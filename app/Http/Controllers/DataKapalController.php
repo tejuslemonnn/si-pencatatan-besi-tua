@@ -42,4 +42,49 @@ class DataKapalController extends Controller
 
         return redirect()->route('data-kapal.index')->with('success', 'Data Kapal berhasil ditambahkan');
     }
+
+    public function show($id)
+    {
+        $title = 'Detail Data Kapal';
+        $icon = 'fa-solid fa-ship';
+        $dataKapal = DataKapal::findOrFail($id);
+
+        return view('admin.data-kapal.show', [
+            'title' => $title,
+            'icon' => $icon,
+            'dataKapal' => $dataKapal,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $title = 'Edit Data Kapal';
+        $icon = 'fa-solid fa-ship';
+        $dataKapal = DataKapal::findOrFail($id);
+
+        return view('admin.data-kapal.edit', [
+            'title' => $title,
+            'icon' => $icon,
+            'dataKapal' => $dataKapal,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_kapal' => 'required',
+            'tanggal_datang' => 'required',
+        ]);
+
+        DataKapal::findOrFail($id)->update($request->all());
+
+        return redirect()->route('data-kapal.index')->with('success', 'Data Kapal berhasil diubah');
+    }
+
+    public function destroy($id)
+    {
+        DataKapal::findOrFail($id)->delete();
+
+        return redirect()->route('data-kapal.index')->with('success', 'Data Kapal berhasil dihapus');
+    }
 }
