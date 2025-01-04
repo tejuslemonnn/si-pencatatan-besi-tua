@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan_pengeluarans', function (Blueprint $table) {
+        Schema::create('kepala_perusahaan', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('keterangan');
-            $table->string('jumlah');
-            $table->integer('total');
-            $table->boolean('status');
+            $table->string('nama');
+            $table->string('username', 20);
+            $table->string('password', 16);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laporan_pengeluarans');
+        Schema::dropIfExists('kepala_perusahaan');
     }
 };

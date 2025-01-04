@@ -15,17 +15,19 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kendaraan_id');
             $table->foreign('kendaraan_id')->references('id')->on('kendaraans');
+            $table->foreignId('kapal_id')->constrained('data_kapals')->cascadeOnUpdate();
             $table->date('tanggal');
-            $table->string('kota');
-            $table->string('nama_barang');
-            $table->integer('netto1');
-            $table->integer('netto2');
-            $table->integer('harga');
-            $table->integer('jumlah');
-            $table->date('tanggal_lunas');
+            $table->integer('bruto_pabrik', false, 0);
+            $table->integer('tara_pabrik', false,0);
+            $table->integer('netto_pabrik', false, 0);
+            $table->integer('potongan', false, 0);
+            $table->integer('netto_bersih');
+            $table->integer('harga_satuan');
+            $table->Integer('harga_total');
+            $table->date('tgl_lunas');
             $table->integer('uang_masuk');
+            $table->string('keterangan');
             $table->string('pembeli');
-            $table->integer('status');
             $table->timestamps();
         });
     }

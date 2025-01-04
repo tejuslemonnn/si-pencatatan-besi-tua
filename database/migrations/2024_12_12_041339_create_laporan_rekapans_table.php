@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('laporan_rekapans', function (Blueprint $table) {
             $table->id();
-            $table->integer('keseluruhan');
-            $table->integer('besi_tua_ke_pabrik');
-            $table->integer('terjual_di_kamal');
-            $table->integer('masuk_gudang_sb');
+            $table->integer('netto_total_barang');
+            $table->integer('netto_ke_pabrik');
+            $table->integer('netto_terjual_di_kamal');
+            $table->integer('netto_ke_gudang');
+            $table->integer('netto_terjual_di_gudang');
             $table->integer('tekor_timbangan');
-            $table->integer('status');
-            $table->integer('penjualan');
-            $table->integer('total_penjualan');
+            $table->integer('total_penjualan_kamal');
+            $table->integer('total_penjualan_gudang');
+            $table->integer('total_penjualan_pabrik');
+            $table->integer('total_penjualan_seluruh');
             $table->integer('pengeluaran');
             $table->integer('modal');
-            $table->integer('laba_besih');
+            $table->integer('laba_bersih');
             $table->timestamps();
         });
     }

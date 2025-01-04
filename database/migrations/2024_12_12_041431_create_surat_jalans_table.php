@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreign('barang_keluar_id')->references('id')->on('barang_keluars')->onDelete('cascade');
             $table->double('no_surat');
             $table->date('tanggal_surat');
-            $table->integer('pengirim');
-            $table->integer('penerima');
+            $table->integer('netto_bersih');
+            $table->string('penerima');
             $table->string('deskripsi');
-            $table->integer('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
