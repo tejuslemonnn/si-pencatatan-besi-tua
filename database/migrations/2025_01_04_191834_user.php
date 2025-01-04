@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kepala_perusahaan', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('username', 20);
-            $table->string('password', 16);
+            $table->string('username');
+            $table->string('password');
+            $table->enum('role', ['admin_perusahaan', 'kepala_perusahaan']);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kepala_perusahaan');
+        Schema::dropIfExists('user');
     }
 };
