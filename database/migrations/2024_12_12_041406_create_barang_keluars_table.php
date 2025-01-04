@@ -33,7 +33,7 @@ return new class extends Migration
     {
         Schema::create('barang_keluar_kapal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kapal_id')->constrained('kapal')->cascadeOnUpdate();
+            $table->foreignId('data_kapal_id')->constrained('data_kapals')->cascadeOnUpdate();
             $table->date('tanggal');
             $table->char('no_polisi', 15);
             $table->integer('bruto');
