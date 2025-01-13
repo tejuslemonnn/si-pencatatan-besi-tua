@@ -36,6 +36,13 @@
             <span class="font-weight-bold">Produk</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('kendaraan.*') ? 'text-purple' : '' }}"
+            href="{{ route('kendaraan.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('kendaraan.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Kendaraan</span></a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'text-purple' : '' }}"

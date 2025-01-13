@@ -7,7 +7,6 @@ use App\Http\Controllers\DOController;
 
 use App\Http\Controllers\ITRController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\ProdukController;
@@ -17,8 +16,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataKapalController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\StockCountController;
 use App\Http\Controllers\BarangMasukBesiTuaController;
+use App\Http\Controllers\BarangMasukBesiScrapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/barang-masuk-besi-tua/total-jumlah', [BarangMasukBesiTuaController::class, 'getTotalJumlah'])->name('barang-masuk-besi-tua.total-jumlah');
 
     Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
+
+    Route::resource('kendaraan', KendaraanController::class);
 
 
     // Material Request
