@@ -44,5 +44,12 @@
         .select2-selection__arrow {
             height: 44px !important;
         }
+
+        tr,
+        td,
+        th {
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
     </style>
 </head>

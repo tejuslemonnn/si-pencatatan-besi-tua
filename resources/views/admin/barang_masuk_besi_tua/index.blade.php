@@ -22,7 +22,7 @@
 
         <div class="overflow-x-auto">
 
-            <table id="example" class="table display nowrap">
+            <table id="example" class="table table-bordered display nowrap">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -63,7 +63,7 @@
                                     class="btn btn-info"><i class="fas fa-eye"></i>
                                     Detail</a>
 
-                                @if (auth()->user()->role == 'admin' && $row->status != 1)
+                                @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
                                     <a href="{{ route('barang-masuk-besi-tua.edit', ['barang_masuk_besi_tua' => $row->id]) }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i> Edit
                                     </a>

@@ -20,7 +20,7 @@
             <input type="text" class="form-control" id="max" name="max">
         </div>
 
-        <table id="example" class="table display nowrap">
+        <table id="example" class="table table-bordered display nowrap">
             <thead>
                 <tr>
                     <th>No</th>
@@ -50,7 +50,7 @@
                                     class="fas fa-eye"></i>
                                 Detail</a>
 
-                            @if (auth()->user()->role == 'admin' && $row->status != 1)
+                            @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
                                 <a href="{{ route('data-kapal.edit', ['data_kapal' => $row->id]) }}"
                                     class="btn btn-warning"><i class="fas fa-edit"></i> Edit
                                 </a>

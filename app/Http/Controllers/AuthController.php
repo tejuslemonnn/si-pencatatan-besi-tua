@@ -18,28 +18,28 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
+            'username' => 'required',
+            'password' => 'required',
         ]);
-    
+
         $infologin = [
-            'email' => $request -> email,
-            'password' => $request -> password,
+            'username' => $request->username,
+            'password' => $request->password,
         ];
         if (Auth::attempt($infologin)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
-        } 
-            return redirect()->route('home')->withErrors([
-                'email' => 'Wrong Email or Password!',
-                'password' => 'Wrong Password!',
-             ]);
-        
+        }
+        return redirect()->route('home')->withErrors([
+            'username' => 'Wrong username or Password!',
+            'password' => 'Wrong Password!',
+        ]);
+
         return back()->withErrors([
-            'email' => 'Invalid credentials.',
+            'username' => 'Invalid credentials.',
         ]);
     }
-       public function logout(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
 

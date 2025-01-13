@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nama');
             $table->integer('berat');
             $table->integer('qty');
+            $table->integer('harga');
             $table->string('picture')->nullable();
             $table->timestamps();
         });

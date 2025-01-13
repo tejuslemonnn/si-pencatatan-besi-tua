@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BarangMasukBesiScrap;
 use App\Models\BarangMasukBesiTua;
 use App\Models\User;
 use App\Models\ITRModel;
@@ -22,32 +23,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Central Admin',
-            'email' => 'centraladmin@gmail.com',
-            'role' => 'admin_pengajuan',
-            'password' => '123456'
-        ]);
-        User::factory()->create([
-            'name' => 'Main Storage',
-            'email' => 'mainstorage@gmail.com',
-            'role' => 'admin_gudang',
-            'password' => '123456'
-        ]);
-        User::factory()->create([
-            'name' => 'Sub Storage',
-            'email' => 'substorage@gmail.com',
-            'role' => 'admin_gudang',
-            'password' => '123456'
-        ]);
-        User::factory()->create([
             'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'role' => 'admin',
+            'username' => 'admin',
+            // 'email' => 'admin@gmail.com',
+            'role' => 'admin_perusahaan',
             'password' => '123456'
         ]);
         User::factory()->create([
             'name' => 'Kepala Perusahaan',
-            'email' => 'kepalaperusahaan@gmail.com',
+            'username' => 'kepala_perusahaan',
+            // 'email' => 'kepalaperusahaan@gmail.com',
             'role' => 'kepala_perusahaan',
             'password' => '123456'
         ]);
@@ -62,13 +47,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Produk::create([
-            'nama' => 'Produk Testing',
+            'nama' => 'Jatim Steel',
             'kategori_id' => 1,
             'data_kapal_id' => 1,
             'kode' => 123,
-            'nama' => 'Produk Testing',
             'berat' => 123,
             'qty' => 123,
+            'harga' => 7200,
         ]);
 
         BarangMasukBesiTua::create([
@@ -89,6 +74,20 @@ class DatabaseSeeder extends Seeder
             'netto' => 16140,
             'jumlah' => 28220,
             'produk_id' => 1,
+        ]);
+
+        BarangMasukBesiScrap::create([
+            'data_kapal_id' => 1,
+            'produk_id' => 1,
+            'tanggal' => date('Y-m-d'),
+            'bruto_sb' => 19540,
+            'tara_sb' => 7460,
+            'netto_sb' => 12080,
+            'bruto_pabrik' => 19560,
+            'tara_pabrik' => 7500,
+            'netto_pabrik' => 12060,
+            'pot' => 90,
+            'netto_bersih' => 11970,
         ]);
 
 

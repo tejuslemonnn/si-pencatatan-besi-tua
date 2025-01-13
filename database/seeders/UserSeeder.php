@@ -25,11 +25,11 @@ class UserSeeder extends Seeder
         //     'role' => 'admin_gudang',
         //     'password' => '123456'
         // ]);
-    //     User::factory()->create([
-    //         'name' => 'AdminGudang3',
-    //         'email' => 'admingudang3@gmail.com',
-    //         'role' => 'admin_gudang',
-    //         'password' => '123456'
-    //     ]);
-    // }
+        //     User::factory()->create([
+        //         'name' => 'AdminGudang3',
+        //         'email' => 'admingudang3@gmail.com',
+        //         'role' => 'admin_gudang',
+        //         'password' => '123456'
+        //     ]);
+    }
 }

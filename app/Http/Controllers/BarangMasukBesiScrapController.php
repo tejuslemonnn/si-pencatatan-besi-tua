@@ -45,7 +45,24 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'data_kapal_id' => 'required|exists:data_kapals,id',
+            'tanggal' => 'required|date',
+            'produk_id' => 'required|exists:produks,id',
+            'bruto_sb' => 'required|integer',
+            'tara_sb' => 'required|integer',
+            'netto_sb' => 'required|integer',
+            'bruto_pabrik' => 'required|integer',
+            'tara_pabrik' => 'required|integer',
+            'netto_pabrik' => 'required|integer',
+            'pot' => 'required|integer',
+            'netto_bersih' => 'required|integer',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+
+        BarangMasukBesiScrap::create($data);
+
+        return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -53,7 +70,11 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function show(BarangMasukBesiScrap $barangMasukBesiScrap)
     {
-        //
+        return view('admin.barang_masuk_besi_scrap.show', [
+            'title' => 'Detail Data Barang Masuk Besi Scrap',
+            'icon' => 'fa-solid fa-box',
+            'data' => $barangMasukBesiScrap
+        ]);
     }
 
     /**
@@ -61,7 +82,16 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function edit(BarangMasukBesiScrap $barangMasukBesiScrap)
     {
-        //
+        $products = Produk::orderBy('nama', 'ASC')->get();
+        $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
+
+        return view('admin.barang_masuk_besi_scrap.edit', [
+            'data' => $barangMasukBesiScrap,
+            'title' => 'Edit Data Barang Masuk Besi Scrap',
+            'icon' => 'fa-solid fa-box',
+            'products' => $products,
+            'dataKapals' => $dataKapals
+        ]);
     }
 
     /**
@@ -69,7 +99,24 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function update(Request $request, BarangMasukBesiScrap $barangMasukBesiScrap)
     {
-        //
+        $data = $request->validate([
+            'data_kapal_id' => 'required|exists:data_kapals,id',
+            'tanggal' => 'required|date',
+            'produk_id' => 'required|exists:produks,id',
+            'bruto_sb' => 'required|integer',
+            'tara_sb' => 'required|integer',
+            'netto_sb' => 'required|integer',
+            'bruto_pabrik' => 'required|integer',
+            'tara_pabrik' => 'required|integer',
+            'netto_pabrik' => 'required|integer',
+            'pot' => 'required|integer',
+            'netto_bersih' => 'required|integer',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+
+        $barangMasukBesiScrap->update($data);
+
+        return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -77,6 +124,8 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function destroy(BarangMasukBesiScrap $barangMasukBesiScrap)
     {
-        //
+        $barangMasukBesiScrap->delete();
+
+        return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil dihapus');
     }
 }

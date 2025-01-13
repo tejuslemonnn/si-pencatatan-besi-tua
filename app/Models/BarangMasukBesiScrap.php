@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class BarangMasukBesiScrap extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
+    }
 }

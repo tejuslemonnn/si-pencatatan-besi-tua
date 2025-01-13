@@ -20,18 +20,19 @@
             <input type="text" class="form-control" id="max" name="max">
         </div>
 
-        <div style="overflow-x:auto;">
+        <div class="overflow-x-auto">
             <table id="example" class="table table-bordered display nowrap">
                 <thead>
                     <tr>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">NO</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">TANGGAL</th>
-                        <th colspan="4" class="text-center" style="vertical-align: middle;">TIMBANGAN SUB</th>
-                        <th colspan="4" class="text-center" style="vertical-align: middle;">TIMBANGAN PABRIK</th>
+                        <th colspan="3" class="text-center" style="vertical-align: middle;">TIMBANGAN SB</th>
+                        <th colspan="3" class="text-center" style="vertical-align: middle;">TIMBANGAN PABRIK</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">POT</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">NETTO BERSIH</th>
-                        <th rowspan="2" class="text-center" style="vertical-align: middle;">HARGA (Rp)</th>
-                        <th rowspan="2" class="text-center" style="vertical-align: middle;">JUMLAH (Rp)</th>
+                        {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">HARGA (Rp)</th> --}}
+                        {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">JUMLAH (Rp)</th> --}}
+                        <th rowspan="2" class="text-center" style="vertical-align: middle;">Produk</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">KETERANGAN</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">Action</th>
                     </tr>
@@ -52,16 +53,15 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->tanggal }}</td>
-                            <td>{{ $row->bruto_sp }}</td>
-                            <td>{{ $row->tara_sp }}</td>
-                            <td>{{ $row->netto_sp }}</td>
+                            <td>{{ $row->bruto_sb }}</td>
+                            <td>{{ $row->tara_sb }}</td>
+                            <td>{{ $row->netto_sb }}</td>
                             <td>{{ $row->bruto_pabrik }}</td>
                             <td>{{ $row->tara_pabrik }}</td>
                             <td>{{ $row->netto_pabrik }}</td>
                             <td>{{ $row->pot }}</td>
                             <td>{{ $row->netto_bersih }}</td>
-                            <td>{{ $row->produk->harga }}</td>
-                            <td>{{ $row->jumlah }}</td>
+                            {{-- <td>{{ $row->produk->harga }}</td> --}}
                             <td>{{ $row->produk->nama }}</td>
                             <td>{{ $row->keterangan }}</td>
 
@@ -72,16 +72,16 @@
                     <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
                     @endif --}}
                             <td>
-                                <a href="{{ route('barang-masuk-besi-tua.show', ['barang_masuk_besi_tua' => $row->id]) }}"
+                                <a href="{{ route('barang-masuk-besi-scrap.show', ['barang_masuk_besi_scrap' => $row->id]) }}"
                                     class="btn btn-info"><i class="fas fa-eye"></i>
                                     Detail</a>
 
-                                @if (auth()->user()->role == 'admin' && $row->status != 1)
-                                    <a href="{{ route('barang-masuk-besi-tua.edit', ['barang_masuk_besi_tua' => $row->id]) }}"
+                                @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
+                                    <a href="{{ route('barang-masuk-besi-scrap.edit', ['barang_masuk_besi_scrap' => $row->id]) }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i> Edit
                                     </a>
                                     <form
-                                        action="{{ route('barang-masuk-besi-tua.destroy', ['barang_masuk_besi_tua' => $row->id]) }}"
+                                        action="{{ route('barang-masuk-besi-scrap.destroy', ['barang_masuk_besi_scrap' => $row->id]) }}"
                                         method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')

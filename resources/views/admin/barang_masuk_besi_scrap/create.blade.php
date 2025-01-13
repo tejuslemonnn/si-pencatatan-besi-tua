@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Page Heading -->
-    <form action="{{ route('barang-masuk-besi-tua.store') }}" method="POST" id="add_form">
+    <form action="{{ route('barang-masuk-besi-scrap.store') }}" method="POST" id="add_form">
         @csrf
         <button type="submit" class="btn btn-primary d-none" id="submit_button">Submit</button>
 
@@ -43,13 +43,6 @@
             </div>
         </div>
 
-        {{-- <div class="from-group col-12 my-2">
-            <label for="nopol">Nopol</label>
-            <div class="input-group">
-                <input type="text" name="nopol" class="form-control" placeholder="nopol" value="{{ old('nopol') }}">
-            </div>
-        </div> --}}
-
         <div class="form-group col-12">
             <label for="produk_id">Produk</label>
             <select name="produk_id" id="produk_id" class="form-control" required>
@@ -62,39 +55,78 @@
             </select>
         </div>
 
-        <div class="from-group col-12 my-2">
-            <label for="bruto">Bruto</label>
-            <div class="input-group">
-                <input type="number" name="bruto" class="form-control" placeholder="Bruto" value="{{ old('bruto') }}"
-                    id="bruto">
+        <div class="col-12 my-3">
+            <h6 class="font-weight-bold mb-0 ">Timbangan SB</h6>
+            <div class="row">
+                <div class="from-group col-4">
+                    <label for="bruto_sb">Bruto</label>
+                    <div class="input-group">
+                        <input type="number" name="bruto_sb" class="form-control" placeholder="Bruto"
+                            value="{{ old('bruto_sb') }}" id="bruto_sb">
+                    </div>
+                </div>
+
+                <div class="from-group col-4">
+                    <label for="tara_sb">Tara</label>
+                    <div class="input-group">
+                        <input type="number" name="tara_sb" class="form-control" placeholder="Tara"
+                            value="{{ old('tara_sb') }}" id="tara_sb">
+                    </div>
+                </div>
+
+                <div class="from-group col-4">
+                    <label for="netto_sb">Netto</label>
+                    <div class="input-group">
+                        <input type="number" name="netto_sb" class="form-control" placeholder="Netto"
+                            value="{{ old('netto_sb') }}" id="netto_sb" readonly>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="from-group col-12 my-2">
-            <label for="tara">Tara</label>
-            <div class="input-group">
-                <input type="number" name="tara" class="form-control" placeholder="Tara" value="{{ old('tara') }}"
-                    id="tara">
+        <div class="col-12 my-3">
+            <h6 class="font-weight-bold mb-0 ">Timbangan Pabrik</h6>
+            <div class="row">
+                <div class="from-group col-4">
+                    <label for="bruto_pabrik">Bruto</label>
+                    <div class="input-group">
+                        <input type="number" name="bruto_pabrik" class="form-control" placeholder="Bruto"
+                            value="{{ old('bruto_pabrik') }}" id="bruto_pabrik">
+                    </div>
+                </div>
+
+                <div class="from-group col-4">
+                    <label for="tara_pabrik">Tara</label>
+                    <div class="input-group">
+                        <input type="number" name="tara_pabrik" class="form-control" placeholder="Tara"
+                            value="{{ old('tara_pabrik') }}" id="tara_pabrik">
+                    </div>
+                </div>
+
+                <div class="from-group col-4">
+                    <label for="netto_pabrik">Netto</label>
+                    <div class="input-group">
+                        <input type="number" name="netto_pabrik" class="form-control" placeholder="Netto"
+                            value="{{ old('netto_pabrik') }}" id="netto_pabrik" readonly>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="from-group col-12 my-2">
-            <label for="netto">Netto</label>
-            <div class="input-group">
-                <input type="number" name="netto" class="form-control" placeholder="Netto" value="{{ old('netto') }}"
-                    id="netto" readonly>
+        <div class="from-group row col-12">
+            <div class="from-group col-6">
+                <label for="pot">POT</label>
+                <div class="input-group">
+                    <input type="number" name="pot" class="form-control" placeholder="Pot" value="{{ old('pot') }}"
+                        id="pot">
+                </div>
             </div>
-        </div>
 
-        <div class="from-group col-12 my-2">
-            <label for="jumlah">Jumlah</label>
-            <div class="input-group">
-                <input type="number" name="jumlah" class="form-control" placeholder="Jumlah" value="{{ old('jumlah') }}"
-                    id="jumlah" readonly>
-                <div id="loading" style="display: none;" class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="fas fa-spinner fa-spin"></i>
-                    </span>
+            <div class="from-group col-6">
+                <label for="netto_bersih">Netto Bersih</label>
+                <div class="input-group">
+                    <input type="number" name="netto_bersih" class="form-control" placeholder="Netto Bersih"
+                        value="{{ old('netto_bersih') }}" id="netto_bersih" readonly>
                 </div>
             </div>
         </div>
@@ -121,17 +153,44 @@
                 width: '100%',
             });
 
-            function updateNetto() {
-                let bruto = parseFloat($('#bruto').val()) || 0;
-                let tara = parseFloat($('#tara').val()) || 0;
+            function updateNettoSB() {
+                let bruto = parseFloat($('#bruto_sb').val()) || 0;
+                let tara = parseFloat($('#tara_sb').val()) || 0;
                 let netto = bruto != 0 && tara != 0 ? bruto - tara : 0;
                 if (netto > 0) {
-                    $('#netto').val(netto > 0 ? netto : 0).trigger('change');
+                    $('#netto_sb').val(netto > 0 ? netto : 0).trigger('change');
                 }
             }
 
-            $('#bruto').on('input', updateNetto);
-            $('#tara').on('input', updateNetto);
+            $('#bruto_sb').on('input', updateNettoSB);
+            $('#tara_sb').on('input', updateNettoSB);
+
+            function updateNettoPabrik() {
+                let bruto = parseFloat($('#bruto_pabrik').val()) || 0;
+                let tara = parseFloat($('#tara_pabrik').val()) || 0;
+                let netto = bruto != 0 && tara != 0 ? bruto - tara : 0;
+                if (netto > 0) {
+                    $('#netto_pabrik').val(netto > 0 ? netto : 0).trigger('change');
+                }
+            }
+
+            $('#bruto_pabrik').on('input', updateNettoPabrik);
+            $('#tara_pabrik').on('input', updateNettoPabrik);
+
+            function updateNettoBersih() {
+                let nettoPabrik = parseFloat($('#netto_pabrik').val()) || 0;
+                let pot = parseFloat($('#pot').val()) || 0;
+                let nettoBersih = pot != 0 && nettoPabrik != 0 ? nettoPabrik - pot : 0;
+                if (nettoBersih > 0) {
+                    $('#netto_bersih').val(nettoBersih > 0 ? nettoBersih : 0).trigger('change');
+                }
+
+                console.log('nettoPabrik', nettoPabrik, 'pot', pot, 'nettoBersih', nettoBersih);
+
+            }
+
+            $('#pot').on('input', updateNettoBersih);
+            $('#netto_pabrik').on('change', updateNettoBersih);
 
             function debounce(func, wait) {
                 let timeout;
@@ -142,32 +201,6 @@
                     timeout = setTimeout(() => func.apply(context, args), wait);
                 };
             }
-
-            const hitungJumlah = debounce(function() {
-                let netto = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('barang-masuk-besi-tua.total-jumlah') }}",
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-
-                        $('#jumlah').val(response.total_jumlah + parseInt(netto));
-                    },
-                    complete: function() {
-                        $('#loading').hide();
-                    }
-                });
-            }, 2000);
-
-            $('#netto').on('change', function() {
-                $('#loading').show();
-
-                hitungJumlah.call(this);
-            });
         });
     </script>
 @endsection
