@@ -3,6 +3,7 @@
 
 @include('sb-admin/datatable')
 
+{{-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script> --}}
 
 <script src="{{ asset('vendor/sb-admin/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

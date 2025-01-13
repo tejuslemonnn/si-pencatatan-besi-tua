@@ -7,16 +7,18 @@ use App\Http\Controllers\DOController;
 
 use App\Http\Controllers\ITRController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpiredController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataKapalController;
-use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\BarangMasukBesiTuaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,9 +82,12 @@ Route::middleware(['auth'])->group(function () {
         return view('admin/report');
     });
 
-    // data kapal
     Route::resource('data-kapal', DataKapalController::class);
     Route::resource('produk', ProdukController::class);
+    Route::resource('barang-masuk-besi-tua', BarangMasukBesiTuaController::class);
+    Route::get('/api/barang-masuk-besi-tua/total-jumlah', [BarangMasukBesiTuaController::class, 'getTotalJumlah'])->name('barang-masuk-besi-tua.total-jumlah');
+
+    Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
 
 
     // Material Request
