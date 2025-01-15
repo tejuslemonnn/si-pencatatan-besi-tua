@@ -23,12 +23,12 @@
             </div>
         @endif
 
-        <div class="from-group col-12 my-2">
+        {{-- <div class="from-group col-12 my-2">
             <label for="jenis">Jenis</label>
             <div class="input-group">
                 <input type="text" name="jenis" class="form-control" placeholder="Jenis" value="{{ old('jenis') }}">
             </div>
-        </div>
+        </div> --}}
 
         <div class="from-group col-12 my-2">
             <label for="nomor_plat">No Plat</label>

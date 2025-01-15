@@ -22,7 +22,7 @@
 
         <div class="overflow-x-auto">
 
-            <table id="example" class="table table-bordered display nowrap">
+            <table id="barang_masuk_besi_tua_table" class="table table-bordered display nowrap">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -31,8 +31,8 @@
                         <th>Tara</th>
                         <th>Netto</th>
                         <th>Jumlah</th>
-                        <th>Nama Produk</th>
-                        <th>Keterangan</th>
+                        <th>Nama Barang</th>
+                        <th>Pesanan Dari</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -49,8 +49,8 @@
                             <td>{{ $row->tara }}</td>
                             <td>{{ $row->netto }}</td>
                             <td>{{ $row->jumlah }}</td>
-                            <td>{{ $row->produk->nama }}</td>
-                            <td>{{ $row->keterangan }}</td>
+                            <td>{{ $row->nama_barang }}</td>
+                            <td>{{ $row->pesanan_dari }}</td>
 
                             {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>

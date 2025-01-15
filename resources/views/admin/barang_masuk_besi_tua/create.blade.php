@@ -51,7 +51,7 @@
         </div> --}}
 
         <div class="form-group col-12">
-            <label for="produk_id">Produk</label>
+            {{-- <label for="produk_id">Produk</label>
             <select name="produk_id" id="produk_id" class="form-control" required>
                 <option value="" selected>Select</option>
                 @foreach ($products as $product)
@@ -59,7 +59,13 @@
                         {{ $product->nama }}
                     </option>
                 @endforeach
-            </select>
+            </select> --}}
+
+            <label for="nama_barang">Nama Barang</label>
+            <div class="input-group">
+                <input type="text" name="nama_barang" class="form-control" placeholder="Nama Barang"
+                    value="{{ old('nama_barang') }}" id="nama_barang">
+            </div>
         </div>
 
         <div class="from-group col-12 my-2">
@@ -100,10 +106,10 @@
         </div>
 
         <div class="from-group col-12 my-2">
-            <label for="keterangan">keterangan</label>
+            <label for="pesanan_dari">Pesanan Dari</label>
             <div class="input-group">
-                <input type="text" name="keterangan" class="form-control" placeholder="Keterangan"
-                    value="{{ old('keterangan') }}">
+                <input type="text" name="pesanan_dari" class="form-control" placeholder="Pesanan Dari"
+                    value="{{ old('pesanan_dari') }}">
             </div>
         </div>
     </form>

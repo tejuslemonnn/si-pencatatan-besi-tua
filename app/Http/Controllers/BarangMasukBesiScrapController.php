@@ -48,7 +48,6 @@ class BarangMasukBesiScrapController extends Controller
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',
             'tanggal' => 'required|date',
-            'produk_id' => 'required|exists:produks,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',
             'netto_sb' => 'required|integer',
@@ -57,7 +56,8 @@ class BarangMasukBesiScrapController extends Controller
             'netto_pabrik' => 'required|integer',
             'pot' => 'required|integer',
             'netto_bersih' => 'required|integer',
-            'keterangan' => 'nullable|string|max:255',
+            // 'keterangan' => 'nullable|string|max:255',
+            'pesanan_dari' => 'required|string',
         ]);
 
         BarangMasukBesiScrap::create($data);
@@ -102,7 +102,6 @@ class BarangMasukBesiScrapController extends Controller
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',
             'tanggal' => 'required|date',
-            'produk_id' => 'required|exists:produks,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',
             'netto_sb' => 'required|integer',
@@ -111,7 +110,7 @@ class BarangMasukBesiScrapController extends Controller
             'netto_pabrik' => 'required|integer',
             'pot' => 'required|integer',
             'netto_bersih' => 'required|integer',
-            'keterangan' => 'nullable|string|max:255',
+            'pesanan_dari' => 'required|string',
         ]);
 
         $barangMasukBesiScrap->update($data);

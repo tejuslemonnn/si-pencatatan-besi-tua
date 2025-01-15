@@ -11,8 +11,8 @@ class BarangMasukBesiScrap extends Model
 
     protected $guarded = [];
 
-    public function produk()
-    {
-        return $this->belongsTo(Produk::class);
-    }
+    // public function produk()
+    // {
+    //     return $this->belongsTo(Produk::class);
+    // }
 }

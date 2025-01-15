@@ -23,13 +23,6 @@
         </div>
     </div>
 
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Produk</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->nama }}</p>
-        </div>
-    </div>
-
 
     <h6 class="font-weight-bold">Timbangan SB</h6>
     <div class="ml-5">
@@ -93,17 +86,11 @@
         </div>
     </div>
 
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Produk</label>
-        <a href="{{ route('produk.show', ['produk' => $data->produk->id]) }}" class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->nama }}</p>
-        </a>
-    </div>
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Keterangan</label>
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Pesanan Dari</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->keterangan }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->pesanan_dari }}</p>
         </div>
     </div>
 

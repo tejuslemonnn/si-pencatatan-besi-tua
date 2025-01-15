@@ -21,9 +21,11 @@ return new class extends Migration
             $table->integer('tara');
             $table->integer('netto');
             $table->integer('jumlah');
-            $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->string('keterangan')->nullable();
+            // $table->unsignedBigInteger('produk_id');
+            // $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
+            $table->string('nama_barang');
+            $table->string('pesanan_dari');
+            // $table->string('keterangan');
             $table->timestamps();
         });
     }

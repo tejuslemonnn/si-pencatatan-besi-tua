@@ -24,9 +24,10 @@ return new class extends Migration
             $table->integer('netto_pabrik');
             $table->integer('pot');
             $table->integer('netto_bersih');
-            $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->string('keterangan')->nullable();
+            // $table->unsignedBigInteger('produk_id');
+            // $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
+            // $table->string('keterangan');
+            $table->string('pesanan_dari');
             $table->timestamps();
         });
     }

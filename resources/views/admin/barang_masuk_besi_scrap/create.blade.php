@@ -43,18 +43,6 @@
             </div>
         </div>
 
-        <div class="form-group col-12">
-            <label for="produk_id">Produk</label>
-            <select name="produk_id" id="produk_id" class="form-control" required>
-                <option value="" selected>Select</option>
-                @foreach ($products as $product)
-                    <option value="{{ $product->id }}" {{ old('produk_id') == $product->id ? 'selected' : '' }}>
-                        {{ $product->nama }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
         <div class="col-12 my-3">
             <h6 class="font-weight-bold mb-0 ">Timbangan SB</h6>
             <div class="row">
@@ -132,10 +120,10 @@
         </div>
 
         <div class="from-group col-12 my-2">
-            <label for="keterangan">keterangan</label>
+            <label for="pesanan_dari">Pesanan Dari</label>
             <div class="input-group">
-                <input type="text" name="keterangan" class="form-control" placeholder="Keterangan"
-                    value="{{ old('keterangan') }}">
+                <input type="text" name="pesanan_dari" class="form-control" placeholder="Pesanan Dari"
+                    value="{{ old('pesanan_dari') }}">
             </div>
         </div>
     </form>

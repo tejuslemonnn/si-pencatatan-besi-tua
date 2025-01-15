@@ -16,7 +16,7 @@ class KendaraanController extends Controller
 
         return view('admin.kendaraan.index', [
             'data' => $data,
-            'title' => 'Data Barang Masuk Besi Tua',
+            'title' => 'Data Kendaraan',
             'icon' => 'fa-solid fa-box'
         ]);
     }
@@ -38,7 +38,7 @@ class KendaraanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis' => 'required',
+            // 'jenis' => 'required',
             'nomor_plat' => 'required',
             'model' => 'required'
         ]);
@@ -82,7 +82,7 @@ class KendaraanController extends Controller
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'jenis' => 'required',
+            // 'jenis' => 'required',
             'nomor_plat' => 'required',
             'model' => 'required'
         ]);

@@ -28,13 +28,13 @@
         Produk
     </div>
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"
             href="{{ route('produk.index') }}">
-            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-duotone fa-solid fa-gauge"></i>
             <i class="fa-solid fa-box {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"></i>
             <span class="font-weight-bold">Produk</span></a>
-    </li>
+    </li> --}}
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('kendaraan.*') ? 'text-purple' : '' }}"

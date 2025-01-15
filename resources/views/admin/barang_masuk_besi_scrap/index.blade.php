@@ -32,8 +32,7 @@
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">NETTO BERSIH</th>
                         {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">HARGA (Rp)</th> --}}
                         {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">JUMLAH (Rp)</th> --}}
-                        <th rowspan="2" class="text-center" style="vertical-align: middle;">Produk</th>
-                        <th rowspan="2" class="text-center" style="vertical-align: middle;">KETERANGAN</th>
+                        <th rowspan="2" class="text-center" style="vertical-align: middle;">PESANAN DARI</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">Action</th>
                     </tr>
                     <tr>
@@ -62,8 +61,7 @@
                             <td>{{ $row->pot }}</td>
                             <td>{{ $row->netto_bersih }}</td>
                             {{-- <td>{{ $row->produk->harga }}</td> --}}
-                            <td>{{ $row->produk->nama }}</td>
-                            <td>{{ $row->keterangan }}</td>
+                            <td>{{ $row->pesanan_dari }}</td>
 
                             {{-- @if ($row->status == 0)
                     <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>

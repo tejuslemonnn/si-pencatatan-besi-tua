@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kendaraan_id');
             $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');
-            $table->unsignedBigInteger('barang_keluar_kapal_id');
-            $table->foreign('barang_keluar_kapal_id')->references('id')->on('barang_keluar_kapal')->onDelete('cascade');
-            $table->double('no_surat');
+            $table->unsignedBigInteger('barang_keluar_besi_tua_id')->nullable();
+            $table->foreign('barang_keluar_besi_tua_id')->references('id')->on('barang_keluar_besi_tuas')->onDelete('cascade');
+            $table->unsignedBigInteger('barang_keluar_besi_scrap_id')->nullable();
+            $table->foreign('barang_keluar_besi_scrap_id')->references('id')->on('barang_keluar_besi_scraps')->onDelete('cascade');
+            $table->string('no_surat');
             $table->date('tanggal_surat');
             $table->integer('netto_bersih');
             $table->string('penerima');

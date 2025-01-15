@@ -13,7 +13,7 @@ class BarangMasukBesiTuaController extends Controller
 {
     public function index()
     {
-        $data = BarangMasukBesiTua::orderBy('id', 'desc')->paginate(10);
+        $data = BarangMasukBesiTua::orderBy('id', 'asc')->paginate(10);
         // $data->transform(function ($item, $key) {
         //     $previousData = BarangMasukBesiTua::where('id', '<', $item->id)->orderBy('id', 'desc')->first();
         //     $previousJumlah = $previousData ? $previousData->netto : 0;
@@ -49,10 +49,13 @@ class BarangMasukBesiTuaController extends Controller
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
-            'produk_id' => 'required|exists:produks,id',
-            'keterangan' => 'nullable|string|max:255',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'jumlah' => 'required|integer'
+            'jumlah' => 'required|integer',
+            // 'produk_id' => 'required|exists:produks,id',
+            // 'keterangan' => 'nullable|string|max:255',
+            'pesanan_dari' => 'required|string',
+            'nama_barang' => 'required|string',
+
         ]);
 
         BarangMasukBesiTua::create($data);
@@ -83,10 +86,12 @@ class BarangMasukBesiTuaController extends Controller
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
-            'produk_id' => 'required|exists:produks,id',
-            'keterangan' => 'nullable|string|max:255',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'jumlah' => 'required|integer'
+            'jumlah' => 'required|integer',
+            // 'produk_id' => 'required|exists:produks,id',
+            // 'keterangan' => 'nullable|string|max:255',
+            'pesanan_dari' => 'required|string',
+            'nama_barang' => 'required|string',
         ]);
 
         $barangMasukBesiTua = BarangMasukBesiTua::findOrFail($id);
@@ -116,8 +121,10 @@ class BarangMasukBesiTuaController extends Controller
                 'bruto' => $nextData->bruto,
                 'tara' => $nextData->tara,
                 'netto' => $nextData->netto,
-                'produk_id' => $nextData->produk_id,
-                'keterangan' => $nextData->keterangan
+                // 'produk_id' => $nextData->produk_id,
+                // 'keterangan' => $nextData->keterangan
+                'pesanan_dari' => $nextData->pesanan_dari,
+                'nama_barang' => $nextData->nama_barang,
             ];
         }
 

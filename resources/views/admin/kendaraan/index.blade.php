@@ -25,8 +25,8 @@
                 <thead>
                     <tr>
                         <th class="text-center" style="vertical-align: middle;">NO</th>
-                        <th class="text-center" style="vertical-align: middle;">JENIS</th>
-                        <th class="text-center" style="vertical-align: middle;">NO. PLAT</th>
+                        {{-- <th class="text-center" style="vertical-align: middle;">JENIS</th> --}}
+                        <th class="text-center" style="vertical-align: middle;">NOMOR PLAT</th>
                         <th class="text-center" style="vertical-align: middle;">MODEL</th>
                         <th class="text-center" style="vertical-align: middle;">Action</th>
                     </tr>
@@ -38,7 +38,7 @@
                     @foreach ($data as $row)
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
-                            <td>{{ $row->jenis }}</td>
+                            {{-- <td>{{ $row->jenis }}</td> --}}
                             <td>{{ $row->nomor_plat }}</td>
                             <td>{{ $row->model }}</td>
 

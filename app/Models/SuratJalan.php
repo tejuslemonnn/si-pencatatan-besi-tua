@@ -10,4 +10,16 @@ class SuratJalan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public static function generateNoSuratJalan()
+    {
+        $prefix = "SJ";
+        $date = now()->format('dmY');
+        $lastNumber = self::whereDate('created_at', today())
+            ->orderBy('id', 'desc')
+            ->value('no_surat_jalan');
+
+        $increment = $lastNumber ? (int)substr($lastNumber, -3) + 1 : 1;
+        return sprintf('%s-%s-%03d', $prefix, $date, $increment);
+    }
 }

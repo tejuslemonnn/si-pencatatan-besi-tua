@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\ITRModel;
 use App\Models\Kategori;
 use App\Models\DataKapal;
+use App\Models\Kendaraan;
 use App\Models\ProductModel;
 use App\Models\MaterialModel;
 use App\Models\Produk;
@@ -63,7 +64,9 @@ class DatabaseSeeder extends Seeder
             'tara' => 7460,
             'netto' => 12080,
             'jumlah' => 12080,
-            'produk_id' => 1,
+            // 'produk_id' => 1,
+            'nama_barang' => 'Besi Tua',
+            'pesanan_dari' => 'PT. Jatim Steel',
         ]);
 
         BarangMasukBesiTua::create([
@@ -73,12 +76,14 @@ class DatabaseSeeder extends Seeder
             'tara' => 7500,
             'netto' => 16140,
             'jumlah' => 28220,
-            'produk_id' => 1,
+            // 'produk_id' => 1,
+            'nama_barang' => 'Jangkar, rantai',
+            'pesanan_dari' => 'PT. Jatim Steel',
         ]);
 
         BarangMasukBesiScrap::create([
             'data_kapal_id' => 1,
-            'produk_id' => 1,
+            // 'produk_id' => 1,
             'tanggal' => date('Y-m-d'),
             'bruto_sb' => 19540,
             'tara_sb' => 7460,
@@ -88,6 +93,13 @@ class DatabaseSeeder extends Seeder
             'netto_pabrik' => 12060,
             'pot' => 90,
             'netto_bersih' => 11970,
+            'pesanan_dari' => 'PT. Jatim Steel',
+
+        ]);
+
+        Kendaraan::create([
+            'nomor_plat' => 'B 1234 ABC',
+            'model' => 'Truk',
         ]);
 
 

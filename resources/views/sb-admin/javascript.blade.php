@@ -26,5 +26,7 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 
 <script>
-    new DataTable('#example');
+    new DataTable('#barang_masuk_besi_tua_table', {
+        'bSort': false
+    });
 </script>
