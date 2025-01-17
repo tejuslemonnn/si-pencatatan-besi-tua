@@ -17,7 +17,10 @@
         $currentRouteName = Route::currentRouteName();
 
         // Remove ".index" or other suffixes from the route name
-        $baseRouteName = Str::beforeLast($currentRouteName, '.index');
+        $baseRouteName =
+            Str::beforeLast($currentRouteName, '.index') ?:
+            Str::beforeLast($currentRouteName, '.index-besi-tua') ?:
+            Str::beforeLast($currentRouteName, '.index-besi-scrap');
 
         // Append ".create" to the base route name
         $createRouteName = $baseRouteName . '.create';
@@ -26,7 +29,10 @@
         $createRouteUrl = Route::has($createRouteName) ? route($createRouteName) : '#';
 
         // Determine if the current route ends with ".index"
-        $showCreateButton = Str::endsWith($currentRouteName, '.index');
+        $showCreateButton =
+            Str::endsWith($currentRouteName, '.index') ||
+            Str::endsWith($currentRouteName, '.index-besi-tua') ||
+            Str::endsWith($currentRouteName, '.index-besi-scrap');
 
         $showBack =
             Str::endsWith($currentRouteName, '.create') ||

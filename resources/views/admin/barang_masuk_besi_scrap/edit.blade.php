@@ -25,6 +25,26 @@
         @endif
 
         <div class="form-group col-12">
+            <label for="kode">Kode</label>
+            <div class="input-group">
+                @php
+                    $kode = $data->kode; // Misalnya: BM-BS-2025/01-001
+                    $kodePrefix = '';
+                    $kodeSuffix = '';
+
+                    // Gunakan regex untuk memisahkan prefix dan suffix
+                    if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+                        $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+                        $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+                    }
+                @endphp
+                <span class="input-group-text" id="basic-addon1">{{ $kodePrefix }}</span>
+                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ $kodeSuffix }}"
+                    id="kode">
+            </div>
+        </div>
+
+        <div class="form-group col-12">
             <label for="data_kapal_id">Kapal</label>
             <select name="data_kapal_id" id="data_kapal_id" class="form-control" required>
                 <option value="" selected>Select</option>
@@ -106,8 +126,8 @@
             <div class="from-group col-6">
                 <label for="pot">POT</label>
                 <div class="input-group">
-                    <input type="number" name="pot" class="form-control" placeholder="Pot" value="{{ $data->pot }}"
-                        id="pot">
+                    <input type="number" name="pot" class="form-control" placeholder="Pot"
+                        value="{{ $data->pot }}" id="pot">
                 </div>
             </div>
 

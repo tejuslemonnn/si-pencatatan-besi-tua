@@ -24,6 +24,20 @@
     </div>
 
     <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Kendaraan</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->kendaraan->model }} - {{ $data->kendaraan->nomor_plat }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Surat Jalan</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->suratJalan->no_surat }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Tanggal</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $data->tanggal }}</p>
@@ -55,6 +69,20 @@
         <label class="col-sm-2 col-form-label" style="font-weight: bold;">Netto</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $data->netto }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Harga</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->harga }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Jumlah Harga</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->jumlah_harga }}</p>
         </div>
     </div>
 

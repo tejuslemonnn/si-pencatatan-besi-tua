@@ -24,6 +24,18 @@
         @endif
 
         <div class="form-group col-12">
+            <label for="kode">Kode</label>
+            <div class="input-group">
+                @php
+                    use Carbon\Carbon;
+                    $currentDate = Carbon::now()->format('Y/m/d');
+                @endphp
+                <span class="input-group-text" id="basic-addon1">BM-BS-{{ $currentDate }}-</span>
+                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ old('kode') }}">
+            </div>
+        </div>
+
+        <div class="form-group col-12">
             <label for="data_kapal_id">Kapal</label>
             <select name="data_kapal_id" id="data_kapal_id" class="form-control" required>
                 <option value="" selected>Select</option>
@@ -105,8 +117,8 @@
             <div class="from-group col-6">
                 <label for="pot">POT</label>
                 <div class="input-group">
-                    <input type="number" name="pot" class="form-control" placeholder="Pot" value="{{ old('pot') }}"
-                        id="pot">
+                    <input type="number" name="pot" class="form-control" placeholder="Pot"
+                        value="{{ old('pot') }}" id="pot">
                 </div>
             </div>
 

@@ -9,10 +9,10 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-lg-end">
+    {{-- <div class="d-flex justify-content-lg-end">
         <a href="{{ route('material-pdf', ['id' => $data->id]) }}" class="btn btn-danger"><i
                 class="fa-regular fa-file-pdf"></i> PDF </a>
-    </div>
+    </div> --}}
 
     <hr>
 

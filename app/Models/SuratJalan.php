@@ -22,4 +22,14 @@ class SuratJalan extends Model
         $increment = $lastNumber ? (int)substr($lastNumber, -3) + 1 : 1;
         return sprintf('%s-%s-%03d', $prefix, $date, $increment);
     }
+
+    public function barangKeluarBesiTua()
+    {
+        return $this->hasOne(BarangKeluarBesiTua::class);
+    }
+
+    public function barangKeluarBesiScrap()
+    {
+        return $this->hasOne(BarangKeluarBesiScrap::class);
+    }
 }

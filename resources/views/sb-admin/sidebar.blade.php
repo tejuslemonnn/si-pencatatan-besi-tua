@@ -45,13 +45,23 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'text-purple' : '' }}"
+        <a class="nav-link {{ request()->routeIs('surat-jalan.*') ? 'text-purple' : '' }}"
+            href="{{ route('surat-jalan.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('surat-jalan.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Surat Jalan</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"
             href="#" data-toggle="collapse" data-target="#collapseExpired" aria-expanded="true"
             aria-controls="collapseExpired">
-            <i class="fa-solid fa-indent {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'text-purple' : '' }}"></i>
+            <i
+                class="fa-solid fa-indent {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"></i>
             <span class="font-weight-bold">Barang Masuk</span>
         </a>
-        <div id="collapseExpired" class="collapse {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'show' : '' }}"
+        <div id="collapseExpired"
+            class="collapse {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'show' : '' }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded mb-1">
                 <a class="collapse-item {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'active' : '' }}"
@@ -60,6 +70,28 @@
             <div class="bg-white collapse-inner rounded">
                 <a class="collapse-item {{ request()->routeIs('barang-masuk-besi-scrap.*') ? 'active' : '' }}"
                     href="{{ route('barang-masuk-besi-scrap.index') }}">Besi Scrap</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'text-purple' : '' }}"
+            href="#" data-toggle="collapse" data-target="#collapseExpired" aria-expanded="true"
+            aria-controls="collapseExpired">
+            <i
+                class="fa-solid fa-indent {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Barang Keluar</span>
+        </a>
+        <div id="collapseExpired"
+            class="collapse {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'show' : '' }}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white collapse-inner rounded mb-1">
+                <a class="collapse-item {{ request()->routeIs('barang-keluar-besi-tua.*') ? 'active' : '' }}"
+                    href="{{ route('barang-keluar-besi-tua.index') }}">Besi Tua</a>
+            </div>
+            <div class="bg-white collapse-inner rounded">
+                <a class="collapse-item {{ request()->routeIs('barang-keluar-besi-scrap.*') ? 'active' : '' }}"
+                    href="{{ route('barang-keluar-besi-scrap.index') }}">Besi Scrap</a>
             </div>
         </div>
     </li>

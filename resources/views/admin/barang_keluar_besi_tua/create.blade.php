@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Page Heading -->
-    <form action="{{ route('barang-masuk-besi-tua.store') }}" method="POST" id="add_form">
+    <form action="{{ route('barang-keluar-besi-tua.store') }}" method="POST" id="add_form">
         @csrf
         <button type="submit" class="btn btn-primary d-none" id="submit_button">Submit</button>
 
@@ -30,18 +30,30 @@
                     use Carbon\Carbon;
                     $currentDate = Carbon::now()->format('Y/m/d');
                 @endphp
-                <span class="input-group-text" id="basic-addon1">BM-BT-{{ $currentDate }}-</span>
+                <span class="input-group-text" id="basic-addon1">BK-BT-{{ $currentDate }}-</span>
                 <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ old('kode') }}">
             </div>
         </div>
 
         <div class="form-group col-12">
-            <label for="data_kapal_id">Kapal</label>
-            <select name="data_kapal_id" id="data_kapal_id" class="form-control" required>
+            <label for="kendaraan_id">Kendaraan</label>
+            <select name="kendaraan_id" id="kendaraan_id" class="form-control" required>
                 <option value="" selected>Select</option>
-                @foreach ($dataKapals as $kapal)
-                    <option value="{{ $kapal->id }}" {{ old('data_kapal_id') == $kapal->id ? 'selected' : '' }}>
-                        {{ $kapal->nama_kapal }}
+                @foreach ($kendaraans as $kendaraan)
+                    <option value="{{ $kendaraan->id }}" {{ old('kendaraan_id') == $kendaraan->id ? 'selected' : '' }}>
+                        {{ $kendaraan->nomor_plat }} - {{ $kendaraan->model }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group col-12">
+            <label for="surat_jalan_id">Surat Jalan</label>
+            <select name="surat_jalan_id" id="surat_jalan_id" class="form-control" required>
+                <option value="" selected>Select</option>
+                @foreach ($suratJalans as $suratJalan)
+                    <option value="{{ $suratJalan->id }}" {{ old('surat_jalan_id') == $suratJalan->id ? 'selected' : '' }}>
+                        {{ $suratJalan->no_surat }}
                     </option>
                 @endforeach
             </select>
@@ -104,6 +116,22 @@
             </div>
         </div>
 
+        <div class="form-group col-12">
+            <label for="harga">Harga</label>
+            <div class="input-group">
+                <input type="number" name="harga" class="form-control" placeholder="Harga" value="{{ old('harga') }}"
+                    id="harga">
+            </div>
+        </div>
+
+        <div class="from-group col-12 my-2">
+            <label for="jumlah_harga">Jumlah Harga</label>
+            <div class="input-group">
+                <input type="number" name="jumlah_harga" class="form-control" placeholder="Jumlah Harga"
+                    value="{{ old('jumlah_harga') }}" id="jumlah_harga" readonly>
+            </div>
+        </div>
+
         {{-- <div class="from-group col-12 my-2">
             <label for="jumlah">Jumlah</label>
             <div class="input-group">
@@ -132,10 +160,10 @@
 @section('javascript')
     <script>
         $(function() {
-            $('#data_kapal_id').select2({
+            $('#kendaraan_id').select2({
                 width: '100%',
             });
-            $('#produk_id').select2({
+            $('#surat_jalan_id').select2({
                 width: '100%',
             });
 
@@ -151,41 +179,18 @@
             $('#bruto').on('input', updateNetto);
             $('#tara').on('input', updateNetto);
 
-            function debounce(func, wait) {
-                let timeout;
-                return function() {
-                    const context = this,
-                        args = arguments;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(context, args), wait);
-                };
+            function updateJumlahHarga() {
+                let netto = parseFloat($('#netto').val()) || 0;
+                let harga = parseFloat($('#harga').val()) || 0;
+                let jumlahHarga = netto != 0 && harga != 0 ? netto * harga : 0;
+                if (jumlahHarga > 0) {
+                    $('#jumlah_harga').val(jumlahHarga > 0 ? jumlahHarga : 0).trigger('change');
+                }
             }
 
-            // const hitungJumlah = debounce(function() {
-            //     let netto = $(this).val();
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "{{ route('barang-masuk-besi-tua.total-jumlah') }}",
-            //         data: {
-            //             _token: "{{ csrf_token() }}"
-            //         },
-            //         dataType: "json",
-            //         success: function(response) {
-            //             console.log(response);
+            $('#netto').on('input', updateJumlahHarga);
+            $('#harga').on('input', updateJumlahHarga);
 
-            //             $('#jumlah').val(response.total_jumlah + parseInt(netto));
-            //         },
-            //         complete: function() {
-            //             $('#loading').hide();
-            //         }
-            //     });
-            // }, 2000);
-
-            // $('#netto').on('change', function() {
-            //     $('#loading').show();
-
-            //     hitungJumlah.call(this);
-            // });
         });
     </script>
 @endsection

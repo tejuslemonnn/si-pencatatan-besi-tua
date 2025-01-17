@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Produk;
 use App\Models\DataKapal;
 use Illuminate\Http\Request;
 use App\Models\BarangMasukBesiTua;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class BarangMasukBesiTuaController extends Controller
 {
     public function index()
     {
         $data = BarangMasukBesiTua::orderBy('id', 'asc')->paginate(10);
-        // $data->transform(function ($item, $key) {
-        //     $previousData = BarangMasukBesiTua::where('id', '<', $item->id)->orderBy('id', 'desc')->first();
-        //     $previousJumlah = $previousData ? $previousData->netto : 0;
-        //     $item->jumlah = $item->netto + $previousJumlah;
-        //     return $item;
-        // });
 
         return view('admin.barang_masuk_besi_tua.index', [
             'data' => $data,
@@ -43,22 +38,42 @@ class BarangMasukBesiTuaController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $request->kode = 'BM-BT-' . $currentDate . '-' . $request->kode;
+
+        $request->validate([
             'tanggal' => 'required|date',
             // 'nopol' => 'required|string|max:255',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'jumlah' => 'required|integer',
+            // 'jumlah' => 'required|integer',
             // 'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
             'pesanan_dari' => 'required|string',
             'nama_barang' => 'required|string',
-
         ]);
 
-        BarangMasukBesiTua::create($data);
+        $isDuplicate = BarangMasukBesiTua::where('kode', $request->kode)->exists();
+
+        if ($isDuplicate) {
+            return redirect()->route('barang-masuk-besi-tua.create')->with('error', 'Kode sudah digunakan');
+        }
+
+        BarangMasukBesiTua::create([
+            'kode' => $request->kode,
+            'tanggal' => $request->tanggal,
+            // 'nopol' => $request->nopol,
+            'bruto' => $request->bruto,
+            'tara' => $request->tara,
+            'netto' => $request->netto,
+            'data_kapal_id' => $request->data_kapal_id,
+            // 'produk_id' => $request->produk_id,
+            // 'keterangan' => $request->keterangan,
+            'pesanan_dari' => $request->pesanan_dari,
+            'nama_barang' => $request->nama_barang,
+        ]);
 
         return redirect()->route('barang-masuk-besi-tua.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -80,24 +95,52 @@ class BarangMasukBesiTuaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
+        $request->validate([
             'tanggal' => 'required|date',
             // 'nopol' => 'required|string|max:255',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'jumlah' => 'required|integer',
             // 'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
             'pesanan_dari' => 'required|string',
             'nama_barang' => 'required|string',
         ]);
 
-        $barangMasukBesiTua = BarangMasukBesiTua::findOrFail($id);
-        $barangMasukBesiTua->update($data);
+        $data = BarangMasukBesiTua::findOrFail($id);
 
-        $this->recalculateJumlah($barangMasukBesiTua);
+        $kode = $data->kode;
+        $kodePrefix = '';
+        $kodeSuffix = '';
+
+        // Gunakan regex untuk memisahkan prefix dan suffix
+        if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+            $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+            $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+        }
+
+        $request->kode = $kodePrefix . '-' . $request->kode;
+
+        $isDuplicate = BarangMasukBesiTua::where('kode', $request->kode)->where('id', '!=', $id)->exists();
+
+        if ($isDuplicate) {
+            return redirect()->route('barang-masuk-besi-tua.edit', $id)->with('error', 'Kode sudah digunakan');
+        }
+
+        $barangMasukBesiTua = BarangMasukBesiTua::findOrFail($id);
+        $barangMasukBesiTua->update([
+            'kode' => $request->kode,
+            'tanggal' => $request->tanggal,
+            'bruto' => $request->bruto,
+            'tara' => $request->tara,
+            'netto' => $request->netto,
+            'data_kapal_id' => $request->data_kapal_id,
+            'pesanan_dari' => $request->pesanan_dari,
+            'nama_barang' => $request->nama_barang,
+        ]);
+
+        // $this->recalculateJumlah($barangMasukBesiTua);
 
         return redirect()->route('barang-masuk-besi-tua.index')->with('success', 'Data berhasil diubah');
     }

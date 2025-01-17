@@ -9,12 +9,19 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-lg-end">
+    {{-- <div class="d-flex justify-content-lg-end">
         <a href="{{ route('material-pdf', ['id' => $data->id]) }}" class="btn btn-danger"><i
                 class="fa-regular fa-file-pdf"></i> PDF </a>
-    </div>
+    </div> --}}
 
     <hr>
+
+    <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Kode</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->kode }}</p>
+        </div>
+    </div>
 
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Tanggal</label>

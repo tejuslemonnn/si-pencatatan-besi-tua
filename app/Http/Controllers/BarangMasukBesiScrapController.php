@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Produk;
 use App\Models\DataKapal;
 use Illuminate\Http\Request;
@@ -45,6 +46,9 @@ class BarangMasukBesiScrapController extends Controller
      */
     public function store(Request $request)
     {
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $request->kode = 'BM-BS-' . $currentDate . '-' . $request->kode;
+
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',
             'tanggal' => 'required|date',
@@ -60,7 +64,27 @@ class BarangMasukBesiScrapController extends Controller
             'pesanan_dari' => 'required|string',
         ]);
 
-        BarangMasukBesiScrap::create($data);
+        $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->exists();
+
+        if ($isDuplicate) {
+            return redirect()->back()->with('error', 'Kode sudah digunakan');
+        }
+
+        BarangMasukBesiScrap::create([
+            'kode' => $request->kode,
+            'data_kapal_id' => $data['data_kapal_id'],
+            'tanggal' => $data['tanggal'],
+            'bruto_sb' => $data['bruto_sb'],
+            'tara_sb' => $data['tara_sb'],
+            'netto_sb' => $data['netto_sb'],
+            'bruto_pabrik' => $data['bruto_pabrik'],
+            'tara_pabrik' => $data['tara_pabrik'],
+            'netto_pabrik' => $data['netto_pabrik'],
+            'pot' => $data['pot'],
+            'netto_bersih' => $data['netto_bersih'],
+            // 'keterangan' => $data['keterangan'],
+            'pesanan_dari' => $data['pesanan_dari'],
+        ]);
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -113,7 +137,40 @@ class BarangMasukBesiScrapController extends Controller
             'pesanan_dari' => 'required|string',
         ]);
 
-        $barangMasukBesiScrap->update($data);
+        $data = BarangMasukBesiScrap::findOrFail($barangMasukBesiScrap->id);
+
+        $kode = $data->kode;
+        $kodePrefix = '';
+        $kodeSuffix = '';
+
+        // Gunakan regex untuk memisahkan prefix dan suffix
+        if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+            $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+            $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+        }
+
+        $request->kode = $kodePrefix . '-' . $request->kode;
+
+        $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->exists();
+
+        if ($isDuplicate) {
+            return redirect()->back()->with('error', 'Kode sudah digunakan');
+        }
+
+        $barangMasukBesiScrap->update([
+            'kode' => $request->kode,
+            'data_kapal_id' => $data['data_kapal_id'],
+            'tanggal' => $data['tanggal'],
+            'bruto_sb' => $data['bruto_sb'],
+            'tara_sb' => $data['tara_sb'],
+            'netto_sb' => $data['netto_sb'],
+            'bruto_pabrik' => $data['bruto_pabrik'],
+            'tara_pabrik' => $data['tara_pabrik'],
+            'netto_pabrik' => $data['netto_pabrik'],
+            'pot' => $data['pot'],
+            'netto_bersih' => $data['netto_bersih'],
+            'pesanan_dari' => $data['pesanan_dari'],
+        ]);
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil diubah');
     }

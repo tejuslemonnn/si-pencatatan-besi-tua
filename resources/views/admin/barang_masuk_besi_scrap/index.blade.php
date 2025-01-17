@@ -25,6 +25,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">NO</th>
+                        <th rowspan="2" class="text-center" style="vertical-align: middle;">KODE</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">TANGGAL</th>
                         <th colspan="3" class="text-center" style="vertical-align: middle;">TIMBANGAN SB</th>
                         <th colspan="3" class="text-center" style="vertical-align: middle;">TIMBANGAN PABRIK</th>
@@ -51,6 +52,7 @@
                     @foreach ($data as $row)
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
+                            <td>{{ $row->kode }}</td>
                             <td>{{ $row->tanggal }}</td>
                             <td>{{ $row->bruto_sb }}</td>
                             <td>{{ $row->tara_sb }}</td>
