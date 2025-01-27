@@ -51,7 +51,6 @@ class BarangKeluarBesiTuaController extends Controller
 
         $request->validate([
             'tanggal' => 'required|date',
-            'kendaraan_id' => 'required|exists:kendaraans,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
@@ -71,7 +70,6 @@ class BarangKeluarBesiTuaController extends Controller
         BarangKeluarBesiTua::create([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
-            'kendaraan_id' => $request->kendaraan_id,
             'surat_jalan_id' => $request->surat_jalan_id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,

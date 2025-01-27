@@ -44,17 +44,6 @@
             </div>
         </div>
 
-        <div class="form-group col-12">
-            <label for="kendaraan_id">Kendaraan</label>
-            <select name="kendaraan_id" id="kendaraan_id" class="form-control" required>
-                <option value="" selected>Select</option>
-                @foreach ($kendaraans as $kendaraan)
-                    <option value="{{ $kendaraan->id }}" {{ $data->kendaraan_id == $kendaraan->id ? 'selected' : '' }}>
-                        {{ $kendaraan->nomor_plat }} - {{ $kendaraan->model }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
 
         <div class="form-group col-12">
             <label for="surat_jalan_id">Surat Jalan</label>

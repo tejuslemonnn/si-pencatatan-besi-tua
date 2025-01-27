@@ -26,7 +26,8 @@
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Kendaraan</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->kendaraan->model }} - {{ $data->kendaraan->nomor_plat }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->suratJalan->kendaraan->model }} -
+                {{ $data->suratJalan->kendaraan->nomor_plat }}</p>
         </div>
     </div>
 
