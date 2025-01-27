@@ -32,4 +32,9 @@ class SuratJalan extends Model
     {
         return $this->hasOne(BarangKeluarBesiScrap::class);
     }
+
+    public function kendaraan()
+    {
+        return $this->belongsTo(Kendaraan::class);
+    }
 }

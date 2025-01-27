@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BarangKeluarBesiScrap;
 use App\Models\BarangKeluarBesiTua;
 use Carbon\Carbon;
 use App\Models\User;
@@ -148,7 +149,6 @@ class DatabaseSeeder extends Seeder
             'tara' => 7460,
             'netto' => 12080,
             'nama_barang' => 'Besi Tua',
-            'kendaraan_id' => 1,
             'harga' => 7200,
             'jumlah_harga' => 7200 * 12080,
             'pesanan_dari' => 'PT. Jatim Steel'
@@ -157,6 +157,28 @@ class DatabaseSeeder extends Seeder
 
         SuratJalan::where('id', 1)->update([
             'barang_keluar_besi_tua_id' => 1
+        ]);
+
+
+        BarangKeluarBesiScrap::create([
+            'surat_jalan_id' => 3,
+            'kode' => 'BK-BS-' . $currentDate . '-' . '001',
+            'tanggal' => date('Y-m-d'),
+            'bruto_sb' => 19540,
+            'tara_sb' => 7460,
+            'netto_sb' => 12080,
+            'bruto_pabrik' => 19560,
+            'tara_pabrik' => 7500,
+            'netto_pabrik' => 12060,
+            'pot' => 90,
+            'netto_bersih' => 11970,
+            'harga' => 7200,
+            'jumlah_harga' => 7200 * 11970,
+            'pesanan_dari' => 'PT. Jatim Steel'
+        ]);
+
+        SuratJalan::where('id', 3)->update([
+            'barang_keluar_besi_scrap_id' => 1
         ]);
 
 

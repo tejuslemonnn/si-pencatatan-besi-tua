@@ -13,6 +13,21 @@ return new class extends Migration
     {
         Schema::create('barang_keluar_besi_scraps', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('surat_jalan_id');
+            $table->foreign('surat_jalan_id')->references('id')->on('surat_jalans')->onDelete('cascade');
+            $table->string('kode');
+            $table->date('tanggal');
+            $table->integer('bruto_sb');
+            $table->integer('tara_sb');
+            $table->integer('netto_sb');
+            $table->integer('bruto_pabrik');
+            $table->integer('tara_pabrik');
+            $table->integer('netto_pabrik');
+            $table->integer('pot');
+            $table->integer('netto_bersih');
+            $table->integer('harga');
+            $table->integer('jumlah_harga');
+            $table->string('pesanan_dari');
             $table->timestamps();
         });
     }

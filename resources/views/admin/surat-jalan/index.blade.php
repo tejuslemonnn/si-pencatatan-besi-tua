@@ -37,6 +37,7 @@
                         <th class="text-center" style="vertical-align: middle;">NO</th>
                         <th class="text-center" style="vertical-align: middle;">TANGGAL SURAT</th>
                         <th class="text-center" style="vertical-align: middle;">NO SURAT</th>
+                        <th class="text-center" style="vertical-align: middle;">KENDARAAN</th>
                         @if ($jenisBesi == 'besi_tua')
                             <th class="text-center" style="vertical-align: middle;">BARANG KELUAR BESI TUA</th>
                         @elseif ($jenisBesi == 'besi_scrap')
@@ -60,6 +61,8 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->tanggal_surat }}</td>
                             <td>{{ $row->no_surat }}</td>
+                            <td>{{ $row->kendaraan->model }} - {{ $row->kendaraan->nomor_plat }}
+                            </td>
                             @if ($jenisBesi == 'besi_tua')
                                 <td>{{ $row->barang_keluar_besi_tua_id != null ? $row->barangKeluarBesiTua->kode : '-' }}
                                 </td>

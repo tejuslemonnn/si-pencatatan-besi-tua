@@ -48,7 +48,8 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->kode }}</td>
-                            <td>{{ $row->kendaraan->model }} - {{ $row->kendaraan->nomor_plat }}</td>
+                            <td>{{ $row->suratJalan->kendaraan->model }} - {{ $row->suratJalan->kendaraan->nomor_plat }}
+                            </td>
                             <td>{{ $row->suratJalan->no_surat }}</td>
                             <td>{{ $row->tanggal }}</td>
                             <td>{{ $row->bruto }}</td>

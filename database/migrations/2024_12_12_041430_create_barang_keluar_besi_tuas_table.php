@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('surat_jalan_id');
             $table->foreign('surat_jalan_id')->references('id')->on('surat_jalans')->onDelete('cascade');
-            $table->unsignedBigInteger('kendaraan_id');
-            $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');
             $table->date('tanggal');
             $table->string('kode');
             $table->integer('bruto');
