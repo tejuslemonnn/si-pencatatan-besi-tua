@@ -39,29 +39,29 @@ class ProdukController extends Controller
         $request->validate([
             'kode' => 'required',
             'nama' => 'required',
-            'berat' => 'required',
+            // 'berat' => 'required',
             'qty' => 'required',
-            'kategori_id' => 'required',
+            // 'kategori_id' => 'required',
             'data_kapal_id' => 'required',
-            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $namaFoto = time() . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('foto_produk'), $namaFoto);
-        } else {
-            $namaFoto = null;
-        }
+        // if ($request->hasFile('foto')) {
+        //     $foto = $request->file('foto');
+        //     $namaFoto = time() . '.' . $foto->getClientOriginalExtension();
+        //     $foto->move(public_path('foto_produk'), $namaFoto);
+        // } else {
+        //     $namaFoto = null;
+        // }
 
         Produk::create([
             'kode' => $request->kode,
             'nama' => $request->nama,
-            'berat' => $request->berat,
+            // 'berat' => $request->berat,
             'qty' => $request->qty,
-            'kategori_id' => $request->kategori_id,
+            // 'kategori_id' => $request->kategori_id,
             'data_kapal_id' => $request->data_kapal_id,
-            'picture' => $namaFoto ?? null,
+            // 'picture' => $namaFoto ?? null,
         ]);
 
         return redirect()->route('produk.index')->with('success', 'Data Produk berhasil ditambahkan');
@@ -98,11 +98,11 @@ class ProdukController extends Controller
         $request->validate([
             'kode' => 'required',
             'nama' => 'required',
-            'berat' => 'required',
+            // 'berat' => 'required',
             'qty' => 'required',
-            'kategori_id' => 'required',
+            // 'kategori_id' => 'required',
             'data_kapal_id' => 'required',
-            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = Produk::findOrFail($id);
@@ -118,11 +118,11 @@ class ProdukController extends Controller
         $data->update([
             'kode' => $request->kode,
             'nama' => $request->nama,
-            'berat' => $request->berat,
+            // 'berat' => $request->berat,
             'qty' => $request->qty,
-            'kategori_id' => $request->kategori_id,
+            // 'kategori_id' => $request->kategori_id,
             'data_kapal_id' => $request->data_kapal_id,
-            'picture' => $namaFoto ?? null,
+            // 'picture' => $namaFoto ?? null,
         ]);
 
         return redirect()->route('produk.index')->with('success', 'Data Produk berhasil diubah');

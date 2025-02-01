@@ -9,10 +9,10 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-lg-end">
+    {{-- <div class="d-flex justify-content-lg-end">
         <a href="{{ route('material-pdf', ['id' => $produk->id]) }}" class="btn btn-danger"><i
                 class="fa-regular fa-file-pdf"></i> PDF </a>
-    </div>
+    </div> --}}
 
     <hr>
 
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="form-group row col-md-10">
+    {{-- <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Kategori</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $produk->kategori->nama }}</p>
@@ -42,7 +42,7 @@
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $produk->berat }}</p>
         </div>
-    </div>
+    </div> --}}
 
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Qty</label>

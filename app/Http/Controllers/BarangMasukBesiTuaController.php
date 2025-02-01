@@ -49,10 +49,10 @@ class BarangMasukBesiTuaController extends Controller
             'netto' => 'required|integer',
             'data_kapal_id' => 'required|exists:data_kapals,id',
             // 'jumlah' => 'required|integer',
-            // 'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
             'pesanan_dari' => 'required|string',
-            'nama_barang' => 'required|string',
+            // 'nama_barang' => 'required|string',
         ]);
 
         $isDuplicate = BarangMasukBesiTua::where('kode', $request->kode)->exists();
@@ -69,10 +69,16 @@ class BarangMasukBesiTuaController extends Controller
             'tara' => $request->tara,
             'netto' => $request->netto,
             'data_kapal_id' => $request->data_kapal_id,
-            // 'produk_id' => $request->produk_id,
+            'produk_id' => $request->produk_id,
             // 'keterangan' => $request->keterangan,
             'pesanan_dari' => $request->pesanan_dari,
-            'nama_barang' => $request->nama_barang,
+            // 'nama_barang' => $request->nama_barang,
+        ]);
+
+        $produk = Produk::findOrFail($request->produk_id);
+
+        $produk->update([
+            'qty' => $produk->qty + $request->netto
         ]);
 
         return redirect()->route('barang-masuk-besi-tua.index')->with('success', 'Data berhasil ditambahkan');
@@ -101,11 +107,12 @@ class BarangMasukBesiTuaController extends Controller
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
+            // 'jumlah' => 'required|integer',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            // 'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
             'pesanan_dari' => 'required|string',
-            'nama_barang' => 'required|string',
+            // 'nama_barang' => 'required|string',
         ]);
 
         $data = BarangMasukBesiTua::findOrFail($id);
@@ -129,16 +136,26 @@ class BarangMasukBesiTuaController extends Controller
         }
 
         $barangMasukBesiTua = BarangMasukBesiTua::findOrFail($id);
+        $produk = Produk::findOrFail($request->produk_id);
+
+        $produk->update([
+            'qty' => $produk->qty + ($request->netto - $barangMasukBesiTua->netto)
+        ]);
+
         $barangMasukBesiTua->update([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
             'netto' => $request->netto,
+            // 'jumlah' => $request->jumlah,
             'data_kapal_id' => $request->data_kapal_id,
             'pesanan_dari' => $request->pesanan_dari,
-            'nama_barang' => $request->nama_barang,
+            // 'nama_barang' => $request->nama_barang,
+            'produk_id' => $request->produk_id,
         ]);
+
+
 
         // $this->recalculateJumlah($barangMasukBesiTua);
 

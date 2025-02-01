@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="form-group col-12">
+        {{-- <div class="form-group col-12">
             <label for="kategori_id">Kategori</label>
             <select name="kategori_id" id="kategori_id" class="form-control" required>
                 @foreach ($kategoris as $kategori)
@@ -46,14 +46,14 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
-        <div class="from-group col-12 my-2">
+        {{-- <div class="from-group col-12 my-2">
             <label for="berat">Berat</label>
             <div class="input-group">
                 <input type="number" name="berat" class="form-control" placeholder="Nama" value="{{ $produk->berat }}">
             </div>
-        </div>
+        </div> --}}
 
         <div class="from-group col-12 my-2">
             <label for="qty">Jumlah</label>

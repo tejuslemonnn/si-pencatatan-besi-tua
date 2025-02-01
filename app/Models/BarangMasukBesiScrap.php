@@ -15,4 +15,9 @@ class BarangMasukBesiScrap extends Model
     // {
     //     return $this->belongsTo(Produk::class);
     // }
+
+    public function dataKapal()
+    {
+        return $this->belongsTo(DataKapal::class);
+    }
 }
