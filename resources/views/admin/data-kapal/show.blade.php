@@ -9,22 +9,22 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-lg-end">
+    {{-- <div class="d-flex justify-content-lg-end">
         <a href="{{ route('material-pdf', ['id' => $dataKapal->id]) }}" class="btn btn-danger"><i
                 class="fa-regular fa-file-pdf"></i> PDF </a>
-    </div>
+    </div> --}}
 
     <hr>
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Material No</label>
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Nama Kapal</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px; "> : &nbsp; {{ $dataKapal->nama_kapal }}</p>
         </div>
     </div>
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Schedule Date</label>
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Tanggal Datang</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px; "> : &nbsp; {{ $dataKapal->tanggal_datang }}</p>
         </div>

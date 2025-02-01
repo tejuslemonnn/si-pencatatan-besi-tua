@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
+use App\Models\BarangMasukBesiTua;
+use App\Models\BarangKeluarBesiTua;
+use App\Http\Controllers\Controller;
+use App\Models\BarangMasukBesiScrap;
+use App\Models\BarangKeluarBesiScrap;
 
 class PerusahaanController extends Controller
 {
@@ -43,10 +48,19 @@ class PerusahaanController extends Controller
     {
         $data = Perusahaan::findOrFail($id);
 
+        $barangMasukBesiTua = BarangMasukBesiTua::where('perusahaan_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $barangMasukBesiScrap = BarangMasukBesiScrap::where('perusahaan_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $barangKeluarBesiTua = BarangKeluarBesiTua::where('perusahaan_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $barangKeluarBesiScrap = BarangKeluarBesiScrap::where('perusahaan_id', $id)->orderBy('id', 'DESC')->paginate(10);
+
         return view('admin.perusahaan.show', [
             'data' => $data,
             'title' => 'Detail Data Perusahaan',
-            'icon' => 'fa-solid fa-box'
+            'icon' => 'fa-solid fa-box',
+            'barangMasukBesiTua' => $barangMasukBesiTua,
+            'barangMasukBesiScrap' => $barangMasukBesiScrap,
+            'barangKeluarBesiTua' => $barangKeluarBesiTua,
+            'barangKeluarBesiScrap' => $barangKeluarBesiScrap,
         ]);
     }
 
