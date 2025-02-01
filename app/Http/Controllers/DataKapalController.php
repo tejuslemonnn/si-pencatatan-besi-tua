@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DataKapal;
 use Illuminate\Http\Request;
+use App\Models\BarangMasukBesiTua;
+use App\Models\BarangKeluarBesiTua;
+use App\Http\Controllers\Controller;
+use App\Models\BarangMasukBesiScrap;
+use App\Models\BarangKeluarBesiScrap;
 
 class DataKapalController extends Controller
 {
@@ -49,10 +54,15 @@ class DataKapalController extends Controller
         $icon = 'fa-solid fa-ship';
         $dataKapal = DataKapal::findOrFail($id);
 
+        $barangMasukBesiTua = BarangMasukBesiTua::where('data_kapal_id', $id)->orderBy('id', 'DESC')->paginate(10);
+        $barangMasukBesiScrap = BarangMasukBesiScrap::where('data_kapal_id', $id)->orderBy('id', 'DESC')->paginate(10);
+
         return view('admin.data-kapal.show', [
             'title' => $title,
             'icon' => $icon,
             'dataKapal' => $dataKapal,
+            'barangMasukBesiTua' => $barangMasukBesiTua,
+            'barangMasukBesiScrap' => $barangMasukBesiScrap,
         ]);
     }
 
