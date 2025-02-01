@@ -28,9 +28,11 @@
                         <th>No</th>
                         <th>Kode</th>
                         <th>Tanggal</th>
+                        <th>Kapal</th>
                         <th>Bruto</th>
                         <th>Tara</th>
                         <th>Netto</th>
+                        {{-- <th>Jumlah</th> --}}
                         <th>Nama Barang</th>
                         <th>Pesanan Dari</th>
                         <th>Action</th>
@@ -45,10 +47,13 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->kode }}</td>
                             <td>{{ $row->tanggal }}</td>
+                            {{-- <td>{{ $row->data_kapal_id }}</td> --}}
+                            <td>{{ $row->dataKapal->nama_kapal }}</td>
                             <td>{{ $row->bruto }}</td>
                             <td>{{ $row->tara }}</td>
                             <td>{{ $row->netto }}</td>
-                            <td>{{ $row->nama_barang }}</td>
+                            {{-- <td>{{ $row->jumlah }}</td> --}}
+                            <td>{{ $row->produk->nama }}</td>
                             <td>{{ $row->pesanan_dari }}</td>
 
                             {{-- @if ($row->status == 0)

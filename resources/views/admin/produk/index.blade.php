@@ -26,8 +26,8 @@
                     <th>No</th>
                     <th>Kode</th>
                     <th>Nama Kapal</th>
-                    <th>Kategori</th>
-                    <th>Berat</th>
+                    {{-- <th>Kategori</th> --}}
+                    {{-- <th>Berat</th> --}}
                     <th>Jumlah</th>
                     <th>Action</th>
                 </tr>
@@ -42,9 +42,9 @@
 
                         <td>{{ $row->kode }}</td>
                         <td>{{ $row->nama }}</td>
-                        <td>{{ $row->kategori->nama }}</td>
-                        <td>{{ $row->berat }}</td>
-                        <td>{{ $row->qty }}</td>
+                        {{-- <td>{{ $row->kategori->nama }}</td> --}}
+                        {{-- <td>{{ $row->berat }}</td> --}}
+                        <td>{{ $row->qty }} Kg</td>
                         {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                             </td>

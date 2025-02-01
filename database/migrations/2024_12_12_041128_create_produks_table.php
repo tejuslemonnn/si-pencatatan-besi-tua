@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('data_kapal_id');
             $table->foreign('data_kapal_id')->references('id')->on('data_kapals')->onDelete('cascade');
-            $table->unsignedBigInteger('kategori_id');
-            $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
+            // $table->unsignedBigInteger('kategori_id');
+            // $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
             $table->double('kode');
             $table->string('nama');
-            $table->integer('berat');
-            $table->integer('qty');
+            // $table->integer('berat');
+            $table->integer('qty')->default(0);
             $table->integer('harga');
-            $table->string('picture')->nullable();
+            // $table->string('picture')->nullable();
             $table->timestamps();
         });
     }

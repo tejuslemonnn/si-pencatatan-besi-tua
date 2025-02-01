@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->string('name', 255);
             $table->string('code', 255);
-            $table->longText('image');
+            // $table->longText('image');
             $table->string('price', 255);
-            $table->integer('qty')->nullable();
+            $table->integer('qty')->default(0);
             $table->string('description', 255)->nullable();
             $table->timestamps();
         });
