@@ -46,18 +46,18 @@
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown dropdown-notifications no-arrow mx-1">
             <!-- Add the notification count badge where needed -->
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+            {{-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
                 <span
                     class="badge badge-danger badge-counter notif-count">{{ count(auth()->user()->unreadnotifications) }}</span>
-            </a>
+            </a> --}}
 
             <!-- ... -->
 
             <!-- Notifications Dropdown Menu -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            {{-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Alerts Center
@@ -83,7 +83,7 @@
                 </div>
 
                 <a class="dropdown-item text-center small text-gray" href="{{ route('markasread-all') }}">Read All</a>
-            </div>
+            </div> --}}
 
         </li>
 

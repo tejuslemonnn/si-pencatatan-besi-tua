@@ -17,7 +17,10 @@
         $currentRouteName = Route::currentRouteName();
 
         // Remove ".index" or other suffixes from the route name
-        $baseRouteName = Str::beforeLast($currentRouteName, '.index');
+        $baseRouteName =
+            Str::beforeLast($currentRouteName, '.index') ?:
+            Str::beforeLast($currentRouteName, '.index-besi-tua') ?:
+            Str::beforeLast($currentRouteName, '.index-besi-scrap');
 
         // Append ".create" to the base route name
         $createRouteName = $baseRouteName . '.create';
@@ -26,7 +29,16 @@
         $createRouteUrl = Route::has($createRouteName) ? route($createRouteName) : '#';
 
         // Determine if the current route ends with ".index"
-        $showCreateButton = Str::endsWith($currentRouteName, '.index');
+        $showCreateButton =
+            Str::endsWith($currentRouteName, '.index') ||
+            Str::endsWith($currentRouteName, '.index-besi-tua') ||
+            Str::endsWith($currentRouteName, '.index-besi-scrap');
+
+        $showBack =
+            Str::endsWith($currentRouteName, '.create') ||
+            Str::endsWith($currentRouteName, '.show') ||
+            Str::endsWith($currentRouteName, '.edit');
+        $showSubmitButton = Str::endsWith($currentRouteName, '.create') || Str::endsWith($currentRouteName, '.edit');
 
         // If not ".index", create variable for back to ".index"
         $indexRouteName = Str::before($currentRouteName, '.') . '.index';
@@ -46,16 +58,21 @@
         </div>
     @else
         <div>
-            <a href="{{ route($indexRouteName) }}" class="btn btn-danger mr-2"> <i class="fas fa-arrow-left"> </i>
-                Back</a>
-            <button type="button" class="btn btn-primary" id="submit_button"> <i class="fas fa-check">
-                </i>Save</button>
+            @if ($showBack)
+                <a href="{{ route($indexRouteName) }}" class="btn btn-danger mr-2"> <i class="fas fa-arrow-left"> </i>
+                    Back</a>
+
+                @if ($showSubmitButton)
+                    <button type="button" class="btn btn-primary" id="submit_button"> <i class="fas fa-check">
+                        </i>Save</button>
+                @endif
         </div>
-        <script>
-            document.getElementById('submit_button').addEventListener('click', function() {
-                document.getElementById('add_form').submit();
-            });
-        </script>
+    @endif
+    <script>
+        document.getElementById('submit_button').addEventListener('click', function() {
+            document.getElementById('add_form').submit();
+        });
+    </script>
     @endif
 
 

@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
         //     'role' => 'admin_gudang',
         //     'password' => '123456'
         // ]);
+<<<<<<< HEAD
     //     User::factory()->create([
     //         'name' => 'AdminGudang3',
     //         'email' => 'admingudang3@gmail.com',
@@ -42,3 +43,13 @@ class UserSeeder extends Seeder
 
     }
 }
+=======
+        //     User::factory()->create([
+        //         'name' => 'AdminGudang3',
+        //         'email' => 'admingudang3@gmail.com',
+        //         'role' => 'admin_gudang',
+        //         'password' => '123456'
+        //     ]);
+    }
+}
+>>>>>>> 84239cea0aed9ef3ae730d26e333205d80b4bb8b

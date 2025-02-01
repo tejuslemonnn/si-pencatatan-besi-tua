@@ -48,6 +48,18 @@
             </select>
         </div>
 
+        <div class="form-group col-12">
+            <label for="data_kapal_id">Kapal</label>
+            <select name="data_kapal_id" id="data_kapal_id" class="form-control" required>
+                <option value="" selected>Select</option>
+                @foreach ($dataKapals as $kapal)
+                    <option value="{{ $kapal->id }}" {{ old('data_kapal_id') == $kapal->id ? 'selected' : '' }}>
+                        {{ $kapal->nama_kapal }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="from-group col-12 my-2">
             <label for="berat">Berat</label>
             <div class="input-group">
@@ -65,4 +77,18 @@
 
     </form>
 
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('#data_kapal_id').select2({
+                width: '100%',
+            });
+            $('#kategori_id').select2({
+                width: '100%',
+            });
+
+        })
+    </script>
 @endsection

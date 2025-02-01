@@ -53,9 +53,10 @@
                                         @endif
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email"
-                                                class="form-control form-control-user @error('email') is-invalid @enderror"
-                                                id="email" aria-describedby="email" placeholder="Email" required>
+                                            <input type="text" name="username"
+                                                class="form-control form-control-user @error('username') is-invalid @enderror"
+                                                id="username" aria-describedby="username" placeholder="username"
+                                                required>
                                         </div>
 
                                         {{-- @if ($errors->has('password'))

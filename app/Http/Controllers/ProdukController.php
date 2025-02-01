@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\DataKapal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,9 +24,11 @@ class ProdukController extends Controller
     public function create()
     {
         $kategoris = Kategori::orderBy('nama', 'ASC')->get();
+        $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
 
         return view('admin.produk.create', [
             'kategoris' => $kategoris,
+            'dataKapals' => $dataKapals,
             'title' => 'Tambah Data Produk',
             'icon' => 'fa-solid fa-box'
         ]);
@@ -39,6 +42,7 @@ class ProdukController extends Controller
             'berat' => 'required',
             'qty' => 'required',
             'kategori_id' => 'required',
+            'data_kapal_id' => 'required',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -56,6 +60,7 @@ class ProdukController extends Controller
             'berat' => $request->berat,
             'qty' => $request->qty,
             'kategori_id' => $request->kategori_id,
+            'data_kapal_id' => $request->data_kapal_id,
             'picture' => $namaFoto ?? null,
         ]);
 
@@ -77,10 +82,12 @@ class ProdukController extends Controller
     {
         $data = Produk::findOrFail($id);
         $kategoris = Kategori::orderBy('nama', 'ASC')->get();
+        $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
 
         return view('admin.produk.edit', [
             'produk' => $data,
             'kategoris' => $kategoris,
+            'dataKapals' => $dataKapals,
             'title' => 'Edit Data Produk',
             'icon' => 'fa-solid fa-box'
         ]);
@@ -94,6 +101,7 @@ class ProdukController extends Controller
             'berat' => 'required',
             'qty' => 'required',
             'kategori_id' => 'required',
+            'data_kapal_id' => 'required',
             'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -113,6 +121,7 @@ class ProdukController extends Controller
             'berat' => $request->berat,
             'qty' => $request->qty,
             'kategori_id' => $request->kategori_id,
+            'data_kapal_id' => $request->data_kapal_id,
             'picture' => $namaFoto ?? null,
         ]);
 

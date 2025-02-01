@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kendaraan_id');
             $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');
-            $table->unsignedBigInteger('barang_keluar_kapal_id');
-            $table->foreign('barang_keluar_kapal_id')->references('id')->on('barang_keluar_kapal')->onDelete('cascade');
-            $table->double('no_surat');
+
+            $table->string('no_surat')->unique();
             $table->date('tanggal_surat');
-            $table->integer('netto_bersih');
             $table->string('penerima');
-            $table->string('deskripsi');
-            $table->boolean('status');
+            $table->string('deskripsi')->nullable();
+            $table->boolean('status')->nullable()->default(false);
             $table->timestamps();
         });
     }

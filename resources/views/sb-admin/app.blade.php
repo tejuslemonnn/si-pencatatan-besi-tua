@@ -54,6 +54,7 @@
 
     {{-- java script --}}
     @include('sb-admin/javascript')
+    @yield('javascript')
     @include('sb-admin/notifications-js')
 
 

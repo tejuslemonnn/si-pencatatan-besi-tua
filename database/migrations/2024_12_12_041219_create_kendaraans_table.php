@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis');
+            // $table->string('jenis');
             $table->string('nomor_plat');
             $table->string('model');
             $table->timestamps();

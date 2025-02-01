@@ -24,45 +24,76 @@
             <span class="font-weight-bold">Data Kapal</span></a>
     </li>
 
-    <li class="nav-item">
+    <div class="sidebar-heading">
+        Produk
+    </div>
+
+    {{-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"
             href="{{ route('produk.index') }}">
-            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-duotone fa-solid fa-gauge"></i>
             <i class="fa-solid fa-box {{ request()->routeIs('produk.*') ? 'text-purple' : '' }}"></i>
             <span class="font-weight-bold">Produk</span></a>
-    </li>
-
-    <div class="sidebar-heading">
-        DO
-    </div>
-
-    <div class="sidebar-heading">
-        Laporan
-    </div>
+    </li> --}}
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExpired"
-            aria-expanded="true" aria-controls="collapseExpired">
-            <i class="fa-regular fa-calendar-days"></i>
-            <span>Expired Draft</span>
+        <a class="nav-link {{ request()->routeIs('kendaraan.*') ? 'text-purple' : '' }}"
+            href="{{ route('kendaraan.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('kendaraan.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Kendaraan</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('surat-jalan.*') ? 'text-purple' : '' }}"
+            href="{{ route('surat-jalan.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('surat-jalan.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Surat Jalan</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"
+            href="#" data-toggle="collapse" data-target="#collapseExpired" aria-expanded="true"
+            aria-controls="collapseExpired">
+            <i
+                class="fa-solid fa-indent {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Barang Masuk</span>
         </a>
-        <div id="collapseExpired" class="collapse {{ Request::is('expired*') ? 'show' : '' }}"
+        <div id="collapseExpired"
+            class="collapse {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'show' : '' }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Draft:</h6>
-                <a class="collapse-item {{ url()->current() == route('expiredMaterial') ? 'active' : '' }}"
-                    href="{{ route('expiredMaterial') }}">Expired Material</a>
-                <a class="collapse-item {{ url()->current() == route('expiredStock') ? 'active' : '' }}"
-                    href="{{ route('expiredStock') }}">Expired Stock</a>
-                <a class="collapse-item {{ url()->current() == route('expiredITR') ? 'active' : '' }}"
-                    href="{{ route('expiredITR') }}">Expired ITR</a>
-                <a class="collapse-item {{ url()->current() == route('expiredDO') ? 'active' : '' }}"
-                    href="{{ route('expiredDO') }}">Expired DO</a>
+            <div class="bg-white collapse-inner rounded mb-1">
+                <a class="collapse-item {{ request()->routeIs('barang-masuk-besi-tua.*') ? 'active' : '' }}"
+                    href="{{ route('barang-masuk-besi-tua.index') }}">Besi Tua</a>
+            </div>
+            <div class="bg-white collapse-inner rounded">
+                <a class="collapse-item {{ request()->routeIs('barang-masuk-besi-scrap.*') ? 'active' : '' }}"
+                    href="{{ route('barang-masuk-besi-scrap.index') }}">Besi Scrap</a>
             </div>
         </div>
     </li>
 
-
+    <li class="nav-item">
+        <a class="nav-link collapsed {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'text-purple' : '' }}"
+            href="#" data-toggle="collapse" data-target="#collapseExpired" aria-expanded="true"
+            aria-controls="collapseExpired">
+            <i
+                class="fa-solid fa-indent {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Barang Keluar</span>
+        </a>
+        <div id="collapseExpired"
+            class="collapse {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'show' : '' }}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white collapse-inner rounded mb-1">
+                <a class="collapse-item {{ request()->routeIs('barang-keluar-besi-tua.*') ? 'active' : '' }}"
+                    href="{{ route('barang-keluar-besi-tua.index') }}">Besi Tua</a>
+            </div>
+            <div class="bg-white collapse-inner rounded">
+                <a class="collapse-item {{ request()->routeIs('barang-keluar-besi-scrap.*') ? 'active' : '' }}"
+                    href="{{ route('barang-keluar-besi-scrap.index') }}">Besi Scrap</a>
+            </div>
+        </div>
     </li>
 
 

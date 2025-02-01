@@ -3,6 +3,7 @@
 
 @include('sb-admin/datatable')
 
+{{-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script> --}}
 
 <script src="{{ asset('vendor/sb-admin/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -25,5 +26,7 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 
 <script>
-    new DataTable('#example');
+    new DataTable('#barang_masuk_besi_tua_table', {
+        'bSort': false
+    });
 </script>
