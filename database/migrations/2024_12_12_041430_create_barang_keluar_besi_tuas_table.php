@@ -20,10 +20,14 @@ return new class extends Migration
             $table->integer('bruto');
             $table->integer('tara');
             $table->integer('netto');
-            $table->integer('harga');
+            // $table->integer('harga');
             $table->integer('jumlah_harga');
-            $table->string('nama_barang');
-            $table->string('pesanan_dari');
+            // $table->string('nama_barang');
+            $table->unsignedBigInteger('produk_id');
+            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
+            // $table->string('pesanan_dari');
+            $table->unsignedBigInteger('perusahaan_id');
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             $table->timestamps();
         });
     }

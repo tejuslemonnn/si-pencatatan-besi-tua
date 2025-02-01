@@ -22,6 +22,7 @@ use App\Http\Controllers\BarangMasukBesiTuaController;
 use App\Http\Controllers\BarangKeluarBesiTuaController;
 use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\BarangKeluarBesiScrapController;
+use App\Http\Controllers\PerusahaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
 
     Route::resource('kendaraan', KendaraanController::class);
+    Route::resource('perusahaan', PerusahaanController::class);
 
     Route::resource('surat-jalan', SuratJalanController::class);
 

@@ -20,4 +20,10 @@ class BarangKeluarBesiScrap extends Model
     {
         return $this->belongsTo(Kendaraan::class);
     }
+
+    // perusahaan
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
 }

@@ -125,9 +125,9 @@
 
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Pesanan Dari</label>
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Perusahaan</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->pesanan_dari }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->perusahaan->nama }}</p>
         </div>
     </div>
 

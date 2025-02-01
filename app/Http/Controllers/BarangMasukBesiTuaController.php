@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Produk;
 use App\Models\DataKapal;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Models\BarangMasukBesiTua;
 use Illuminate\Support\Facades\DB;
@@ -27,12 +28,14 @@ class BarangMasukBesiTuaController extends Controller
     {
         $products = Produk::orderBy('nama', 'ASC')->get();
         $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
+        $perusahaans = Perusahaan::orderBy('nama', 'ASC')->get();
 
         return view('admin.barang_masuk_besi_tua.create', [
             'title' => 'Tambah Data Barang Masuk Besi Tua',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -51,7 +54,8 @@ class BarangMasukBesiTuaController extends Controller
             // 'jumlah' => 'required|integer',
             'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
-            'pesanan_dari' => 'required|string',
+            // 'pesanan_dari' => 'required|string',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
             // 'nama_barang' => 'required|string',
         ]);
 
@@ -71,7 +75,8 @@ class BarangMasukBesiTuaController extends Controller
             'data_kapal_id' => $request->data_kapal_id,
             'produk_id' => $request->produk_id,
             // 'keterangan' => $request->keterangan,
-            'pesanan_dari' => $request->pesanan_dari,
+            // 'pesanan_dari' => $request->pesanan_dari,
+            'perusahaan_id' => $request->perusahaan_id,
             // 'nama_barang' => $request->nama_barang,
         ]);
 
@@ -89,13 +94,15 @@ class BarangMasukBesiTuaController extends Controller
         $data = BarangMasukBesiTua::findOrFail($id);
         $products = Produk::orderBy('nama', 'ASC')->get();
         $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
+        $perusahaans = Perusahaan::orderBy('nama', 'ASC')->get();
 
         return view('admin.barang_masuk_besi_tua.edit', [
             'data' => $data,
             'title' => 'Edit Data Barang Masuk Besi Tua',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -111,7 +118,8 @@ class BarangMasukBesiTuaController extends Controller
             'data_kapal_id' => 'required|exists:data_kapals,id',
             'produk_id' => 'required|exists:produks,id',
             // 'keterangan' => 'nullable|string|max:255',
-            'pesanan_dari' => 'required|string',
+            // 'pesanan_dari' => 'required|string',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
             // 'nama_barang' => 'required|string',
         ]);
 
@@ -150,7 +158,8 @@ class BarangMasukBesiTuaController extends Controller
             'netto' => $request->netto,
             // 'jumlah' => $request->jumlah,
             'data_kapal_id' => $request->data_kapal_id,
-            'pesanan_dari' => $request->pesanan_dari,
+            // 'pesanan_dari' => $request->pesanan_dari,
+            'perusahaan_id' => $request->perusahaan_id,
             // 'nama_barang' => $request->nama_barang,
             'produk_id' => $request->produk_id,
         ]);

@@ -36,7 +36,7 @@
                         <th>Nama Barang</th>
                         <th>Harga</th>
                         <th>Jumlah Harga</th>
-                        <th>Pesanan Dari</th>
+                        <th>Perusahaan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -55,10 +55,10 @@
                             <td>{{ $row->bruto }}</td>
                             <td>{{ $row->tara }}</td>
                             <td>{{ $row->netto }}</td>
-                            <td>{{ $row->nama_barang }}</td>
-                            <td>{{ $row->harga }}</td>
+                            <td>{{ $row->produk->nama }}</td>
+                            <td>{{ $row->produk->harga }}</td>
                             <td>{{ $row->jumlah_harga }}</td>
-                            <td>{{ $row->pesanan_dari }}</td>
+                            <td>{{ $row->perusahaan->nama }}</td>
 
                             {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>

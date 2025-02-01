@@ -27,7 +27,9 @@ return new class extends Migration
             $table->integer('netto_bersih');
             $table->integer('harga');
             $table->integer('jumlah_harga');
-            $table->string('pesanan_dari');
+            // $table->string('pesanan_dari');
+            $table->unsignedBigInteger('perusahaan_id');
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             $table->timestamps();
         });
     }

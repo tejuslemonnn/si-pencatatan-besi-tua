@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Produk;
 use App\Models\Kendaraan;
+use App\Models\Perusahaan;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\BarangKeluarBesiTua;
-use Carbon\Carbon;
 
 class BarangKeluarBesiTuaController extends Controller
 {
@@ -32,12 +34,16 @@ class BarangKeluarBesiTuaController extends Controller
     {
         $kendaraans = Kendaraan::get();
         $suratJalans = SuratJalan::WhereNull('barang_keluar_besi_tua_id')->WhereNull('barang_keluar_besi_scrap_id')->get();
+        $perusahaans = Perusahaan::get();
+        $products = Produk::get();
 
         return view('admin.barang_keluar_besi_tua.create', [
             'title' => 'Tambah Data Barang Keluar Besi Tua',
             'icon' => 'fa-solid fa-box',
             'kendaraans' => $kendaraans,
-            'suratJalans' => $suratJalans
+            'suratJalans' => $suratJalans,
+            'perusahaans' => $perusahaans,
+            'products' => $products
         ]);
     }
 
@@ -55,10 +61,12 @@ class BarangKeluarBesiTuaController extends Controller
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
-            'harga' => 'required|integer',
+            // 'harga' => 'required|integer',
             'jumlah_harga' => 'required|integer',
-            'nama_barang' => 'required|string',
-            'pesanan_dari' => 'required|string',
+            // 'nama_barang' => 'required|string',
+            // 'pesanan_dari' => 'required|string',
+            'produk_id' => 'required|exists:produks,id',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
         ]);
 
         $isDuplicate = BarangKeluarBesiTua::where('kode', $request->kode)->exists();
@@ -74,10 +82,12 @@ class BarangKeluarBesiTuaController extends Controller
             'bruto' => $request->bruto,
             'tara' => $request->tara,
             'netto' => $request->netto,
-            'harga' => $request->harga,
+            // 'harga' => $request->harga,
             'jumlah_harga' => $request->jumlah_harga,
-            'nama_barang' => $request->nama_barang,
-            'pesanan_dari' => $request->pesanan_dari,
+            // 'nama_barang' => $request->nama_barang,
+            // 'pesanan_dari' => $request->pesanan_dari,
+            'produk_id' => $request->produk_id,
+            'perusahaan_id' => $request->perusahaan_id,
         ]);
 
         SuratJalan::where('id', $request->surat_jalan_id)->update([
@@ -115,14 +125,18 @@ class BarangKeluarBesiTuaController extends Controller
             })
             ->get();
 
+        $perusahaans = Perusahaan::get();
 
+        $products = Produk::get();
 
         return view('admin.barang_keluar_besi_tua.edit', [
             'title' => 'Edit Data Barang Keluar Besi Tua',
             'icon' => 'fa-solid fa-box',
             'data' => $barangKeluarBesiTua,
             'kendaraans' => $kendaraans,
-            'suratJalans' => $suratJalans
+            'suratJalans' => $suratJalans,
+            'perusahaans' => $perusahaans,
+            'products' => $products
         ]);
     }
 
@@ -133,15 +147,17 @@ class BarangKeluarBesiTuaController extends Controller
     {
         $request->validate([
             'tanggal' => 'required|date',
-            'kendaraan_id' => 'required|exists:kendaraans,id',
+            // 'kendaraan_id' => 'required|exists:kendaraans,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
-            'harga' => 'required|integer',
+            // 'harga' => 'required|integer',
             'jumlah_harga' => 'required|integer',
-            'nama_barang' => 'required|string',
-            'pesanan_dari' => 'required|string',
+            // 'nama_barang' => 'required|string',
+            'produk_id' => 'required|exists:produks,id',
+            // 'pesanan_dari' => 'required|string',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
         ]);
 
         $kode = $barangKeluarBesiTua->kode;
@@ -163,15 +179,17 @@ class BarangKeluarBesiTuaController extends Controller
         $barangKeluarBesiTua->update([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
-            'kendaraan_id' => $request->kendaraan_id,
+            // 'kendaraan_id' => $request->kendaraan_id,
             'surat_jalan_id' => $request->surat_jalan_id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
             'netto' => $request->netto,
-            'harga' => $request->harga,
+            // 'harga' => $request->harga,
             'jumlah_harga' => $request->jumlah_harga,
-            'nama_barang' => $request->nama_barang,
-            'pesanan_dari' => $request->pesanan_dari,
+            // 'nama_barang' => $request->nama_barang,
+            'produk_id' => $request->produk_id,
+            // 'pesanan_dari' => $request->pesanan_dari,
+            'perusahaan_id' => $request->perusahaan_id,
         ]);
 
         SuratJalan::where('id', $request->surat_jalan_id)->update([

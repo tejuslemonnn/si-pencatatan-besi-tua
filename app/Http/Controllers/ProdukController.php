@@ -40,10 +40,11 @@ class ProdukController extends Controller
             'kode' => 'required',
             'nama' => 'required',
             // 'berat' => 'required',
-            'qty' => 'required',
+            'qty' => 'nullable',
             // 'kategori_id' => 'required',
-            'data_kapal_id' => 'required',
+            // 'data_kapal_id' => 'required',
             // 'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'harga' => 'required',
         ]);
 
         // if ($request->hasFile('foto')) {
@@ -60,8 +61,9 @@ class ProdukController extends Controller
             // 'berat' => $request->berat,
             'qty' => $request->qty,
             // 'kategori_id' => $request->kategori_id,
-            'data_kapal_id' => $request->data_kapal_id,
+            // 'data_kapal_id' => $request->data_kapal_id,
             // 'picture' => $namaFoto ?? null,
+            'harga' => $request->harga,
         ]);
 
         return redirect()->route('produk.index')->with('success', 'Data Produk berhasil ditambahkan');
@@ -99,10 +101,11 @@ class ProdukController extends Controller
             'kode' => 'required',
             'nama' => 'required',
             // 'berat' => 'required',
-            'qty' => 'required',
+            'qty' => 'nullable',
             // 'kategori_id' => 'required',
-            'data_kapal_id' => 'required',
+            // 'data_kapal_id' => 'required',
             // 'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'harga' => 'required',
         ]);
 
         $data = Produk::findOrFail($id);
@@ -121,8 +124,9 @@ class ProdukController extends Controller
             // 'berat' => $request->berat,
             'qty' => $request->qty,
             // 'kategori_id' => $request->kategori_id,
-            'data_kapal_id' => $request->data_kapal_id,
+            // 'data_kapal_id' => $request->data_kapal_id,
             // 'picture' => $namaFoto ?? null,
+            'harga' => $request->harga,
         ]);
 
         return redirect()->route('produk.index')->with('success', 'Data Produk berhasil diubah');

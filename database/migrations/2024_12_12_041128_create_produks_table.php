@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('data_kapal_id');
-            $table->foreign('data_kapal_id')->references('id')->on('data_kapals')->onDelete('cascade');
+            // $table->unsignedBigInteger('data_kapal_id');
+            // $table->foreign('data_kapal_id')->references('id')->on('data_kapals')->onDelete('cascade');
             // $table->unsignedBigInteger('kategori_id');
             // $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
             $table->double('kode');

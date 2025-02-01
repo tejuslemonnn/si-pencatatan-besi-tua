@@ -28,7 +28,9 @@ return new class extends Migration
             // $table->unsignedBigInteger('produk_id');
             // $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
             // $table->string('keterangan');
-            $table->string('pesanan_dari');
+            // $table->string('pesanan_dari');
+            $table->unsignedBigInteger('perusahaan_id');
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             $table->timestamps();
         });
     }

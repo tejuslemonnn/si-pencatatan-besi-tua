@@ -46,7 +46,7 @@
                             <th class="text-center" style="vertical-align: middle;">BARANG KELUAR BESI TUA</th>
                             <th class="text-center" style="vertical-align: middle;">BARANG KELUAR BESI SCRAP</th>
                         @endif
-                        <th class="text-center" style="vertical-align: middle;">PENERIMA</th>
+                        <th class="text-center" style="vertical-align: middle;">PERUSAHAAN</th>
                         <th class="text-center" style="vertical-align: middle;">DESKRIPSI</th>
                         <th class="text-center" style="vertical-align: middle;">STATUS</th>
                         <th class="text-center" style="vertical-align: middle;">Action</th>
@@ -72,7 +72,7 @@
                                 <td>{{ $row->barang_keluar_besi_tua_id != null ? $row->barangKeluarBesiTua->kode : '-' }}
                                 <td>{{ $row->barang_keluar_besi_scrap_id != null ? $row->barangKeluarBesiScrap->kode : '-' }}
                             @endif
-                            <td>{{ $row->penerima }}</td>
+                            <td>{{ $row->perusahaan->nama }}</td>
                             <td>{{ $row->deskripsi }}</td>
                             {{-- <td class=" color by status --}}
                             <td

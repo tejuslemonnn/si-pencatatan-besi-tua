@@ -55,10 +55,18 @@
             </div>
         </div> --}}
 
+        {{-- harga --}}
+        <div class="from-group col-12 my-2">
+            <label for="harga">Harga</label>
+            <div class="input-group">
+                <input type="number" name="harga" class="form-control" placeholder="Harga" value="{{ $produk->harga }}">
+            </div>
+        </div>
+
         <div class="from-group col-12 my-2">
             <label for="qty">Jumlah</label>
             <div class="input-group">
-                <input type="number" name="qty" class="form-control" placeholder="Nama" value="{{ $produk->qty }}">
+                <input type="number" name="qty" class="form-control" placeholder="Jumlah" value="{{ $produk->qty }}">
             </div>
         </div>
 

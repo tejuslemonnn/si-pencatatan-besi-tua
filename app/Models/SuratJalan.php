@@ -37,4 +37,9 @@ class SuratJalan extends Model
     {
         return $this->belongsTo(Kendaraan::class);
     }
+    // perusahaann
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
 }

@@ -25,7 +25,8 @@
                 <tr>
                     <th>No</th>
                     <th>Kode</th>
-                    <th>Nama Kapal</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
                     {{-- <th>Kategori</th> --}}
                     {{-- <th>Berat</th> --}}
                     <th>Jumlah</th>
@@ -42,6 +43,7 @@
 
                         <td>{{ $row->kode }}</td>
                         <td>{{ $row->nama }}</td>
+                        <td>Rp. {{ number_format($row->harga) }}</td>
                         {{-- <td>{{ $row->kategori->nama }}</td> --}}
                         {{-- <td>{{ $row->berat }}</td> --}}
                         <td>{{ $row->qty }} Kg</td>

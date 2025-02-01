@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kendaraan;
+use App\Models\Perusahaan;
+use App\Models\SuratJalan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BarangKeluarBesiTua extends Model
 {
@@ -19,5 +22,15 @@ class BarangKeluarBesiTua extends Model
     public function suratJalan()
     {
         return $this->belongsTo(SuratJalan::class);
+    }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
     }
 }

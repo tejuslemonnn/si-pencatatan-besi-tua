@@ -20,4 +20,9 @@ class BarangMasukBesiScrap extends Model
     {
         return $this->belongsTo(DataKapal::class);
     }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
 }

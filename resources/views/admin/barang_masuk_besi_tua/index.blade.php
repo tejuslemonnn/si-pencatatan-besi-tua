@@ -34,7 +34,8 @@
                         <th>Netto</th>
                         {{-- <th>Jumlah</th> --}}
                         <th>Nama Barang</th>
-                        <th>Pesanan Dari</th>
+                        {{-- <th>Perusahaan</th> --}}
+                        <th>Perusahaan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -54,7 +55,8 @@
                             <td>{{ $row->netto }}</td>
                             {{-- <td>{{ $row->jumlah }}</td> --}}
                             <td>{{ $row->produk->nama }}</td>
-                            <td>{{ $row->pesanan_dari }}</td>
+                            {{-- <td>{{ $row->pesanan_dari }}</td> --}}
+                            <td>{{ $row->perusahaan->nama }}</td>
 
                             {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Produk;
+use App\Models\DataKapal;
+use App\Models\Perusahaan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,5 +24,10 @@ class BarangMasukBesiTua extends Model
     public function dataKapal()
     {
         return $this->belongsTo(DataKapal::class);
+    }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
     }
 }

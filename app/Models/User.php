@@ -2,17 +2,6 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
-{
-    use HasFactory;
-
-
-    protected $table = 'user';
-=======
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\MaterialModel;
 use App\Models\StockCountModel;
@@ -82,5 +71,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(StockCountModel::class, 'id', 'source');
     }
->>>>>>> 84239cea0aed9ef3ae730d26e333205d80b4bb8b
 }

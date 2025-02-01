@@ -19,6 +19,7 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Database\Seeder;
 use App\Models\BarangMasukBesiTua;
 use App\Models\BarangMasukBesiScrap;
+use App\Models\Perusahaan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,6 +44,10 @@ class DatabaseSeeder extends Seeder
             'password' => '123456'
         ]);
 
+        Perusahaan::create([
+            'nama' => 'PT. Jatim Steel',
+        ]);
+
         DataKapal::create([
             'nama_kapal' => 'KM Mentari Javelin',
             'tanggal_datang' =>  date('Y-m-d'),
@@ -55,7 +60,7 @@ class DatabaseSeeder extends Seeder
         Produk::create([
             'nama' => 'Jangkar',
             // 'kategori_id' => 1,
-            'data_kapal_id' => 1,
+            // 'data_kapal_id' => 1,
             'kode' => 123,
             // 'berat' => 123,
             'qty' => 0,
@@ -72,7 +77,8 @@ class DatabaseSeeder extends Seeder
             // 'jumlah' => 12080,
             'produk_id' => 1,
             // 'nama_barang' => 'Besi Tua',
-            'pesanan_dari' => 'PT. Jatim Steel',
+            // 'pesanan_dari' => 'PT. Jatim Steel',
+            'perusahaan_id' => 1,
         ]);
 
         Produk::where('id', 1)->update([
@@ -89,7 +95,8 @@ class DatabaseSeeder extends Seeder
             // 'jumlah' => 23640,
             'produk_id' => 1,
             // 'nama_barang' => 'Jangkar, rantai',
-            'pesanan_dari' => 'PT. Jatim Steel',
+            // 'pesanan_dari' => 'PT. Jatim Steel',
+            'perusahaan_id' => 1,
         ]);
 
         Produk::where('id', 1)->update([
@@ -109,7 +116,8 @@ class DatabaseSeeder extends Seeder
             'netto_pabrik' => 12060,
             'pot' => 90,
             'netto_bersih' => 11970,
-            'pesanan_dari' => 'PT. Jatim Steel',
+            // 'pesanan_dari' => 'PT. Jatim Steel',
+            'perusahaan_id' => 1,
         ]);
 
         Kendaraan::create([
@@ -123,7 +131,7 @@ class DatabaseSeeder extends Seeder
             "kendaraan_id" => "1",
             "barang_keluar_besi_tua_id" => null,
             "barang_keluar_besi_scrap_id" => null,
-            "penerima" => "Jatim Steel",
+            "perusahaan_id" => 1,
             "deskripsi" => null,
         ]);
 
@@ -133,7 +141,7 @@ class DatabaseSeeder extends Seeder
             "kendaraan_id" => "1",
             "barang_keluar_besi_tua_id" => null,
             "barang_keluar_besi_scrap_id" => null,
-            "penerima" => "Jatim Steel",
+            "perusahaan_id" => 1,
             "deskripsi" => null,
             'status' => null,
         ]);
@@ -144,9 +152,11 @@ class DatabaseSeeder extends Seeder
             "kendaraan_id" => "1",
             "barang_keluar_besi_tua_id" => null,
             "barang_keluar_besi_scrap_id" => null,
-            "penerima" => "Jatim Steel",
+            "perusahaan_id" => 1,
             "deskripsi" => null,
         ]);
+
+        $produk = Produk::where('id', 1)->first();
 
         BarangKeluarBesiTua::create([
             'surat_jalan_id' => 1,
@@ -155,10 +165,12 @@ class DatabaseSeeder extends Seeder
             'bruto' => 19540,
             'tara' => 7460,
             'netto' => 12080,
-            'nama_barang' => 'Besi Tua',
-            'harga' => 7200,
-            'jumlah_harga' => 7200 * 12080,
-            'pesanan_dari' => 'PT. Jatim Steel'
+            // 'nama_barang' => 'Besi Tua',
+            'produk_id' => 1,
+            // 'harga' => 7200,
+            'jumlah_harga' =>  $produk->harga * 12080,
+            // 'pesanan_dari' => 'PT. Jatim Steel'
+            'perusahaan_id' => 1,
         ]);
 
 
@@ -181,7 +193,8 @@ class DatabaseSeeder extends Seeder
             'netto_bersih' => 11970,
             'harga' => 7200,
             'jumlah_harga' => 7200 * 11970,
-            'pesanan_dari' => 'PT. Jatim Steel'
+            // 'pesanan_dari' => 'PT. Jatim Steel'
+            'perusahaan_id' => 1,
         ]);
 
         SuratJalan::where('id', 3)->update([

@@ -104,11 +104,20 @@
         </div> --}}
 
         <div class="from-group col-12 my-2">
-            <label for="penerima">Penerima</label>
+            {{-- <label for="penerima">Penerima</label>
             <div class="input-group">
                 <input type="text" name="penerima" class="form-control" placeholder="Penerima"
                     value="{{ $data->penerima }}">
-            </div>
+            </div> --}}
+            <label for="perusahaan_id">Perusahaan</label>
+            <select name="perusahaan_id" id="perusahaan_id" class="form-control" required>
+                <option value="" selected>Select</option>
+                @foreach ($perusahaans as $perusahaan)
+                    <option value="{{ $perusahaan->id }}" {{ $data->perusahaan_id == $perusahaan->id ? 'selected' : '' }}>
+                        {{ $perusahaan->nama }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="from-group col-12 my-2">
@@ -133,6 +142,9 @@
                 width: '100%',
             });
             $('#kendaraan').select2({
+                width: '100%',
+            });
+            $('#perusahaan_id').select2({
                 width: '100%',
             });
 

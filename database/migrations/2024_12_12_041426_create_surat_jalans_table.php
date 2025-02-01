@@ -18,7 +18,9 @@ return new class extends Migration
 
             $table->string('no_surat')->unique();
             $table->date('tanggal_surat');
-            $table->string('penerima');
+            // $table->string('penerima');
+            $table->unsignedBigInteger('perusahaan_id');
+            $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             $table->string('deskripsi')->nullable();
             $table->boolean('status')->nullable()->default(false);
             $table->timestamps();

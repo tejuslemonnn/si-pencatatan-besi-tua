@@ -73,21 +73,22 @@
         </div> --}}
 
         <div class="form-group col-12">
-            {{-- <label for="produk_id">Produk</label>
+            <label for="produk_id">Produk</label>
             <select name="produk_id" id="produk_id" class="form-control" required>
                 <option value="" selected>Select</option>
                 @foreach ($products as $product)
-                    <option value="{{ $product->id }}" {{ old('produk_id') == $product->id ? 'selected' : '' }}>
-                        {{ $product->nama }}
+                    <option value="{{ $product->id }}" data-harga="{{ $product->harga }}"
+                        {{ $data->produk_id == $product->id ? 'selected' : '' }}>
+                        {{ $product->nama }} - Rp. {{ number_format($product->harga, 0, ',', '.') }}
                     </option>
                 @endforeach
-            </select> --}}
+            </select>
 
-            <label for="nama_barang">Nama Barang</label>
+            {{-- <label for="nama_barang">Nama Barang</label>
             <div class="input-group">
                 <input type="text" name="nama_barang" class="form-control" placeholder="Nama Barang"
                     value="{{ $data->nama_barang ?? old('nama_barang') }}" id="nama_barang">
-            </div>
+            </div> --}}
         </div>
 
         <div class="from-group col-12 my-2">
@@ -114,13 +115,13 @@
             </div>
         </div>
 
-        <div class="form-group col-12">
+        {{-- <div class="form-group col-12">
             <label for="harga">Harga</label>
             <div class="input-group">
                 <input type="number" name="harga" class="form-control" placeholder="Harga"
-                    value="{{ $data->harga ?? old('harga') }}" id="harga">
+                    value="{{ $data->produk->harga }}" id="harga" readonly>
             </div>
-        </div>
+        </div> --}}
 
         <div class="from-group col-12 my-2">
             <label for="jumlah_harga">Jumlah Harga</label>
@@ -144,11 +145,15 @@
         </div> --}}
 
         <div class="from-group col-12 my-2">
-            <label for="pesanan_dari">Pesanan Dari</label>
-            <div class="input-group">
-                <input type="text" name="pesanan_dari" class="form-control" placeholder="Pesanan Dari"
-                    value="{{ $data->pesanan_dari ?? old('pesanan_dari') }}">
-            </div>
+            <label for="perusahaan_id">Perusahaan</label>
+            <select name="perusahaan_id" id="perusahaan_id" class="form-control" required>
+                <option value="" selected>Select</option>
+                @foreach ($perusahaans as $perusahaan)
+                    <option value="{{ $perusahaan->id }}" {{ $data->perusahaan_id == $perusahaan->id ? 'selected' : '' }}>
+                        {{ $perusahaan->nama }}
+                    </option>
+                @endforeach
+            </select>
         </div>
     </form>
 
@@ -164,6 +169,22 @@
             $('#surat_jalan_id').select2({
                 width: '100%',
             });
+            $('#perusahaan_id').select2({
+                width: '100%',
+            });
+            $('#produk_id').select2({
+                width: '100%',
+            });
+
+            function updateJumlahHarga() {
+                let netto = parseFloat($('#netto').val()) || 0;
+                let selectedProduct = $('#produk_id').find(':selected');
+                let harga = selectedProduct.data('harga') || 0;
+                let jumlahHarga = netto != 0 && harga != 0 ? netto * harga : 0;
+                // if (jumlahHarga > 0) {
+                $('#jumlah_harga').val(jumlahHarga > 0 ? jumlahHarga : 0).trigger('change');
+                // }
+            }
 
             function updateNetto() {
                 let bruto = parseFloat($('#bruto').val()) || 0;
@@ -171,24 +192,23 @@
                 let netto = bruto != 0 && tara != 0 ? bruto - tara : 0;
                 if (netto > 0) {
                     $('#netto').val(netto > 0 ? netto : 0).trigger('change');
+                    updateJumlahHarga();
                 }
             }
 
             $('#bruto').on('input', updateNetto);
             $('#tara').on('input', updateNetto);
 
-            function updateJumlahHarga() {
-                let netto = parseFloat($('#netto').val()) || 0;
-                let harga = parseFloat($('#harga').val()) || 0;
-                let jumlahHarga = netto != 0 && harga != 0 ? netto * harga : 0;
-                if (jumlahHarga > 0) {
-                    $('#jumlah_harga').val(jumlahHarga > 0 ? jumlahHarga : 0).trigger('change');
-                }
-            }
+
+
+            $('#produk_id').on('change', function() {
+                let selectedProduct = $(this).find(':selected');
+
+                let harga = selectedProduct.data('harga') || 0;
+                updateJumlahHarga();
+            });
 
             $('#netto').on('input', updateJumlahHarga);
-            $('#harga').on('input', updateJumlahHarga);
-
         });
     </script>
 @endsection

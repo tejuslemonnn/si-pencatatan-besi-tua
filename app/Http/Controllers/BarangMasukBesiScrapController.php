@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Produk;
 use App\Models\DataKapal;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukBesiScrap;
@@ -32,12 +33,14 @@ class BarangMasukBesiScrapController extends Controller
     {
         $products = Produk::orderBy('nama', 'ASC')->get();
         $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
+        $perusahaans = Perusahaan::orderBy('nama', 'ASC')->get();
 
         return view('admin.barang_masuk_besi_scrap.create', [
             'title' => 'Tambah Data Barang Masuk Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -61,7 +64,8 @@ class BarangMasukBesiScrapController extends Controller
             'pot' => 'required|integer',
             'netto_bersih' => 'required|integer',
             // 'keterangan' => 'nullable|string|max:255',
-            'pesanan_dari' => 'required|string',
+            // 'pesanan_dari' => 'required|string',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
         ]);
 
         $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->exists();
@@ -83,7 +87,8 @@ class BarangMasukBesiScrapController extends Controller
             'pot' => $data['pot'],
             'netto_bersih' => $data['netto_bersih'],
             // 'keterangan' => $data['keterangan'],
-            'pesanan_dari' => $data['pesanan_dari'],
+            // 'pesanan_dari' => $data['pesanan_dari'],
+            'perusahaan_id' => $data['perusahaan_id'],
         ]);
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil ditambahkan');
@@ -108,13 +113,15 @@ class BarangMasukBesiScrapController extends Controller
     {
         $products = Produk::orderBy('nama', 'ASC')->get();
         $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
+        $perusahaans = Perusahaan::orderBy('nama', 'ASC')->get();
 
         return view('admin.barang_masuk_besi_scrap.edit', [
             'data' => $barangMasukBesiScrap,
             'title' => 'Edit Data Barang Masuk Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -134,7 +141,8 @@ class BarangMasukBesiScrapController extends Controller
             'netto_pabrik' => 'required|integer',
             'pot' => 'required|integer',
             'netto_bersih' => 'required|integer',
-            'pesanan_dari' => 'required|string',
+            // 'pesanan_dari' => 'required|string',
+            'perusahaan_id' => 'required|exists:perusahaans,id',
         ]);
 
         $data = BarangMasukBesiScrap::findOrFail($barangMasukBesiScrap->id);
@@ -151,7 +159,7 @@ class BarangMasukBesiScrapController extends Controller
 
         $request->kode = $kodePrefix . '-' . $request->kode;
 
-        $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->exists();
+        $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->where('id', '!=', $barangMasukBesiScrap->id)->exists();
 
         if ($isDuplicate) {
             return redirect()->back()->with('error', 'Kode sudah digunakan');
@@ -169,7 +177,8 @@ class BarangMasukBesiScrapController extends Controller
             'netto_pabrik' => $data['netto_pabrik'],
             'pot' => $data['pot'],
             'netto_bersih' => $data['netto_bersih'],
-            'pesanan_dari' => $data['pesanan_dari'],
+            // 'pesanan_dari' => $data['pesanan_dari'],
+            'perusahaan_id' => $data['perusahaan_id'],
         ]);
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil diubah');

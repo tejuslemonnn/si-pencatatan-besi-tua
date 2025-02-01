@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Kendaraan;
+use App\Models\Perusahaan;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,12 +33,14 @@ class BarangKeluarBesiScrapController extends Controller
     {
         $kendaraans = Kendaraan::get();
         $suratJalans = SuratJalan::WhereNull('barang_keluar_besi_tua_id')->WhereNull('barang_keluar_besi_scrap_id')->get();
+        $perusahaans = Perusahaan::get();
 
         return view('admin.barang_keluar_besi_scrap.create', [
             'title' => 'Tambah Data Barang Keluar Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'kendaraans' => $kendaraans,
-            'suratJalans' => $suratJalans
+            'suratJalans' => $suratJalans,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -60,7 +63,8 @@ class BarangKeluarBesiScrapController extends Controller
             'netto_bersih' => 'required|integer',
             'harga' => 'required|integer',
             'jumlah_harga' => 'required|integer',
-            'pesanan_dari' => 'required'
+            // 'pesanan_dari' => 'required',
+            'perusahaan_id' => 'required'
         ]);
 
         $currentDate = Carbon::now()->format('Y/m/d');
@@ -106,13 +110,15 @@ class BarangKeluarBesiScrapController extends Controller
                 $query->whereNull('barang_keluar_besi_tua_id');
             })
             ->get();
+        $perusahaans = Perusahaan::get();
 
         return view('admin.barang_keluar_besi_scrap.edit', [
             'title' => 'Edit Data Barang Keluar Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'data' => $barangKeluarBesiScrap,
             'kendaraans' => $kendaraans,
-            'suratJalans' => $suratJalans
+            'suratJalans' => $suratJalans,
+            'perusahaans' => $perusahaans
         ]);
     }
 
@@ -135,7 +141,8 @@ class BarangKeluarBesiScrapController extends Controller
             'netto_bersih' => 'required|integer',
             'harga' => 'required|integer',
             'jumlah_harga' => 'required|integer',
-            'pesanan_dari' => 'required'
+            // 'pesanan_dari' => 'required'
+            'perusahaan_id' => 'required'
         ]);
 
         $kode = $barangKeluarBesiScrap->kode;

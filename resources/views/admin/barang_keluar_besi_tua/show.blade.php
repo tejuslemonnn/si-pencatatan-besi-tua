@@ -48,7 +48,7 @@
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style="font-weight: bold;">Nama Barang</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->nama_barang }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->nama }}</p>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style="font-weight: bold;">Harga</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->harga }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->harga }}</p>
         </div>
     </div>
 
@@ -95,9 +95,9 @@
     </div> --}}
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Pesanan Dari</label>
+        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Perusahaan</label>
         <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->pesanan_dari }}</p>
+            <p style="margin-top: 6px;"> : &nbsp; {{ $data->perusahaan->nama }}</p>
         </div>
     </div>
 
