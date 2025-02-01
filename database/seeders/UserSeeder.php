@@ -32,4 +32,13 @@ class UserSeeder extends Seeder
     //         'password' => '123456'
     //     ]);
     // }
+
+    User::factory()->create([
+        'nama' => 'admin_perusahaan1',
+        'username' => 'adminperusahaan1',
+        'role' => 'admin_perusahaan',
+        'password' => 'admin1'
+    ]);
+
+    }
 }

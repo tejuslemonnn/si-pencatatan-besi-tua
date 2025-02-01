@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('potongan', false, 0);
             $table->integer('netto_bersih');
             $table->integer('harga_satuan');
-            $table->Integer('harga_total');
+            $table->integer('harga_total');
             $table->date('tgl_lunas');
             $table->integer('uang_masuk');
             $table->string('keterangan');
