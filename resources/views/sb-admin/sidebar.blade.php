@@ -60,6 +60,7 @@
             <span class="font-weight-bold">Surat Jalan</span></a>
     </li>
 
+
     <li class="nav-item">
         <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"
             href="#" data-toggle="collapse" data-target="#collapseBarangMasuk" aria-expanded="true"

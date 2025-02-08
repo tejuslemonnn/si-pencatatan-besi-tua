@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kapal');
             $table->date('tanggal_datang');
+            $table->bigInteger('total_modal')->default(0);
             $table->timestamps();
         });
     }

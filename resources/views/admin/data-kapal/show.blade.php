@@ -30,6 +30,13 @@
         </div>
     </div>
 
+    <div class="form-group row col-md-10">
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Modal</label>
+        <div class="col-sm-4">
+            <p style="margin-top: 6px; "> : &nbsp; {{ $dataKapal->total_modal }}</p>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

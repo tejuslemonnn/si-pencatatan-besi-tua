@@ -23,6 +23,7 @@ use App\Http\Controllers\BarangKeluarBesiTuaController;
 use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\BarangKeluarBesiScrapController;
 use App\Http\Controllers\PerusahaanController;
+use App\Http\Controllers\RekapanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,9 +88,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::resource('data-kapal', DataKapalController::class);
+    Route::get('data-kapal/{id}/rekapan', [DataKapalController::class, 'rekapan'])->name('data-kapal.rekapan');
+
     Route::resource('produk', ProdukController::class);
     Route::resource('barang-masuk-besi-tua', BarangMasukBesiTuaController::class);
     Route::get('/api/barang-masuk-besi-tua/total-jumlah', [BarangMasukBesiTuaController::class, 'getTotalJumlah'])->name('barang-masuk-besi-tua.total-jumlah');
+    Route::get('/api/barang-masuk-besi-tua/generatepdf/{id}', [BarangMasukBesiTuaController::class, 'generatepdf'])->name('barang-masuk-besi-tua.generatepdf');
+
 
     Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
 

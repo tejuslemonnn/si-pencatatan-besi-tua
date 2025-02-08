@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Produk;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\DataKapal;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
@@ -244,5 +245,14 @@ class BarangMasukBesiTuaController extends Controller
         return response()->json([
             'total_jumlah' => $totalJumlah
         ]);
+    }
+
+    public function generatepdf($id)
+    {
+        $barangMasukBesiTua = BarangMasukBesiTua::findOrFail($id);
+        $data = ['data' => $barangMasukBesiTua];
+
+        $pdf = PDF::loadView('admin.barang_masuk_besi_tua.pdf', $data);
+        return $pdf->download('barang_masuk_besi_tua_' . $barangMasukBesiTua->kode . '.pdf');
     }
 }

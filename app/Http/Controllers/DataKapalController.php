@@ -41,6 +41,7 @@ class DataKapalController extends Controller
         $request->validate([
             'nama_kapal' => 'required',
             'tanggal_datang' => 'required',
+            'total_modal' => 'required|integer|min:0',
         ]);
 
         DataKapal::create($request->all());
@@ -84,6 +85,7 @@ class DataKapalController extends Controller
         $request->validate([
             'nama_kapal' => 'required',
             'tanggal_datang' => 'required',
+            'total_modal' => 'required|integer|min:0',
         ]);
 
         DataKapal::findOrFail($id)->update($request->all());
@@ -96,5 +98,26 @@ class DataKapalController extends Controller
         DataKapal::findOrFail($id)->delete();
 
         return redirect()->route('data-kapal.index')->with('success', 'Data Kapal berhasil dihapus');
+    }
+
+    public function rekapan($id)
+    {
+        $title = 'Rekapan Data Kapal';
+        $icon = 'fa-solid fa-ship';
+        $data = DataKapal::findOrFail($id);
+        $keseluruhanBesiTuaKapal = BarangMasukBesiTua::where('data_kapal_id', $id)->sum('netto');
+        $keseluruhanBesiScrapKapal = BarangMasukBesiScrap::where('data_kapal_id', $id)->sum('netto_bersih');
+        $keseluruhanBesiKapal = $keseluruhanBesiTuaKapal + $keseluruhanBesiScrapKapal;
+        // dd($keseluruhanBesiTuaKapal, $keseluruhanBesiScrapKapal, $keseluruhanBesiKapal);
+
+        // $barangKeluarBesiTua = BarangKeluarBesiTua::where('data_kapal_id', $id)->pluck('netto', 'jumlah_harga');
+        // dd($barangKeluarBesiTua);
+
+        return view('admin.data-kapal.rekapan', [
+            'title' => $title,
+            'icon' => $icon,
+            'dataKapal' => $data,
+            'keseluruhanBesiKapal' => $keseluruhanBesiKapal,
+        ]);
     }
 }

@@ -26,6 +26,7 @@
                     <th>No</th>
                     <th>Nama Kapal</th>
                     <th>Tanggal Datang</th>
+                    {{-- <th>Modal</th> --}}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@
 
                         <td>{{ $row->nama_kapal }}</td>
                         <td>{{ $row->tanggal_datang }}</td>
+                        {{-- <td>{{ $row->modal }}</td> --}}
                         {{-- @if ($row->status == 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                             </td>
