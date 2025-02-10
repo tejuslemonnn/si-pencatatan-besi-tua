@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\DataKapal;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
 use App\Models\SuratJalan;
@@ -34,13 +35,15 @@ class BarangKeluarBesiScrapController extends Controller
         $kendaraans = Kendaraan::get();
         $suratJalans = SuratJalan::WhereNull('barang_keluar_besi_tua_id')->WhereNull('barang_keluar_besi_scrap_id')->get();
         $perusahaans = Perusahaan::get();
+        $dataKapals = DataKapal::get();
 
         return view('admin.barang_keluar_besi_scrap.create', [
             'title' => 'Tambah Data Barang Keluar Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'kendaraans' => $kendaraans,
             'suratJalans' => $suratJalans,
-            'perusahaans' => $perusahaans
+            'perusahaans' => $perusahaans,
+            'dataKapals' => $dataKapals
         ]);
     }
 
@@ -52,6 +55,7 @@ class BarangKeluarBesiScrapController extends Controller
         $request->validate([
             'kode' => 'required',
             'tanggal' => 'required|date',
+            'data_kapal_id' => 'required|exists:data_kapals,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',
@@ -111,6 +115,7 @@ class BarangKeluarBesiScrapController extends Controller
             })
             ->get();
         $perusahaans = Perusahaan::get();
+        $dataKapals = DataKapal::get();
 
         return view('admin.barang_keluar_besi_scrap.edit', [
             'title' => 'Edit Data Barang Keluar Besi Scrap',
@@ -118,7 +123,8 @@ class BarangKeluarBesiScrapController extends Controller
             'data' => $barangKeluarBesiScrap,
             'kendaraans' => $kendaraans,
             'suratJalans' => $suratJalans,
-            'perusahaans' => $perusahaans
+            'perusahaans' => $perusahaans,
+            'dataKapals' => $dataKapals
         ]);
     }
 
@@ -130,6 +136,7 @@ class BarangKeluarBesiScrapController extends Controller
         $request->validate([
             'kode' => 'required',
             'tanggal' => 'required|date',
+            'data_kapal_id' => 'required|exists:data_kapals,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',

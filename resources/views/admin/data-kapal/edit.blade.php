@@ -27,11 +27,11 @@
                 value="{{ $dataKapal->tanggal_datang }}"required>
         </div>
 
-        <div class="form-group col-12">
+        {{-- <div class="form-group col-12">
             <label for="total_modal">Total Modal</label>
             <input type="number" class="form-control" id="total_modal" name="total_modal"
                 value="{{ $dataKapal->total_modal }}" required>
-        </div>
+        </div> --}}
 
     </form>
 

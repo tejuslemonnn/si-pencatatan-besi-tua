@@ -27,6 +27,7 @@
                     <tr>
                         <th>No</th>
                         <th>Kode</th>
+                        <th>Kapal</th>
                         <th>Kendaraan</th>
                         <th>Surat Jalan</th>
                         <th>Tanggal</th>
@@ -48,6 +49,7 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->kode }}</td>
+                            <td>{{ $row->dataKapal->nama_kapal }}</td>
                             <td>{{ $row->suratJalan->kendaraan->model }} - {{ $row->suratJalan->kendaraan->nomor_plat }}
                             </td>
                             <td>{{ $row->suratJalan->no_surat }}</td>

@@ -108,6 +108,9 @@ class DataKapalController extends Controller
         $keseluruhanBesiTuaKapal = BarangMasukBesiTua::where('data_kapal_id', $id)->sum('netto');
         $keseluruhanBesiScrapKapal = BarangMasukBesiScrap::where('data_kapal_id', $id)->sum('netto_bersih');
         $keseluruhanBesiKapal = $keseluruhanBesiTuaKapal + $keseluruhanBesiScrapKapal;
+        $totalPenjualanBesiTuaKapal = BarangKeluarBesiTua::where('data_kapal_id', $id)->sum('jumlah_harga');
+        $totalPenjualanBesiScrapKapal = BarangKeluarBesiScrap::where('data_kapal_id', $id)->sum('jumlah_harga');
+        $totalPenjualanKapal = $totalPenjualanBesiTuaKapal + $totalPenjualanBesiScrapKapal;
         // dd($keseluruhanBesiTuaKapal, $keseluruhanBesiScrapKapal, $keseluruhanBesiKapal);
 
         // $barangKeluarBesiTua = BarangKeluarBesiTua::where('data_kapal_id', $id)->pluck('netto', 'jumlah_harga');
@@ -118,6 +121,7 @@ class DataKapalController extends Controller
             'icon' => $icon,
             'dataKapal' => $data,
             'keseluruhanBesiKapal' => $keseluruhanBesiKapal,
+            'totalPenjualanKapal' => $totalPenjualanKapal,
         ]);
     }
 }

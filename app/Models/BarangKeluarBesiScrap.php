@@ -26,4 +26,10 @@ class BarangKeluarBesiScrap extends Model
     {
         return $this->belongsTo(Perusahaan::class);
     }
+
+    // dataKapal
+    public function dataKapal()
+    {
+        return $this->belongsTo(DataKapal::class);
+    }
 }

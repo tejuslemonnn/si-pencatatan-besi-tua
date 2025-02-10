@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('barang_keluar_besi_tuas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('data_kapal_id');
+            $table->foreign('data_kapal_id')->references('id')->on('data_kapals')->onDelete('cascade');
             $table->unsignedBigInteger('surat_jalan_id');
             $table->foreign('surat_jalan_id')->references('id')->on('surat_jalans')->onDelete('cascade');
             $table->date('tanggal');

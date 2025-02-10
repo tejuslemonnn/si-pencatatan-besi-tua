@@ -159,6 +159,7 @@ class DatabaseSeeder extends Seeder
         $produk = Produk::where('id', 1)->first();
 
         BarangKeluarBesiTua::create([
+            'data_kapal_id' => 1,
             'surat_jalan_id' => 1,
             'kode' => 'BK-BT-' . $currentDate . '-' . '001',
             'tanggal' => date('Y-m-d'),
@@ -180,6 +181,7 @@ class DatabaseSeeder extends Seeder
 
 
         BarangKeluarBesiScrap::create([
+            'data_kapal_id' => 1,
             'surat_jalan_id' => 3,
             'kode' => 'BK-BS-' . $currentDate . '-' . '001',
             'tanggal' => date('Y-m-d'),

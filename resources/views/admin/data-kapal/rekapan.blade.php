@@ -18,29 +18,15 @@
 
     <h3 class="text-center font-weight-bold text-black">{{ $dataKapal->nama_kapal }}</h3>
 
-    {{-- <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Tanggal Datang</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px; "> : &nbsp; {{ $dataKapal->tanggal_datang }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Modal</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px; "> : &nbsp; {{ $dataKapal->total_modal }}</p>
-        </div>
-    </div> --}}
-
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered">
                 <tbody>
                     <tr>
                         <th>KESELURUHAN</th>
-                        <td>1,189,100 Kg</td>
+                        <td>{{ $keseluruhanBesiKapal }} Kg</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th>BESTI TUA KE PABRIK</th>
                         <td>1,094,380 Kg</td>
                     </tr>
@@ -59,11 +45,16 @@
                     <tr>
                         <th>TEKOR TIMBANGAN</th>
                         <td>2,561 Kg</td>
+                    </tr> --}}
+
+                    <tr class="fw-bold">
+                        <th>TOTAL PENJUALAN</th>
+                        <td>Rp {{ number_format($totalPenjualanKapal, 0, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <table class="table table-bordered mt-4">
+            {{-- <table class="table table-bordered mt-4">
                 <tbody>
                     <tr>
                         <th>PENJUALAN KAMAL</th>
@@ -82,9 +73,9 @@
                         <td>Rp 8,537,666,150</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> --}}
 
-            <table class="table table-bordered mt-4">
+            {{-- <table class="table table-bordered mt-4">
                 <tbody>
                     <tr>
                         <th>PENGELUARAN</th>
@@ -103,7 +94,7 @@
                         <td>Rp 425,000,000</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 

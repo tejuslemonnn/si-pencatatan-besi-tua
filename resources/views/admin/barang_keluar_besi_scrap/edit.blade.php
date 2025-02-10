@@ -45,6 +45,18 @@
         </div>
 
         <div class="form-group col-12">
+            <label for="data_kapal_id">Data Kapal</label>
+            <select name="data_kapal_id" id="data_kapal_id" class="form-control" required>
+                <option value="" selected>Select</option>
+                @foreach ($dataKapals as $dataKapal)
+                    <option value="{{ $dataKapal->id }}" {{ $data->data_kapal_id == $dataKapal->id ? 'selected' : '' }}>
+                        {{ $dataKapal->nama_kapal }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group col-12">
             <label for="surat_jalan_id">Surat Jalan</label>
             <select name="surat_jalan_id" id="surat_jalan_id" class="form-control" required>
                 <option value="" selected>Select</option>
@@ -207,6 +219,9 @@
                 width: '100%',
             });
             $('#perusahaan_id').select2({
+                width: '100%',
+            });
+            $('#data_kapal_id').select2({
                 width: '100%',
             });
 

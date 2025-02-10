@@ -10,6 +10,7 @@ use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\BarangKeluarBesiTua;
+use App\Models\DataKapal;
 
 class BarangKeluarBesiTuaController extends Controller
 {
@@ -36,6 +37,7 @@ class BarangKeluarBesiTuaController extends Controller
         $suratJalans = SuratJalan::WhereNull('barang_keluar_besi_tua_id')->WhereNull('barang_keluar_besi_scrap_id')->get();
         $perusahaans = Perusahaan::get();
         $products = Produk::get();
+        $dataKapals = DataKapal::get();
 
         return view('admin.barang_keluar_besi_tua.create', [
             'title' => 'Tambah Data Barang Keluar Besi Tua',
@@ -43,7 +45,8 @@ class BarangKeluarBesiTuaController extends Controller
             'kendaraans' => $kendaraans,
             'suratJalans' => $suratJalans,
             'perusahaans' => $perusahaans,
-            'products' => $products
+            'products' => $products,
+            'dataKapals' => $dataKapals
         ]);
     }
 
@@ -57,6 +60,7 @@ class BarangKeluarBesiTuaController extends Controller
 
         $request->validate([
             'tanggal' => 'required|date',
+            'data_kapal_id' => 'required|exists:data_kapals,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
@@ -78,6 +82,7 @@ class BarangKeluarBesiTuaController extends Controller
         BarangKeluarBesiTua::create([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
+            'data_kapal_id' => $request->data_kapal_id,
             'surat_jalan_id' => $request->surat_jalan_id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
@@ -125,6 +130,8 @@ class BarangKeluarBesiTuaController extends Controller
             })
             ->get();
 
+        $dataKapals = DataKapal::get();
+
         $perusahaans = Perusahaan::get();
 
         $products = Produk::get();
@@ -136,7 +143,8 @@ class BarangKeluarBesiTuaController extends Controller
             'kendaraans' => $kendaraans,
             'suratJalans' => $suratJalans,
             'perusahaans' => $perusahaans,
-            'products' => $products
+            'products' => $products,
+            'dataKapals' => $dataKapals
         ]);
     }
 
@@ -148,6 +156,7 @@ class BarangKeluarBesiTuaController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             // 'kendaraan_id' => 'required|exists:kendaraans,id',
+            'data_kapal_id' => 'required|exists:data_kapals,id',
             'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
@@ -179,7 +188,8 @@ class BarangKeluarBesiTuaController extends Controller
         $barangKeluarBesiTua->update([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
-            // 'kendaraan_id' => $request->kendaraan_id,
+            // 'kendaraan_id' => $request->kendaraan_id,'
+            'data_kapal_id' => $request->data_kapal_id,
             'surat_jalan_id' => $request->surat_jalan_id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,

@@ -27,6 +27,7 @@
                     <tr>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">NO</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">KODE</th>
+                        <th rowspan="2" class="text-center" style="vertical-align: middle;">KAPAL</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">SURAT JALAN</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">KENDARAAN</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">TANGGAL</th>
@@ -56,6 +57,7 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->kode }}</td>
+                            <td>{{ $row->dataKapal->nama_kapal }}</td>
                             <td>{{ $row->suratJalan->no_surat }}</td>
                             <td>{{ $row->suratJalan->kendaraan->model }} - {{ $row->suratJalan->kendaraan->nomor_plat }}
                             </td>

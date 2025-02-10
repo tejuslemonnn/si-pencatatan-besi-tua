@@ -33,4 +33,10 @@ class BarangKeluarBesiTua extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    //dataKapal
+    public function dataKapal()
+    {
+        return $this->belongsTo(DataKapal::class);
+    }
 }
