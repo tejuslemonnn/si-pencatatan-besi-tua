@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('perusahaan_id');
             $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             $table->string('deskripsi')->nullable();
-            $table->boolean('status')->nullable()->default(false);
+            $table->boolean('status')->nullable()->default(null);
             $table->timestamps();
         });
     }

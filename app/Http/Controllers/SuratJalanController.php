@@ -93,7 +93,7 @@ class SuratJalanController extends Controller
             // 'penerima' => $request->penerima,
             'perusahaan_id' => $request->perusahaan_id,
             'deskripsi' => $request->deskripsi,
-            'status' => false,
+            'status' => null,
         ]);
 
         return redirect()->route('surat-jalan.index')->with('success', 'Data Surat Jalan berhasil ditambahkan.');
@@ -203,5 +203,25 @@ class SuratJalanController extends Controller
         $data->delete();
 
         return redirect()->route('surat-jalan.index')->with('success', 'Data Surat Jalan berhasil dihapus.');
+    }
+
+    public function approveSuratJalan(string $id)
+    {
+        $data = SuratJalan::findOrFail($id);
+        $data->update([
+            'status' => true,
+        ]);
+
+        return redirect()->route('surat-jalan.index')->with('success', 'Data Surat Jalan berhasil disetujui.');
+    }
+
+    public function rejectSuratJalan(string $id)
+    {
+        $data = SuratJalan::findOrFail($id);
+        $data->update([
+            'status' => false,
+        ]);
+
+        return redirect()->route('surat-jalan.index')->with('success', 'Data Surat Jalan berhasil ditolak.');
     }
 }

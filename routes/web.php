@@ -103,10 +103,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('surat-jalan', SuratJalanController::class);
 
+
     Route::resource('barang-keluar-besi-tua', BarangKeluarBesiTuaController::class);
     Route::resource('barang-keluar-besi-scrap', BarangKeluarBesiScrapController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::middleware(['role:kepala_perusahaan'])->group(function () {
+        Route::put('/approve-surat-jalan/{id}', [SuratJalanController::class, 'approveSuratJalan'])->name('approve-surat-jalan');
+        Route::put('/reject-surat-jalan/{id}', [SuratJalanController::class, 'rejectSuratJalan'])->name('reject-surat-jalan');
+        Route::put('/approve-barang-masuk-besi-tua/{id}', [BarangMasukBesiTuaController::class, 'approveBarangMasukBesiTua'])->name('approve-barang-masuk-besi-tua');
+        Route::put('/reject-barang-masuk-besi-tua/{id}', [BarangMasukBesiTuaController::class, 'rejectBarangMasukBesiTua'])->name('reject-barang-masuk-besi-tua');
+        Route::put('/approve-barang-masuk-besi-scrap/{id}', [BarangMasukBesiScrapController::class, 'approveBarangMasukBesiScrap'])->name('approve-barang-masuk-besi-scrap');
+        Route::put('/reject-barang-masuk-besi-scrap/{id}', [BarangMasukBesiScrapController::class, 'rejectBarangMasukBesiScrap'])->name('reject-barang-masuk-besi-scrap');
+        Route::put('/approve-barang-keluar-besi-tua/{id}', [BarangKeluarBesiTuaController::class, 'approveBarangKeluarBesiTua'])->name('approve-barang-keluar-besi-tua');
+        Route::put('/reject-barang-keluar-besi-tua/{id}', [BarangKeluarBesiTuaController::class, 'rejectBarangKeluarBesiTua'])->name('reject-barang-keluar-besi-tua');
+        Route::put('/approve-barang-keluar-besi-scrap/{id}', [BarangKeluarBesiScrapController::class, 'approveBarangKeluarBesiScrap'])->name('approve-barang-keluar-besi-scrap');
+        Route::put('/reject-barang-keluar-besi-scrap/{id}', [BarangKeluarBesiScrapController::class, 'rejectBarangKeluarBesiScrap'])->name('reject-barang-keluar-besi-scrap');
+    });
 });
 
 

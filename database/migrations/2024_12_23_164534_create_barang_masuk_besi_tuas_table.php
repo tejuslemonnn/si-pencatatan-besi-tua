@@ -29,6 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('perusahaan_id');
             $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
             // $table->string('keterangan');
+            $table->boolean('status')->nullable()->default(null);
             $table->timestamps();
         });
     }

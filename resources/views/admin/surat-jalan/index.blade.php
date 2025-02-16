@@ -76,16 +76,9 @@
                             <td>{{ $row->deskripsi }}</td>
                             {{-- <td class=" color by status --}}
                             <td
-                                class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-warning' : 'text-danger') }} font-weight-bold">
-                                {{ $row->status !== null ? ($row->status ? 'Disetujui' : 'Menunggu Persetujuan') : 'Tidak Disetujui' }}
+                                class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
+                                {{ $row->status === 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
                             </td>
-
-                            {{-- @if ($row->status == 0)
-                    <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
-                    </td>
-                    @else
-                    <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
-                    @endif --}}
                             <td>
                                 <a href="{{ route('surat-jalan.show', ['surat_jalan' => $row->id]) }}"
                                     class="btn btn-info"><i class="fas fa-eye"></i>
@@ -103,13 +96,23 @@
                                             <i class="fas fa-trash"></i>
                                             Delete</button>
                                     </form>
-                                @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
-                                    {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
-                        style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="btn btn-success">Approve</button>
-                        </form> --}}
+                                @elseif(auth()->user()->role == 'kepala_perusahaan')
+                                    @if ($row->status === null || $row->status === 0)
+                                        <form action="{{ route('approve-surat-jalan', ['id' => $row->id]) }}"
+                                            method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                        </form>
+                                    @endif
+                                    @if ($row->status === null)
+                                        <form action="{{ route('reject-surat-jalan', ['id' => $row->id]) }}" method="POST"
+                                            style="display: inline-block;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

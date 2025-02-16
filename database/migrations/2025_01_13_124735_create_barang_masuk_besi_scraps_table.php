@@ -31,6 +31,7 @@ return new class extends Migration
             // $table->string('pesanan_dari');
             $table->unsignedBigInteger('perusahaan_id');
             $table->foreign('perusahaan_id')->references('id')->on('perusahaans')->onDelete('cascade');
+            $table->boolean('status')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -33,7 +33,10 @@ class BarangKeluarBesiScrapController extends Controller
     public function create()
     {
         $kendaraans = Kendaraan::get();
-        $suratJalans = SuratJalan::WhereNull('barang_keluar_besi_tua_id')->WhereNull('barang_keluar_besi_scrap_id')->get();
+        $suratJalans = SuratJalan::whereNull('barang_keluar_besi_tua_id')
+            ->whereNull('barang_keluar_besi_scrap_id')
+            ->where('status', true)
+            ->get();
         $perusahaans = Perusahaan::get();
         $dataKapals = DataKapal::get();
 
@@ -113,6 +116,7 @@ class BarangKeluarBesiScrapController extends Controller
             ->where(function ($query) {
                 $query->whereNull('barang_keluar_besi_tua_id');
             })
+            ->where('status', true)
             ->get();
         $perusahaans = Perusahaan::get();
         $dataKapals = DataKapal::get();
@@ -190,5 +194,25 @@ class BarangKeluarBesiScrapController extends Controller
         $barangKeluarBesiScrap->delete();
 
         return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function approveBarangKeluarBesiScrap(string $id)
+    {
+        $data = BarangKeluarBesiScrap::findOrFail($id);
+        $data->update([
+            'status' => true,
+        ]);
+
+        return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data Barang Keluar Besi Scrap berhasil disetujui.');
+    }
+
+    public function rejectBarangKeluarBesiScrap(string $id)
+    {
+        $data = BarangKeluarBesiScrap::findOrFail($id);
+        $data->update([
+            'status' => false,
+        ]);
+
+        return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data Barang Keluar Besi Scrap berhasil ditolak.');
     }
 }

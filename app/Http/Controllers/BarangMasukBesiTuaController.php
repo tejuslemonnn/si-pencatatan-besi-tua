@@ -255,4 +255,24 @@ class BarangMasukBesiTuaController extends Controller
         $pdf = PDF::loadView('admin.barang_masuk_besi_tua.pdf', $data);
         return $pdf->download('barang_masuk_besi_tua_' . $barangMasukBesiTua->kode . '.pdf');
     }
+
+    public function approveBarangMasukBesiTua(string $id)
+    {
+        $data = BarangMasukBesiTua::findOrFail($id);
+        $data->update([
+            'status' => true,
+        ]);
+
+        return redirect()->route('barang-masuk-besi-tua.index')->with('success', 'Data Barang Masuk Besi Tua berhasil disetujui.');
+    }
+
+    public function rejectBarangMasukBesiTua(string $id)
+    {
+        $data = BarangMasukBesiTua::findOrFail($id);
+        $data->update([
+            'status' => false,
+        ]);
+
+        return redirect()->route('barang-masuk-besi-tua.index')->with('success', 'Data Barang Masuk Besi Tua berhasil ditolak.');
+    }
 }

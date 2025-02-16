@@ -193,4 +193,24 @@ class BarangMasukBesiScrapController extends Controller
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil dihapus');
     }
+
+    public function approveBarangMasukBesiScrap(string $id)
+    {
+        $data = BarangMasukBesiScrap::findOrFail($id);
+        $data->update([
+            'status' => true,
+        ]);
+
+        return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data Barang Masuk Besi Tua berhasil disetujui.');
+    }
+
+    public function rejectBarangMasukBesiScrap(string $id)
+    {
+        $data = BarangMasukBesiScrap::findOrFail($id);
+        $data->update([
+            'status' => false,
+        ]);
+
+        return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data Barang Masuk Besi Tua berhasil ditolak.');
+    }
 }

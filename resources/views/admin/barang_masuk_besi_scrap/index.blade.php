@@ -35,6 +35,7 @@
                         {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">HARGA (Rp)</th> --}}
                         {{-- <th rowspan="2" class="text-center" style="vertical-align: middle;">JUMLAH (Rp)</th> --}}
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">PERUSAHAAN</th>
+                        <th rowspan="2" class="text-center" style="vertical-align: middle;">STATUS</th>
                         <th rowspan="2" class="text-center" style="vertical-align: middle;">Action</th>
                     </tr>
                     <tr>
@@ -64,16 +65,11 @@
                             <td>{{ $row->netto_pabrik }}</td>
                             <td>{{ $row->pot }}</td>
                             <td>{{ $row->netto_bersih }}</td>
-                            {{-- <td>{{ $row->produk->harga }}</td> --}}
-                            {{-- <td>{{ $row->pesanan_dari }}</td> --}}
                             <td>{{ $row->perusahaan->nama }}</td>
-
-                            {{-- @if ($row->status == 0)
-                    <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
-                    </td>
-                    @else
-                    <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
-                    @endif --}}
+                            <td
+                                class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
+                                {{ $row->status === 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                            </td>
                             <td>
                                 <a href="{{ route('barang-masuk-besi-scrap.show', ['barang_masuk_besi_scrap' => $row->id]) }}"
                                     class="btn btn-info"><i class="fas fa-eye"></i>
@@ -92,13 +88,23 @@
                                             <i class="fas fa-trash"></i>
                                             Delete</button>
                                     </form>
-                                @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
-                                    {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
-                        style="display: inline-block;">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="btn btn-success">Approve</button>
-                        </form> --}}
+                                @elseif(auth()->user()->role == 'kepala_perusahaan')
+                                    @if ($row->status === null || $row->status === 0)
+                                        <form action="{{ route('approve-barang-masuk-besi-scrap', ['id' => $row->id]) }}"
+                                            method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                        </form>
+                                    @endif
+                                    @if ($row->status === null)
+                                        <form action="{{ route('reject-barang-masuk-besi-scrap', ['id' => $row->id]) }}"
+                                            method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
+                                    @endif
                                 @endif
                             </td>
                         </tr>
