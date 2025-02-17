@@ -59,8 +59,8 @@
                             <td>{{ $row->tara }}</td>
                             <td>{{ $row->netto }}</td>
                             <td>{{ $row->produk->nama }}</td>
-                            <td>{{ $row->produk->harga }}</td>
-                            <td>{{ $row->jumlah_harga }}</td>
+                            <td>Rp. {{ number_format($row->produk->harga,0,',','.') }}</td>
+                            <td>Rp. {{ number_format($row->jumlah_harga,0,',','.') }}</td>
                             <td>{{ $row->perusahaan->nama }}</td>
 
                             <td

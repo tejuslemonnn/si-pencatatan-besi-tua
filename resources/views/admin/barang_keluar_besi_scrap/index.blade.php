@@ -71,8 +71,8 @@
                             <td>{{ $row->netto_pabrik }}</td>
                             <td>{{ $row->pot }}</td>
                             <td>{{ $row->netto_bersih }}</td>
-                            <td>{{ $row->harga }}</td>
-                            <td>{{ $row->jumlah_harga }}</td>
+                            <td>Rp. {{ number_format($row->harga,0,',','.') }}</td>
+                            <td>Rp. {{ number_format($row->jumlah_harga,0,',','.') }}</td>
                             <td>{{ $row->perusahaan->nama }}</td>
                             <td
                                 class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">

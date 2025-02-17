@@ -97,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
+    Route::get('/api/barang-masuk-besi-scrap/generatepdf/{id}', [BarangMasukBesiScrapController::class, 'generatepdf'])->name('barang-masuk-besi-scrap.generatepdf');
 
     Route::resource('kendaraan', KendaraanController::class);
     Route::resource('perusahaan', PerusahaanController::class);
@@ -105,7 +106,10 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('barang-keluar-besi-tua', BarangKeluarBesiTuaController::class);
+    Route::get('/api/barang-keluar-besi-tua/generatepdf/{id}', [BarangKeluarBesiTuaController::class, 'generatepdf'])->name('barang-keluar-besi-tua.generatepdf');
+
     Route::resource('barang-keluar-besi-scrap', BarangKeluarBesiScrapController::class);
+    Route::get('/api/barang-keluar-besi-scrap/generatepdf/{id}', [BarangKeluarBesiScrapController::class, 'generatepdf'])->name('barang-keluar-besi-scrap.generatepdf');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
