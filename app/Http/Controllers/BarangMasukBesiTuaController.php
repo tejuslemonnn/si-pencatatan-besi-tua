@@ -43,7 +43,7 @@ class BarangMasukBesiTuaController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d');
-        $request->kode = 'BM-BT-' . $currentDate . '-' . $request->kode;
+        $request->merge(['kode' => 'BM-BT-' . $currentDate . '-' . $request->kode]);
 
         $request->validate([
             'tanggal' => 'required|date',
@@ -136,7 +136,7 @@ class BarangMasukBesiTuaController extends Controller
             $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
         }
 
-        $request->kode = $kodePrefix . '-' . $request->kode;
+        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
         $isDuplicate = BarangMasukBesiTua::where('kode', $request->kode)->where('id', '!=', $id)->exists();
 

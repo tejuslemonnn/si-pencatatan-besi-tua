@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\Produk;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
@@ -59,7 +60,7 @@ class BarangKeluarBesiTuaController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d');
-        $request->kode = 'BK-BT-' . $currentDate . '-' . $request->kode;
+        $request->merge(['kode' => 'BK-BT-' . $currentDate . '-' . $request->kode]);
 
         $request->validate([
             'tanggal' => 'required|date',
@@ -183,7 +184,7 @@ class BarangKeluarBesiTuaController extends Controller
             $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
         }
 
-        $request->kode = $kodePrefix . '-' . $request->kode;
+        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
         SuratJalan::where('id', $barangKeluarBesiTua->surat_jalan_id)->update([
             'barang_keluar_besi_tua_id' => null
@@ -225,6 +226,15 @@ class BarangKeluarBesiTuaController extends Controller
         $barangKeluarBesiTua->delete();
 
         return redirect()->route('barang-keluar-besi-tua.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function generatepdf($id)
+    {
+        $barangKeluarBesiTua = BarangKeluarBesiTua::findOrFail($id);
+        $data = ['data' => $barangKeluarBesiTua];
+
+        $pdf = PDF::loadView('admin.barang_keluar_besi_tua.pdf', $data);
+        return $pdf->download('barang_keluar_besi_tua_' . $barangKeluarBesiTua->kode . '.pdf');
     }
 
     public function approveBarangKeluarBesiTua(string $id)

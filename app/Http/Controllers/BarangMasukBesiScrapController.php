@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\Produk;
 use App\Models\DataKapal;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BarangKeluarBesiScrap;
 use App\Models\BarangMasukBesiScrap;
 
 class BarangMasukBesiScrapController extends Controller
@@ -50,7 +52,7 @@ class BarangMasukBesiScrapController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d');
-        $request->kode = 'BM-BS-' . $currentDate . '-' . $request->kode;
+        $request->merge(['kodee' => 'BM-BS-' . $currentDate . '-' . $request->kode]);
 
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',
@@ -157,7 +159,7 @@ class BarangMasukBesiScrapController extends Controller
             $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
         }
 
-        $request->kode = $kodePrefix . '-' . $request->kode;
+        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
         $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->where('id', '!=', $barangMasukBesiScrap->id)->exists();
 
@@ -192,6 +194,15 @@ class BarangMasukBesiScrapController extends Controller
         $barangMasukBesiScrap->delete();
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function generatepdf($id)
+    {
+        $barangMasukBesiScrap = BarangMasukBesiScrap::findOrFail($id);
+        $data = ['data' => $barangMasukBesiScrap];
+
+        $pdf = PDF::loadView('admin.barang_masuk_besi_scrap.pdf', $data);
+        return $pdf->download('barang_masuk_besi_scrap_' . $barangMasukBesiScrap->kode . '.pdf');
     }
 
     public function approveBarangMasukBesiScrap(string $id)

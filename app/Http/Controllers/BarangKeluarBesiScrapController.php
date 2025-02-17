@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\DataKapal;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
@@ -10,6 +11,7 @@ use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BarangKeluarBesiScrap;
+use App\Models\BarangMasukBesiScrap;
 
 class BarangKeluarBesiScrapController extends Controller
 {
@@ -194,6 +196,15 @@ class BarangKeluarBesiScrapController extends Controller
         $barangKeluarBesiScrap->delete();
 
         return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function generatepdf($id)
+    {
+        $barangKeluarBesiScrap = BarangKeluarBesiScrap::findOrFail($id);
+        $data = ['data' => $barangKeluarBesiScrap];
+
+        $pdf = PDF::loadView('admin.barang_keluar_besi_scrap.pdf', $data);
+        return $pdf->download('barang_keluar_besi_scrap_' . $barangKeluarBesiScrap->kode . '.pdf');
     }
 
     public function approveBarangKeluarBesiScrap(string $id)
