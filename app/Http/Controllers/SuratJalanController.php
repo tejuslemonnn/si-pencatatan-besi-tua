@@ -75,7 +75,7 @@ class SuratJalanController extends Controller
         ]);
 
 
-        $isDuplicate = \DB::table('surat_jalans')
+        $isDuplicate = DB::table('surat_jalans')
             ->where('no_surat', $request->no_surat)
             ->exists();
 
@@ -169,7 +169,7 @@ class SuratJalanController extends Controller
 
         $newNoSurat = $noSuratPrefix . '-' . $request->no_surat;
 
-        $isDuplicate = \DB::table('surat_jalans')
+        $isDuplicate = DB::table('surat_jalans')
             ->where('no_surat', $newNoSurat)
             ->where('id', '!=', $id) // Abaikan jika ID sama
             ->exists();

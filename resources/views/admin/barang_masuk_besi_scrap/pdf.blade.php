@@ -1,99 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barang Masuk Besi Scrap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header img {
+            width: 100px;
+            height: auto;
+        }
+        .info-table {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .info-table td {
+            border: none;
+            padding: 5px;
+            font-size: 12px;
+        }
+        .info-table td:first-child {
+            width: 50%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .signature-table {
+            width: 100%;
+            margin-top: 80px;
+        }
+        .signature-table td {
+            border: none;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .signature-table td:first-child {
+            width: 50%;
+        }
+    </style>
 </head>
-
 <body>
-    <h3 style="text-align: center;">Barang Masuk Besi Scrap</h3>
 
-    <div style="margin-top: 20px;">
-        <div style="font-weight: bold; margin-bottom: 10px;">Kode:
-            <div style="margin-top: 6px;">{{ $data->kode }}</div>
-        </div>
+    <div class="header">
+        <h2>Surat Barang Masuk Besi Scrap</h2>
+    </div>
 
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Tanggal:</div>
-            <div style="margin-top: 6px;">{{ $data->tanggal }}</div>
-        </div>
+    <table class="info-table">
+        <tr>
+            <td style="text-align: left"><strong>Kode:</strong> {{$data->kode}}</td>
+            <td style="text-align: right"><strong>Tanggal Surat:</strong> {{ date('d F Y') }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: left"><strong>Penerima:</strong> CV. Java Metalindo</td>
+        </tr>
+    </table>
 
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Kapal:</div>
-            <div style="margin-top: 6px;">{{ $data->dataKapal->nama_kapal }}</div>
-        </div>
+    <table>
+        <tr>
+            <th rowspan="2">Kapal</th>
+            <th colspan="3">Timbangan SB (Kg)</th>
+            <th colspan="3">Timbangan Pabrik (Kg)</th>
+            <th rowspan="2">Netto Bersih (Kg)</th>
+        </tr>
+        <tr>
+            <th>Bruto</th>
+            <th>Tara</th>
+            <th>Netto</th>
+            <th>Bruto</th>
+            <th>Tara</th>
+            <th>Netto</th>
+        </tr>
+        <tr>
+            <td>{{$data->dataKapal->nama_kapal}}</td>
+            <td>{{$data->bruto_sb}}</td>
+            <td>{{$data->tara_sb}}</td>
+            <td>{{$data->netto_sb}}</td>
+            <td>{{$data->bruto_pabrik}}</td>
+            <td>{{$data->tara_pabrik}}</td>
+            <td>{{$data->netto_pabrik}}</td>
+            <td>{{$data->netto_bersih}}</td>
+        </tr>
+    </table>
 
-        {{-- <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Nama Barang:</div>
-            <div style="margin-top: 6px;">{{ $data->produk->nama }}</div>
-        </div> --}}
-        <div style="margin-top: 20px">
-            <div style="font-weight: bold; margin-bottom: 10px;">Timbangan SB</div>
-        </div>
+    <p>Catatan: Harap dilakukan pengecekan kembali sebelum diterima.</p>
 
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Bruto SB</div>
-            <div style="margin-top: 6px;">{{ $data->bruto_sb }}</div>
-        </div>
+    <table class="signature-table">
+        <tr>
+            <td></td>
+            <td>_________________________<br><strong>Penerima</strong><br>CV. Java Metalindo</td>
+        </tr>
+    </table>
 
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Tara SB</div>
-            <div style="margin-top: 6px;">{{ $data->tara_sb }}</div>
-        </div>
-
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Netto SB</div>
-            <div style="margin-top: 6px;">{{ $data->netto_sb }}</div>
-        </div>
-
-        <div style="margin-top: 20px">
-            <div style="font-weight: bold; margin-bottom: 10px;">Timbangan Pabrik</div>
-        </div>
-
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Bruto Pabrik</div>
-            <div style="margin-top: 6px;">{{ $data->bruto_pabrik }}</div>
-        </div>
-
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Tara Pabrik</div>
-            <div style="margin-top: 6px;">{{ $data->tara_pabrik }}</div>
-        </div>
-
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Netto Pabrik</div>
-            <div style="margin-top: 6px;">{{ $data->netto_pabrik }}</div>
-        </div>
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Potongan</div>
-            <div style="margin-top: 6px;">{{ $data->pot }}</div>
-        </div>
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Netto Bersih</div>
-            <div style="margin-top: 6px;">{{ $data->netto_bersih }}</div>
-        </div>
-        
-        <div style="margin-top: 20px;">
-            <div style="font-weight: bold; margin-bottom: 10px;">Perusahaan</div>
-            <div style="margin-top: 6px;">{{ $data->perusahaan->nama }}</div>
-        </div>
-
-        <hr style="margin-top: 20px;">
-
-        <!-- Signatures at Bottom Left and Bottom Right -->
-        <div style="position: fixed; bottom: 20px; left: 20px;">
-            <p>_________________________</p>
-            <p>Prepared By</p>
-        </div>
-
-        <div style="position: fixed; bottom: 20px; right: 20px;">
-            <p>_________________________</p>
-            <p>Approved By</p>
-        </div>
-        <!-- End Signatures -->
 </body>
-
 </html>
