@@ -67,7 +67,7 @@
             <div class="mr-3">
 
                 <a href="{{ $createRouteUrl }}" class="btn bg-purple text-white">
-                    <i class="fas fa-plus"></i> Create
+                    <i class="fas fa-plus"></i> New
                 </a>
 
 

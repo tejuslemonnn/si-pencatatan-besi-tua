@@ -2,6 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\DOModel;
+use App\Models\ITRModel;
+use App\Models\Perusahaan;
+use App\Models\ProductModel;
+use App\Models\MaterialModel;
+use App\Models\StockCountModel;
+use App\Models\BarangMasukBesiTua;
+use App\Models\BarangKeluarBesiTua;
+use App\Http\Controllers\Controller;
+use App\Models\BarangMasukBesiScrap;
+use App\Models\BarangKeluarBesiScrap;
+use App\Models\Produk;
+
 // use Carbon\Carbon;
 // use App\Models\DOModel;
 // use App\Models\ITRModel;
@@ -26,6 +40,7 @@ class DashboardController extends Controller
         //             ->orWhereNull('expired');
         //     });
         // })->get();
+
 
         // $stockCounts = StockCountModel::where(function ($query) {
         //     if (auth()->user()->role == "admin_pengajuan") {
@@ -101,20 +116,44 @@ class DashboardController extends Controller
 
         // $DOsExpired = DOModel::where('source', auth()->user()->id)->whereNotNull('delivery_date')->where('delivery_date', '<=', date("Y-m-d"))->count();
 
+
         // dd($ITRsOutByMonth,$stockCountsByMonth);
+
+        $barangMasukBesiTuas = BarangMasukBesiTua::where('status', true)->get();
+        $barangMasukBesiTuasByMonth = $barangMasukBesiTuas->groupBy(function ($item) {
+            return Carbon::parse($item->created_at)->format('F');
+        });
+
+        $barangkeluarBesiTuas = BarangKeluarBesiTua::where('status', true)->get();
+        $barangkeluarBesiTuasByMonth = $barangkeluarBesiTuas->groupBy(function ($item) {
+            return Carbon::parse($item->created_at)->format('F');
+        });
+
+        $barangMasukBesiScraps = BarangMasukBesiScrap::where('status', true)->get();
+        $barangMasukBesiScrapsByMonth = $barangMasukBesiScraps->groupBy(function ($item) {
+            return Carbon::parse($item->created_at)->format('F');
+        });
+
+        $barangKeluarBesiScraps = BarangKeluarBesiScrap::where('status', true)->get();
+        $barangKeluarBesiScrapsByMonth = $barangKeluarBesiScraps->groupBy(function ($item) {
+            return Carbon::parse($item->created_at)->format('F');
+        });
+
+        $perusahaans = Perusahaan::all();
+        $produks = Produk::all();
+
         return view('admin/dashboard', [
-            // 'materialReqs' => $materialReqs,
-            // 'itrs' => $itrs,
-            // 'stockCounts' => $stockCounts,
-            // 'DOs' => $DOs,
-            // 'products' => $products,
-            // 'stockCountsByMonth' => $stockCountsByMonth,
-            // 'ITRsOutByMonth' => $ITRsOutByMonth,
-            // 'ITRsInByMonth' => $ITRsInByMonth,
-            // 'materialReqsExpired' => $materialReqsExpired,
-            // 'stockCountsExpired' => $stockCountsExpired,
-            // 'itrsExpired' => $itrsExpired,
-            // 'DOsExpired' => $DOsExpired,
+            'title' => 'Dashboard',
+            'perusahaans' => $perusahaans,
+            'produks' => $produks,
+            'barangMasukBesiTuas' => $barangMasukBesiTuas,
+            'barangMasukBesiTuasByMonth' => $barangMasukBesiTuasByMonth,
+            'barangkeluarBesiTuas' => $barangkeluarBesiTuas,
+            'barangkeluarBesiTuasByMonth' => $barangkeluarBesiTuasByMonth,
+            'barangMasukBesiScraps' => $barangMasukBesiScraps,
+            'barangMasukBesiScrapsByMonth' => $barangMasukBesiScrapsByMonth,
+            'barangKeluarBesiScraps' => $barangKeluarBesiScraps,
+            'barangKeluarBesiScrapsByMonth' => $barangKeluarBesiScrapsByMonth,
         ]);
     }
 }

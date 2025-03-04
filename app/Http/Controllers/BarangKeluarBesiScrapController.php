@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;;
+
 use App\Models\DataKapal;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
