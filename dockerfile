@@ -44,7 +44,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock ./
 
 # Install composer dependencies
-RUN composer install --no-scripts --no-autoloader --prefer-dist --no-interaction
+# RUN composer install --no-scripts --no-autoloader --prefer-dist --no-interaction
 
 # Install Node.js dependencies
 # COPY package.json package-lock.json ./

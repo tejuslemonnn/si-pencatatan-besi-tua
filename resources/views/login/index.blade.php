@@ -1,178 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>MM | Login</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="vendor/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | CV. Java Metalindo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
-  margin: 0;
-  padding: 0;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.carousel-container {
-  height: 100%; /* Set container height */
-  overflow: hidden; /* Prevent overflow */
-}
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003f7f);
+            /* background-color: #00234b; */
 
-.carousel-container {
-  width: 100%;         /* Full width of its parent */
-  height: 100%;       /* Or any fixed height you prefer */
-  overflow: hidden;    /* Hide overflowing content */
-  position: relative;  /* Relative positioning for flexibility */
-}
+            color: white;
+        }
 
-.carousel_items {
-  display: flex;        /* Line items in a row */
-  transition: transform 0.5s linear;
-  height: 100%;         /* Match parent height */
-}
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
 
-.carousel_item {
-  min-width: 100%;      /* Full width */
-  height: 100%;         /* Match container height */
-  background-repeat: no-repeat;
-  background-size: cover;     /* Make sure the image covers the entire container */
-  background-position: center; /* Center the image */
-  transition: transform 0.5s ease-in-out;
-}
+        .content {
+            display: flex;
+            background-color: #00234b;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+        }
 
-.item1 {
-  background-image: url("img/login1.jpg");
-}
-.item2 {
-    background-image: url("img/login2.jpg");
-}
-.item3 {
-  background-image: url("img/login3.jpg");
-}
+        .left {
+            flex: 1;
+            padding: 2rem;
+        }
 
+        .left h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .left h1 span {
+            color: #e74c3c;
+        }
+
+        .left p {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        .right {
+            background-color: #fff;
+            flex: 1;
+            padding: 2rem;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 8px 8px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .right img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .right h3 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #005be4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #003fa5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .right {
+                border-radius: 0 0 8px 8px;
+            }
+
+            .left {
+                text-align: center;
+            }
+        }
     </style>
-
 </head>
 
-<body class="bg-gradient-dark">
+<body>
 
-    <div class="container pt-5">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center mt-5 pt-5">
-
-            <div class="col-lg-8">
-
-
-                {{--  <div class="col-xl-10 col-lg-12 col-md-9"> --}}
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg d-none d-lg-block text-center">
-                            <div class="carousel-container">
-  <div class="carousel_items">
-    <div class="carousel_item item1">
-    </div>
-    <div class="carousel_item item2">
-    </div>
-    <div class="carousel_item item3">
-    </div>
-  </div>
-</div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="p-4">
-                                    <div class="text-center">
-                                        <div class="d-flex mb-2 align-items-center justify-content-center">
-                                        <h5 class="h5 text-gray-900 ">SI Pencatatan Besi Tua</h5>
-          
-                                    </div>
-
-                                    <form action="/login" method="POST">
-                                        @if ($errors->has('email'))
-                                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" name="username"
-                                                class="form-control form-control-user @error('username') is-invalid @enderror"
-                                                id="username" aria-describedby="username" placeholder="username"
-                                                required>
-                                        </div>
-
-                                        {{-- @if ($errors->has('password'))
-                                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                                        @endif --}}
-                                        <div class="form-group">
-                                            <input type="password" name="password"
-                                                class="form-control form-control-user @error('password') is-invalid @enderror"
-                                                id="password" aria-describedby="password" id="password"
-                                                placeholder="Password" required>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="container">
+        <div class="content">
+            <div class="left">
+                <h1>CV. Java Metalindo</h1>
+                <h1>Perusahaan Yang Bergerak<br>Di Bidang Penjualan<br><span>Besi Tua</span></h1>
+                <p>Memudahkan staff administrasi dalam mengelola data perusahaan seperti barang masuk, barang keluar,
+                    pengelolaan data penjualan serta membantu kepala perusahaan dalam memantau perkembangan usaha yang
+                    dimiliki</p>
             </div>
-
+            <div class="right">
+                <img src="img/login1.jpg" alt="Gambar Login">
+                <h3>MASUK SISTEM INFORMASI</h3>
+                <form action="/login" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="username" placeholder="username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
-
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <script>
-        const carouselItems = document.querySelectorAll(".carousel_item"); 
-let i = 1;
-
-setInterval(() => {
-// Accessing All the carousel Items
- Array.from(carouselItems).forEach((item,index) => {
-
-   if(i < carouselItems.length){
-    item.style.transform = `translateX(-${i*100}%)`
-   }
-  })
-
-
-  if(i < carouselItems.length){
-    i++;
-  }
-  else{
-    i=0;
-  }
-},2000)
-    </script>
 
 </body>
 
