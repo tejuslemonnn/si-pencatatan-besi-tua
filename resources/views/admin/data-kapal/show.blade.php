@@ -105,7 +105,7 @@
 
                                             @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
                                                 <a href="{{ route('barang-masuk-besi-tua.edit', ['barang_masuk_besi_tua' => $row->id]) }}"
-                                                    class="btn btn-warning"><i class="fas fa-edit"></i> Edit
+                                                    class="btn btn-warning"><i class="fas fa-edit"></i> Ubah
                                                 </a>
                                                 <form
                                                     action="{{ route('barang-masuk-besi-tua.destroy', ['barang_masuk_besi_tua' => $row->id]) }}"
@@ -114,7 +114,7 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">
                                                         <i class="fas fa-trash"></i>
-                                                        Delete</button>
+                                                        Hapus</button>
                                                 </form>
                                             @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
                                                 {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
@@ -202,7 +202,7 @@
 
                                             @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
                                                 <a href="{{ route('barang-masuk-besi-scrap.edit', ['barang_masuk_besi_scrap' => $row->id]) }}"
-                                                    class="btn btn-warning"><i class="fas fa-edit"></i> Edit
+                                                    class="btn btn-warning"><i class="fas fa-edit"></i> Ubah
                                                 </a>
                                                 <form
                                                     action="{{ route('barang-masuk-besi-scrap.destroy', ['barang_masuk_besi_scrap' => $row->id]) }}"
@@ -211,7 +211,7 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">
                                                         <i class="fas fa-trash"></i>
-                                                        Delete</button>
+                                                        Hapus</button>
                                                 </form>
                                             @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
                                                 {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"

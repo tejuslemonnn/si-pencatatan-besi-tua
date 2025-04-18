@@ -70,7 +70,7 @@ class PerusahaanController extends Controller
 
         return view('admin.perusahaan.edit', [
             'data' => $data,
-            'title' => 'Edit Data Perusahaan',
+            'title' => 'Ubah Data Perusahaan',
             'icon' => 'fa-solid fa-box'
         ]);
     }

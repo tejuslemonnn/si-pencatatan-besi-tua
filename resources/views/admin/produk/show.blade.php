@@ -53,7 +53,7 @@
     </div> --}}
 
     <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Qty</label>
+        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Jumlah</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $produk->qty }}</p>
         </div>

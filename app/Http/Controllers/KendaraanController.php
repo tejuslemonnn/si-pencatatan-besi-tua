@@ -71,7 +71,7 @@ class KendaraanController extends Controller
 
         return view('admin.kendaraan.edit', [
             'data' => $data,
-            'title' => 'Edit Data Kendaraan',
+            'title' => 'Ubah Data Kendaraan',
             'icon' => 'fa-solid fa-box'
         ]);
     }

@@ -20,6 +20,51 @@
     <!-- Custom styles for this template-->
     <link href="vendor/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-container {
+  height: 100%; /* Set container height */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.carousel-container {
+  width: 100%;         /* Full width of its parent */
+  height: 100%;       /* Or any fixed height you prefer */
+  overflow: hidden;    /* Hide overflowing content */
+  position: relative;  /* Relative positioning for flexibility */
+}
+
+.carousel_items {
+  display: flex;        /* Line items in a row */
+  transition: transform 0.5s linear;
+  height: 100%;         /* Match parent height */
+}
+
+.carousel_item {
+  min-width: 100%;      /* Full width */
+  height: 100%;         /* Match container height */
+  background-repeat: no-repeat;
+  background-size: cover;     /* Make sure the image covers the entire container */
+  background-position: center; /* Center the image */
+  transition: transform 0.5s ease-in-out;
+}
+
+.item1 {
+  background-image: url("img/login1.jpg");
+}
+.item2 {
+    background-image: url("img/login2.jpg");
+}
+.item3 {
+  background-image: url("img/login3.jpg");
+}
+
+    </style>
+
 </head>
 
 <body class="bg-gradient-dark">
@@ -39,12 +84,23 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg d-none d-lg-block text-center">
-                                <img src="img/besi-tua.png" class="img-fluid" style="height: 100%; width:100%;">
+                            <div class="carousel-container">
+  <div class="carousel_items">
+    <div class="carousel_item item1">
+    </div>
+    <div class="carousel_item item2">
+    </div>
+    <div class="carousel_item item3">
+    </div>
+  </div>
+</div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-4">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">SI Pencatatan Besi Tua</h1>
+                                        <div class="d-flex mb-2 align-items-center justify-content-center">
+                                        <h5 class="h5 text-gray-900 ">SI Pencatatan Besi Tua</h5>
+          
                                     </div>
 
                                     <form action="/login" method="POST">
@@ -94,6 +150,29 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        const carouselItems = document.querySelectorAll(".carousel_item"); 
+let i = 1;
+
+setInterval(() => {
+// Accessing All the carousel Items
+ Array.from(carouselItems).forEach((item,index) => {
+
+   if(i < carouselItems.length){
+    item.style.transform = `translateX(-${i*100}%)`
+   }
+  })
+
+
+  if(i < carouselItems.length){
+    i++;
+  }
+  else{
+    i=0;
+  }
+},2000)
+    </script>
 
 </body>
 

@@ -126,7 +126,7 @@ class SuratJalanController extends Controller
 
         return view('admin.surat-jalan.edit', [
             'data' => $data,
-            'title' => 'Edit Data Surat Jalan',
+            'title' => 'Ubah Data Surat Jalan',
             'icon' => 'fa-solid fa-box',
             'barangKeluarBesiTuas' => $barangKeluarBesiTuas,
             'barangKeluarBesiScraps' => $barangKeluarBesiScraps,

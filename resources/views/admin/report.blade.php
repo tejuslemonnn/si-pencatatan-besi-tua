@@ -13,14 +13,14 @@
         <div class="row">
             <input type="hidden" name="_token" value="ubqZkGbnjpavuprrvwSNL4pQCVGqhb35tq3Gn5a6">          
             <div class="col-md-2 col-12">
-                <label for="from_date">Start Date<span class="text-danger">*</span></label>
+                <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
                 <input type="date" class="form-control "
                     id="from_date" name="from_date" placeholder="Masukkan Tanggal DO"
                     value="2023-05-03">
                                                 </div>
 
             <div class="col-md-2 col-12">
-                <label for="to_date">End Date<span class="text-danger">*</span></label>
+                <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
                 <input type="date" class="form-control "
                     id="to_date" name="to_date" placeholder="Masukkan Tanggal Delivery"
                     value="2023-05-03">

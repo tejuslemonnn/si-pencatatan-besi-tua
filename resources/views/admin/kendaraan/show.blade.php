@@ -16,12 +16,12 @@
 
     <hr>
 
-    <div class="form-group row col-md-10">
+    <!-- <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style="font-weight: bold;">Jenis</label>
         <div class="col-sm-4">
             <p style="margin-top: 6px;"> : &nbsp; {{ $data->jenis }}</p>
         </div>
-    </div>
+    </div> -->
 
     <div class="form-group row col-md-10">
         <label class="col-sm-2 col-form-label" style="font-weight: bold;">Nomor Plat</label>

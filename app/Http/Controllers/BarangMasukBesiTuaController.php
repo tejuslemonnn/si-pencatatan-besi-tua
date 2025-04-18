@@ -99,7 +99,7 @@ class BarangMasukBesiTuaController extends Controller
 
         return view('admin.barang_masuk_besi_tua.edit', [
             'data' => $data,
-            'title' => 'Edit Data Barang Masuk Besi Tua',
+            'title' => 'Ubah Data Barang Masuk Besi Tua',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
             'dataKapals' => $dataKapals,

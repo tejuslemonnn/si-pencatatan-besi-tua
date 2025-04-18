@@ -25,12 +25,12 @@ class SuratJalan extends Model
 
     public function barangKeluarBesiTua()
     {
-        return $this->hasOne(BarangKeluarBesiTua::class);
+        return $this->belongsTo(BarangKeluarBesiTua::class);
     }
 
     public function barangKeluarBesiScrap()
     {
-        return $this->hasOne(BarangKeluarBesiScrap::class);
+        return $this->belongsTo(BarangKeluarBesiScrap::class);
     }
 
     public function kendaraan()

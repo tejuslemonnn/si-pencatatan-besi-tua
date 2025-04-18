@@ -31,53 +31,40 @@
     </div>
 
     {{-- kapal --}}
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Kapal</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->dataKapal->nama_kapal }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Nama Barang</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->nama }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Bruto</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->bruto }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Tara</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->tara }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Netto</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->netto }}</p>
-        </div>
-    </div>
-
-    {{-- <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Jumlah</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->jumlah }}</p>
-        </div>
-    </div> --}}
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Perusahaan</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->perusahaan->nama }}</p>
-        </div>
-    </div>
+    <table class="table table-striped-columns table-bordered table-hover col-md-12">
+    <tbody>
+        <tr>
+            <th class="text-start bg-primary text-white"style="width: 20%; font-weight: bold;">Kapal</th>
+            <td class="text-start bg-primary text-white">{{ $data->dataKapal->nama_kapal }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Nama Barang</th>
+            <td class="text-start">{{ $data->produk->nama }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Bruto</th>
+            <td class="text-start">{{ $data->bruto }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Tara</th>
+            <td class="text-start">{{ $data->tara }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Netto</th>
+            <td class="text-start">{{ $data->netto }}</td>
+        </tr>
+        <!-- Uncomment if needed -->
+        <!--
+        <tr>
+            <th style="font-weight: bold;">Jumlah</th>
+            <td  class="text-start">{{ $data->jumlah }}</td>
+        </tr>
+        -->
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Perusahaan</th>
+            <td  class="text-start">{{ $data->perusahaan->nama }}</td>
+        </tr>
+    </tbody>
+</table>
 
 @endsection

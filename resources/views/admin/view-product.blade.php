@@ -13,9 +13,9 @@
 <form action="/delete-product/{{ $product->id }}" method="GET" style="display: inline-block;">
     @csrf
     @method('DELETE')
-    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="submit" class="btn btn-danger">Hapus</button>
 </form>
-<a href="{{ route('editProduct', ['productId' => $product->id]) }}" class="btn btn-primary">Edit</a>
+<a href="{{ route('editProduct', ['productId' => $product->id]) }}" class="btn btn-primary">Ubah</a>
 
 <hr>
 <h5 class="mb-4 text-gray-800">Form Detail Product</h5>

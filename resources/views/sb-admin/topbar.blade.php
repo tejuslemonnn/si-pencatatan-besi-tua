@@ -63,11 +63,11 @@
         }
     @endphp
     @if ($currentRouteName != 'dashboard')
-        @if ($showCreateButton)
+    @if ($showCreateButton && Auth::user()->role != "kepala_perusahaan")
             <div class="mr-3">
 
                 <a href="{{ $createRouteUrl }}" class="btn bg-purple text-white">
-                    <i class="fas fa-plus"></i> New
+                    <i class="fas fa-plus"></i> Buat Baru
                 </a>
 
 
@@ -76,11 +76,11 @@
             <div>
                 @if ($showBack)
                     <a href="{{ $indexRouteUrl }}" class="btn btn-danger mr-2"> <i class="fas fa-arrow-left"> </i>
-                        Back</a>
+                        Kembali</a>
 
                     @if ($showSubmitButton)
                         <button type="button" class="btn btn-primary" id="submit_button"> <i class="fas fa-check">
-                            </i>Save</button>
+                            </i>Simpan</button>
                     @endif
                     @if ($isDetailKapal)
                         {{-- Rekapan --}}

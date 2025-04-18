@@ -76,6 +76,8 @@
     <table>
         <tr>
             <th rowspan="2">Kapal</th>
+            <th rowspan="2">Kendaraan</th>
+            <th rowspan="2">Surat Jalan</th>
             <th rowspan="2">Nama Barang</th>
             <th colspan="3">Timbangan SB (Kg)</th>
             <th rowspan="2">Harga</th>
@@ -88,6 +90,9 @@
         </tr>
         <tr>
             <td>{{$data->dataKapal->nama_kapal}}</td>
+            <td>{{ $data->suratJalan->kendaraan->model }} - {{ $data->suratJalan->kendaraan->nomor_plat }}
+                            </td>
+                            <td>{{ $data->suratJalan->no_surat }}</td>
             <td>{{$data->produk->nama}}</td>
             <td>{{$data->bruto}}</td>
             <td>{{$data->tara}}</td>

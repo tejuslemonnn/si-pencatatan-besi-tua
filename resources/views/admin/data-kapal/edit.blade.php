@@ -1,5 +1,5 @@
 @extends('sb-admin/app')
-@section('title', 'Edit Data Kapal')
+@section('title', 'Ubah Data Kapal')
 
 @section('content')
     <!-- Page Heading -->

@@ -1,9 +1,9 @@
 @extends('sb-admin/app')
-@section('title', 'Edit Interwarehouse Transfer Request')
+@section('title', 'Ubah Interwarehouse Transfer Request')
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Interwarehouse Transfer Request</h1>
+    <h1 class="h3 mb-4 text-gray-800">Ubah Interwarehouse Transfer Request</h1>
 
     <form action="{{ route('updateItr', ['itrId' => $detailItr->id]) }}" method="POST" id="add_form">
 
@@ -21,7 +21,7 @@
             </div>
         @endif
         <hr>
-        <h5 class="mb-4 text-gray-800">Form Edit Interwarehouse Transfer Request</h5>
+        <h5 class="mb-4 text-gray-800">Form Ubah Interwarehouse Transfer Request</h5>
 
         <div class="row">
             <div class="col-lg-4">

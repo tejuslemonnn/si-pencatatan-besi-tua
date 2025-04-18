@@ -1,9 +1,9 @@
 @extends('sb-admin/app')
-@section('title', 'Edit Delivery Order Request')
+@section('title', 'Ubah Delivery Order Request')
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Delivery Order Request</h1>
+    <h1 class="h3 mb-4 text-gray-800">Ubah Delivery Order Request</h1>
 
     <form action="{{ route('updateDO', ['id' => $data->id]) }}" method="POST" id="add_form">
 
@@ -21,7 +21,7 @@
             </div>
         @endif
         <hr>
-        <h5 class="mb-4 text-gray-800">Form Edit Delivery Order Request</h5>
+        <h5 class="mb-4 text-gray-800">Form Ubah Delivery Order Request</h5>
         <div class="row">
             <div class="form-group col-lg-4">
                 <label for="do_no">DO No.</label>

@@ -5,8 +5,11 @@
     <!-- Sidebar - Brand -->
     <div class="sidebar-brand d-flex align-items-center justify-content-start pl-2 topnav-sidebar"
         style="background-color: #6961CE;height: 3rem;">
+        
         <a class="sidebar-brand-icon d-flex align-items-center" href="/" style="text-decoration: none;">
-            <img class="img-profile rounded-circle" height="35" src="{{ url('/img/mm.jpg') }}">
+        <div style="height: 25%; width:25%" class="rounded-circle bg-white">
+        <img class="img-profile rounded-circle p-1" style="object-fit: contain;" height="35" src="{{ url('/img/cargo-ship.png') }}">
+</div>
             <div class="sidebar-brand-text mx-4 text-white font-weight-bold d-none d-lg-inline">
                 Java
                 Metalindo</div>

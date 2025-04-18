@@ -176,7 +176,8 @@ class DatabaseSeeder extends Seeder
 
 
         SuratJalan::where('id', 1)->update([
-            'barang_keluar_besi_tua_id' => 1
+            'barang_keluar_besi_tua_id' => 1,
+            "status" => 1,
         ]);
 
 
@@ -199,8 +200,9 @@ class DatabaseSeeder extends Seeder
             'perusahaan_id' => 1,
         ]);
 
-        SuratJalan::where('id', 3)->update([
-            'barang_keluar_besi_scrap_id' => 1
+        SuratJalan::where('id', 1)->update([
+            'barang_keluar_besi_tua_id' => 1,
+            "status" => 1,
         ]);
 
 

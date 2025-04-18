@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Models\Produk;
 use App\Models\Kendaraan;
@@ -143,7 +143,7 @@ class BarangKeluarBesiTuaController extends Controller
         $products = Produk::get();
 
         return view('admin.barang_keluar_besi_tua.edit', [
-            'title' => 'Edit Data Barang Keluar Besi Tua',
+            'title' => 'Ubah Data Barang Keluar Besi Tua',
             'icon' => 'fa-solid fa-box',
             'data' => $barangKeluarBesiTua,
             'kendaraans' => $kendaraans,

@@ -1,7 +1,7 @@
-@extends('sb-admin/app') @section('title', 'Edit Stock Count')
+@extends('sb-admin/app') @section('title', 'Ubah Stock Count')
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Stock Count</h1>
+    <h1 class="h3 mb-4 text-gray-800">Ubah Stock Count</h1>
 
     <form action="{{ route('updateStock', ['stockcountId' => $stockcount->id]) }}" method="POST" id="add_form">
         <div class="mt-3">
@@ -23,7 +23,7 @@
 
         <hr />
 
-        <h5 class="mb-4 text-gray-800">Form Edit Material Requests</h5>
+        <h5 class="mb-4 text-gray-800">Form Ubah Material Requests</h5>
 
         <div class="row">
             <div class="col-lg-4">

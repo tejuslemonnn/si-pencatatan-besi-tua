@@ -159,8 +159,8 @@ class DOController extends Controller
         $DO = DOModel::where('id', $id)->with('DetailDO')->first();
 
         return view('admin.edit-DO', [
-            'title' => 'Edit Delivery Order transfer request',
-            'active' => 'Edit Delivery Order transfer request',
+            'title' => 'Ubah Delivery Order transfer request',
+            'active' => 'Ubah Delivery Order transfer request',
             'data' => $DO,
             'products' => ProductModel::where('user_id', '=', auth()->user()->id)->get(),
             'warehouses' => User::where('role', '<>', 'admin_pengajuan')->get(),

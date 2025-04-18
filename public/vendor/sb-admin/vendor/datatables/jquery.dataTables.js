@@ -8122,7 +8122,7 @@
 				}
 			}
 	
-			// Delete from the display arrays
+			// Hapus from the display arrays
 			_fnDeleteIndex( settings.aiDisplayMaster, row );
 			_fnDeleteIndex( settings.aiDisplay, row );
 			_fnDeleteIndex( that[ thatIdx ], row, false ); // maintain local indexes
@@ -12767,7 +12767,7 @@
 		 *        "columnDefs": [
 		 *          {
 		 *            "data": null,
-		 *            "defaultContent": "Edit",
+		 *            "defaultContent": "Ubah",
 		 *            "targets": [ -1 ]
 		 *          }
 		 *        ]
@@ -12784,7 +12784,7 @@
 		 *          null,
 		 *          {
 		 *            "data": null,
-		 *            "defaultContent": "Edit"
+		 *            "defaultContent": "Ubah"
 		 *          }
 		 *        ]
 		 *      } );

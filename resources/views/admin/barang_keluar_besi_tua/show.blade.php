@@ -22,90 +22,56 @@
             <p style="margin-top: 6px;"> : &nbsp; {{ $data->kode }}</p>
         </div>
     </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Kapal</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->dataKapal->nama_kapal }} </p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Kendaraan</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->suratJalan->kendaraan->model }} -
-                {{ $data->suratJalan->kendaraan->nomor_plat }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Surat Jalan</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->suratJalan->no_surat }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style=" font-weight: bold;">Tanggal</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->tanggal }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Nama Barang</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->nama }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Bruto</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->bruto }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Tara</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->tara }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Netto</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->netto }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Harga</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->produk->harga }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Jumlah Harga</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->jumlah_harga }}</p>
-        </div>
-    </div>
-
-    {{-- <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Jumlah</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->jumlah }}</p>
-        </div>
-    </div> --}}
-
-    <div class="form-group row col-md-10">
-        <label class="col-sm-2 col-form-label" style="font-weight: bold;">Perusahaan</label>
-        <div class="col-sm-4">
-            <p style="margin-top: 6px;"> : &nbsp; {{ $data->perusahaan->nama }}</p>
-        </div>
-    </div>
-
-@endsection
+    
+    <table class="table table-striped-columns table-bordered table-hover col-md-12">
+    <tbody>
+        <tr>
+            <th class="text-start bg-primary text-white"style="width: 20%; font-weight: bold;">Kapal</th>
+            <td class="text-start bg-primary text-white">{{ $data->dataKapal->nama_kapal }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Kendaraan</th>
+            <td class="text-start">{{ $data->suratJalan->kendaraan->model }} - {{ $data->suratJalan->kendaraan->nomor_plat }}
+        </td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Surat Jalan</th>
+            <td class="text-start">{{ $data->suratJalan->no_surat }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Nama Barang</th>
+            <td class="text-start">{{ $data->produk->nama }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Bruto</th>
+            <td class="text-start">{{ $data->bruto }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Tara</th>
+            <td class="text-start">{{ $data->tara }}</td>
+        </tr>
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Netto</th>
+            <td class="text-start">{{ $data->netto }}</td>
+        </tr>
+        <!-- Uncomment if needed -->
+        <!--
+        <tr>
+            <th style="font-weight: bold;">Jumlah</th>
+            <td  class="text-start">{{ $data->jumlah }}</td>
+        </tr>
+        -->
+        <tr>
+            <th class="text-start" style="font-weight: bold;">Perusahaan</th>
+            <td  class="text-start">{{ $data->perusahaan->nama }}</td>
+        </tr>
+        <tr>
+        <th class="text-start" style="font-weight: bold;">Status</th>
+        <td
+                                class="text-start {{ $data->status === 1 ? 'text-success' : ($data->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
+                                {{ $data->status === 1 ? 'Disetujui' : ($data->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                            </td>
+        </tr>
+    </tbody>
+</table>
+            @endsection

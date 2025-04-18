@@ -41,7 +41,7 @@ class DataKapalController extends Controller
         $request->validate([
             'nama_kapal' => 'required',
             'tanggal_datang' => 'required',
-            'total_modal' => 'required|integer|min:0',
+            // 'total_modal' => 'required|integer|min:0',
         ]);
 
         DataKapal::create($request->all());
@@ -69,7 +69,7 @@ class DataKapalController extends Controller
 
     public function edit($id)
     {
-        $title = 'Edit Data Kapal';
+        $title = 'Ubah Data Kapal';
         $icon = 'fa-solid fa-ship';
         $dataKapal = DataKapal::findOrFail($id);
 

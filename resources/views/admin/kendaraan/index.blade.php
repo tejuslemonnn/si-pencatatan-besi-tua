@@ -10,15 +10,15 @@
     @endif
 
     <div class="row my-2">
-        <div class="col-md-2 col-12">
-            <label for="from_date">Start Date<span class="text-danger">*</span></label>
+        <!-- <div class="col-md-2 col-12">
+            <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="min" name="min">
         </div>
 
         <div class="col-md-2 col-12 mb-4">
-            <label for="to_date">End Date<span class="text-danger">*</span></label>
+            <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="max" name="max">
-        </div>
+        </div> -->
 
         <div class="overflow-x-auto">
             <table id="example" class="table table-bordered display nowrap">
@@ -55,7 +55,7 @@
 
                                 @if (auth()->user()->role == 'admin_perusahaan' && $row->status != 1)
                                     <a href="{{ route('kendaraan.edit', ['kendaraan' => $row->id]) }}"
-                                        class="btn btn-warning"><i class="fas fa-edit"></i> Edit
+                                        class="btn btn-warning"><i class="fas fa-edit"></i> Ubah
                                     </a>
                                     <form action="{{ route('kendaraan.destroy', ['kendaraan' => $row->id]) }}"
                                         method="POST" style="display: inline-block;">
@@ -63,7 +63,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
-                                            Delete</button>
+                                            Hapus</button>
                                     </form>
                                 @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
                                     {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"

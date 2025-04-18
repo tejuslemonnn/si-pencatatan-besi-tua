@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Models\DataKapal;
 use App\Models\Kendaraan;
@@ -125,7 +125,7 @@ class BarangKeluarBesiScrapController extends Controller
         $dataKapals = DataKapal::get();
 
         return view('admin.barang_keluar_besi_scrap.edit', [
-            'title' => 'Edit Data Barang Keluar Besi Scrap',
+            'title' => 'Ubah Data Barang Keluar Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'data' => $barangKeluarBesiScrap,
             'kendaraans' => $kendaraans,

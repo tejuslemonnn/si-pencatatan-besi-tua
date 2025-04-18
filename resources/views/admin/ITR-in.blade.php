@@ -15,12 +15,12 @@
         <form action="/ITR">
             <div class="row">
                 <div class="col-md-2 col-12">
-                    <label for="from_date">Start Date<span class="text-danger">*</span></label>
+                    <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
                     <input type="date" class="form-control " id="from_date" name="from_date" value="{{ date('Y-m-d') }}">
                 </div>
 
                 <div class="col-md-2 col-12">
-                    <label for="to_date">End Date<span class="text-danger">*</span></label>
+                    <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
                     <input type="date" class="form-control " id="to_date" name="to_date">
                 </div>
 
@@ -42,12 +42,12 @@
 
     <div class="row my-2">
         <div class="col-md-2 col-12">
-            <label for="from_date">Start Date<span class="text-danger">*</span></label>
+            <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="min" name="min">
         </div>
 
         <div class="col-md-2 col-12">
-            <label for="to_date">End Date<span class="text-danger">*</span></label>
+            <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="max" name="max">
         </div>
 
@@ -90,12 +90,12 @@
                                 Detail</a>
 
                             @if (auth()->user()->role != 'admin_pengajuan' && $row->status != 1)
-                                <a href="/edit-ITR/{{ $row->id }}" class="btn btn-primary">Edit</a>
+                                <a href="/edit-ITR/{{ $row->id }}" class="btn btn-primary">Ubah</a>
                                 <form action="/delete-ITR/{{ $row->id }}" method="GET"
                                     style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Hapus</button>
                                 </form>
                             @elseif($row->status == 0 && auth()->user()->role == 'admin_pengajuan')
                                 <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"

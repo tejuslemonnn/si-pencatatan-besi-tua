@@ -13,12 +13,12 @@
 
     <div class="row my-2">
         <div class="col-md-2 col-12">
-            <label for="from_date">Start Date<span class="text-danger">*</span></label>
+            <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="min" name="min">
         </div>
 
         <div class="col-md-2 col-12">
-            <label for="to_date">End Date<span class="text-danger">*</span></label>
+            <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="max" name="max">
         </div>
 

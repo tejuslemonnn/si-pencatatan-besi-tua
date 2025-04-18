@@ -90,7 +90,7 @@ class ProdukController extends Controller
             'produk' => $data,
             'kategoris' => $kategoris,
             'dataKapals' => $dataKapals,
-            'title' => 'Edit Data Produk',
+            'title' => 'Ubah Data Produk',
             'icon' => 'fa-solid fa-box'
         ]);
     }

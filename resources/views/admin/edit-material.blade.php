@@ -1,9 +1,9 @@
 @extends('sb-admin/app')
-@section('title', 'Edit Material Request')
+@section('title', 'Ubah Material Request')
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Material Request</h1>
+    <h1 class="h3 mb-4 text-gray-800">Ubah Material Request</h1>
 
     <form action="{{ route('updateMaterial', ['materialId' => $material->id]) }}" method="POST" id="add_form">
         @csrf
@@ -19,7 +19,7 @@
             </div>
         @endif
         <hr>
-        <h5 class="mb-4 text-gray-800">Form Edit Material Requests</h5>
+        <h5 class="mb-4 text-gray-800">Form Ubah Material Requests</h5>
 
         <div class="form-group col-lg-4">
             <label for="material_no">Material No.</label>

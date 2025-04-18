@@ -6179,7 +6179,7 @@ edit:
   changes:
     - '1'
     - 5.0.0
-  label: Edit
+  label: Ubah
   search:
     terms:
       - edit
@@ -20202,7 +20202,7 @@ user-cog:
 user-edit:
   changes:
     - 5.0.11
-  label: User Edit
+  label: User Ubah
   search:
     terms:
       - edit

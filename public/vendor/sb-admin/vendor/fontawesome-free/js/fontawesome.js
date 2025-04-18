@@ -2027,7 +2027,7 @@
           node.setAttribute(pendingAttribute, iconIdentifier);
 
           if (alreadyProcessedPseudoElement) {
-            // Delete the old one, since we're replacing it with a new one
+            // Hapus the old one, since we're replacing it with a new one
             node.removeChild(alreadyProcessedPseudoElement);
           }
 
