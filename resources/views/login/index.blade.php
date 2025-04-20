@@ -15,8 +15,8 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #001f3f, #003f7f);
-            /* background-color: #00234b; */
+            /* background: linear-gradient(135deg, #001f3f, #003f7f); */
+            background-color: #00234b;
 
             color: white;
         }
@@ -34,8 +34,12 @@
             background-color: #00234b;
             border-radius: 8px;
             overflow: hidden;
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1200px;
+            width: 80%;
+            height: auto;
+            font-size: 1.5rem;
+            padding: 6rem 2rem;
+            margin: 0 auto;
         }
 
         .left {
