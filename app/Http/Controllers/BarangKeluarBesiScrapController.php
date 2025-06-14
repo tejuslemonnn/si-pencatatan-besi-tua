@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\History;
 use Barryvdh\DomPDF\Facade\Pdf;
-
 use App\Models\DataKapal;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BarangKeluarBesiScrap;
 use App\Models\BarangMasukBesiScrap;
+use App\Models\BarangKeluarBesiScrap;
 
 class BarangKeluarBesiScrapController extends Controller
 {
@@ -84,12 +84,16 @@ class BarangKeluarBesiScrapController extends Controller
         if ($isDuplicate) {
             return redirect()->back()->with('error', 'Kode sudah digunakan');
         }
+        
+        $request->merge(['created_by' => auth()->user()->id]);
 
-        BarangKeluarBesiScrap::create($request->all());
+        $BarangKeluarBesiScrap = BarangKeluarBesiScrap::create($request->all());
 
         SuratJalan::where('id', $request->surat_jalan_id)->update([
             'barang_keluar_besi_scrap_id' => BarangKeluarBesiScrap::latest()->first()->id
         ]);
+
+
 
         return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -213,6 +217,11 @@ class BarangKeluarBesiScrapController extends Controller
         $data = BarangKeluarBesiScrap::findOrFail($id);
         $data->update([
             'status' => true,
+        ]);
+
+        History::create([
+            'created_by' => $data->created_by,
+            'barang_keluar_besi_scraps' => $data->id
         ]);
 
         return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data Barang Keluar Besi Scrap berhasil disetujui.');

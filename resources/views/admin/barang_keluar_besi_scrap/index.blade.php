@@ -71,12 +71,12 @@
                             <td>{{ $row->netto_pabrik }}</td>
                             <td>{{ $row->pot }}</td>
                             <td>{{ $row->netto_bersih }}</td>
-                            <td>Rp. {{ number_format($row->harga,0,',','.') }}</td>
-                            <td>Rp. {{ number_format($row->jumlah_harga,0,',','.') }}</td>
+                            <td>Rp. {{ number_format($row->harga, 0, ',', '.') }}</td>
+                            <td>Rp. {{ number_format($row->jumlah_harga, 0, ',', '.') }}</td>
                             <td>{{ $row->perusahaan->nama }}</td>
                             <td
-                                class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
-                                {{ $row->status === 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                                class="{{ $row->status == 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
+                                {{ $row->status == 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
                             </td>
                             <td>
                                 <a href="{{ route('barang-keluar-besi-scrap.show', ['barang_keluar_besi_scrap' => $row->id]) }}"
@@ -97,7 +97,7 @@
                                             Hapus</button>
                                     </form>
                                 @elseif(auth()->user()->role == 'kepala_perusahaan')
-                                    @if ($row->status === null || $row->status === 0)
+                                    @if ($row->status == null || $row->status === 0)
                                         <form action="{{ route('approve-barang-keluar-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf
@@ -105,7 +105,7 @@
                                             <button type="submit" class="btn btn-success">Approve</button>
                                         </form>
                                     @endif
-                                    @if ($row->status === null)
+                                    @if ($row->status == null)
                                         <form action="{{ route('reject-barang-keluar-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf

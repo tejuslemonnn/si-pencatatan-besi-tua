@@ -53,7 +53,7 @@ class BarangMasukBesiScrapController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d');
-        $request->merge(['kodee' => 'BM-BS-' . $currentDate . '-' . $request->kode]);
+        $request->merge(['kode' => 'BM-BS-' . $currentDate . '-' . $request->kode]);
 
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',

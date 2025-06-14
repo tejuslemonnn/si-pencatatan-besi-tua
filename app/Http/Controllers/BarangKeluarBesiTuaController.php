@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\BarangKeluarBesiTua;
 use App\Models\DataKapal;
+use App\Models\History;
 
 class BarangKeluarBesiTuaController extends Controller
 {
@@ -84,11 +85,12 @@ class BarangKeluarBesiTuaController extends Controller
             return redirect()->back()->with('error', 'Kode sudah digunakan');
         }
 
-        BarangKeluarBesiTua::create([
+        $barangKeluarBesiTua = BarangKeluarBesiTua::create([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
             'data_kapal_id' => $request->data_kapal_id,
             'surat_jalan_id' => $request->surat_jalan_id,
+            'created_by' => auth()->user()->id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
             'netto' => $request->netto,
@@ -101,8 +103,10 @@ class BarangKeluarBesiTuaController extends Controller
         ]);
 
         SuratJalan::where('id', $request->surat_jalan_id)->update([
-            'barang_keluar_besi_tua_id' => BarangKeluarBesiTua::latest()->first()->id
+            'barang_keluar_besi_tua_id' => $barangKeluarBesiTua->id
         ]);
+
+
 
         return redirect()->route('barang-keluar-besi-tua.index')->with('success', 'Data berhasil ditambahkan');
     }
@@ -243,6 +247,11 @@ class BarangKeluarBesiTuaController extends Controller
         $data = BarangKeluarBesiTua::findOrFail($id);
         $data->update([
             'status' => true,
+        ]);
+
+        History::create([
+            'created_by' => $data->created_by,
+            'barang_keluar_besi_tuas' => $data->id
         ]);
 
         return redirect()->route('barang-keluar-besi-tua.index')->with('success', 'Data Barang Keluar Besi Tua berhasil disetujui.');

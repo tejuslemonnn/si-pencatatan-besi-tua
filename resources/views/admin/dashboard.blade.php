@@ -36,22 +36,22 @@
 
             <!-- Perusahaan -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <a href="{{ route('produk.index') }}"> 
-                <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                    Produk
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($produks) }} </div>
+                <a href="{{ route('produk.index') }}">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                        Produk
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($produks) }} </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa-solid fa-solid fa-warehouse"></i>
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-solid fa-warehouse"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <!-- Perusahaan -->
@@ -83,28 +83,29 @@
             <!-- Perusahaan -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <a href="{{ route('barang-masuk-besi-scrap.index') }}">
-                <div class="card shadow h-100 py-2" style="border-left: 4px solid rgb(3, 192, 60);">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: rgb(3, 192, 60)">
-                                    Barang Masuk Besi Scrap</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangMasukBesiScraps) }}
+                    <div class="card shadow h-100 py-2" style="border-left: 4px solid rgb(3, 192, 60);">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1"
+                                        style="color: rgb(3, 192, 60)">
+                                        Barang Masuk Besi Scrap</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangMasukBesiScraps) }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fa-solid fa-solid fa-warehouse"></i>
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-solid fa-warehouse"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <!-- Perusahaan -->
 
             <!-- ITR -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <a  href="{{ route('barang-keluar-besi-tua.index') }}">
+                <a href="{{ route('barang-keluar-besi-tua.index') }}">
                     <div class="card shadow h-100 py-2" style="border-left: 4px solid rgb(255, 105, 97)">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -135,7 +136,8 @@
                                     <div class="text-xs font-weight-bold text-uppercase mb-1"
                                         style="color: rgb(255, 179, 71)">
                                         Barang Keluar Besi Scrap</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($barangKeluarBesiScraps) }}
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ count($barangKeluarBesiScraps) }}
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -146,55 +148,100 @@
                     </div>
                 </a>
             </div>
+
+
+
+            <!-- Content Row -->
+
+            @if (auth()->user()->role != 'admin_pengajuan')
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div <div class="col-xl-6 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Besi Tua</h6>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="BesiTuasChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div <div class="col-xl-6 col-lg-12">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Besi Scrap</h6>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="BesiScrapChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
         </div>
+        @endif
+
+        <table id="example" class="table table-bordered display nowrap">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Besi Tua</th>
+                    <th>Besi Scrap</th>
+                    <th>Perusahaan</th>
+                    <th>Netto Bersih</th>
+                    <th>Total Harga</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $no = 1;
+                @endphp
+                @foreach ($histories as $row)
+                    <tr>
+                        <td>{{ ($histories->currentPage() - 1) * $histories->perPage() + $loop->iteration }}</td>
+                        <td>{{ $row->created_at->format('d-m-Y H:i') }}</td>
+                        <td>{{ $row->barang_keluar_besi_tuas != null ? $row->barangKeluarBesiTua->kode : '-' }}</td>
+                        <td>{{ $row->barang_keluar_besi_scraps != null ? $row->barangKeluarBesiScrap->kode : '-' }}</td>
+                        <td>{{ $row->barang_keluar_besi_scraps != null ? $row->barangKeluarBesiScrap->perusahaan->nama : $row->barangKeluarBesiTua->perusahaan->nama }}
+                        </td>
+                        <td class="text-primary font-weight-bold">
+                            {{ $row->barang_keluar_besi_scraps != null ? $row->barangKeluarBesiScrap->netto_bersih : $row->barangKeluarBesiTua->netto }}
+                            KG
+                        </td>
+                        <td class="text-success font-weight-bold">
+                            +
+                            Rp.{{ $row->barang_keluar_besi_scraps != null ? $row->barangKeluarBesiScrap->jumlah_harga : $row->barangKeluarBesiTua->jumlah_harga }}
+                        </td>
+                        <td>
+                            <a href="{{ $row->barang_keluar_besi_scraps != null ? route('barang-keluar-besi-scrap.show', $row->barang_keluar_besi_scraps) : route('barang-keluar-besi-tua.show', $row->barang_keluar_besi_tuas) }}"
+                                class="btn
+                                btn-info"><i class="fas fa-eye"></i>
+                                Detail</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
         <!-- Content Row -->
-
-        @if (auth()->user()->role != 'admin_pengajuan')
-            <div class="row">
-
-                <!-- Area Chart -->
-                <div <div class="col-xl-6 col-lg-12">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Besi Tua</h6>
-                        </div>
-
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="BesiTuasChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div <div class="col-xl-6 col-lg-12">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Besi Scrap</h6>
-                        </div>
-
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="BesiScrapChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-    </div>
-    @endif
-
-    <!-- Content Row -->
-    {{-- <div class="row">
+        {{-- <div class="row">
 
         <!-- Content Column -->
         <div class="col-lg-6 mb-4">

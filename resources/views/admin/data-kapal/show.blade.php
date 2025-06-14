@@ -92,7 +92,7 @@
                                         {{-- <td>{{ $row->pesanan_dari }}</td> --}}
                                         <td>{{ $row->perusahaan->nama }}</td>
 
-                                        {{-- @if ($row->status == 0)
+                                        {{-- @if ($row->status === 0)
                                         <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                                         </td>
                                     @else
@@ -116,7 +116,7 @@
                                                         <i class="fas fa-trash"></i>
                                                         Hapus</button>
                                                 </form>
-                                            @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
+                                            @elseif($row->status === 0 && auth()->user()->role == 'kepala_perusahaan')
                                                 {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
                                                 style="display: inline-block;">
                                                 @csrf
@@ -189,7 +189,7 @@
                                         {{-- <td>{{ $row->pesanan_dari }}</td> --}}
                                         <td>{{ $row->perusahaan->nama }}</td>
 
-                                        {{-- @if ($row->status == 0)
+                                        {{-- @if ($row->status === 0)
                                 <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                                 </td>
                                 @else
@@ -213,7 +213,7 @@
                                                         <i class="fas fa-trash"></i>
                                                         Hapus</button>
                                                 </form>
-                                            @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
+                                            @elseif($row->status === 0 && auth()->user()->role == 'kepala_perusahaan')
                                                 {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf

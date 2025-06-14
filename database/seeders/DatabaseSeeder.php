@@ -161,6 +161,7 @@ class DatabaseSeeder extends Seeder
         BarangKeluarBesiTua::create([
             'data_kapal_id' => 1,
             'surat_jalan_id' => 1,
+            'created_by' => 1,
             'kode' => 'BK-BT-' . $currentDate . '-' . '001',
             'tanggal' => date('Y-m-d'),
             'bruto' => 19540,
@@ -184,6 +185,7 @@ class DatabaseSeeder extends Seeder
         BarangKeluarBesiScrap::create([
             'data_kapal_id' => 1,
             'surat_jalan_id' => 3,
+            'created_by' => 1,
             'kode' => 'BK-BS-' . $currentDate . '-' . '001',
             'tanggal' => date('Y-m-d'),
             'bruto_sb' => 19540,

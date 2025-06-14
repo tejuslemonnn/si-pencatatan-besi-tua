@@ -153,6 +153,7 @@
                 <img src="img/login1.jpg" alt="Gambar Login">
                 <h3>MASUK SISTEM INFORMASI</h3>
                 <form action="/login" method="POST">
+                    @csrf
                     <div class="form-group">
                         <input type="text" name="username" placeholder="username" required>
                     </div>

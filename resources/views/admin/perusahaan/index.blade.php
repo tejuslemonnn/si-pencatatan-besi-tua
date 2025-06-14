@@ -11,14 +11,14 @@
 
     <div class="row my-2">
         <!-- <div class="col-md-2 col-12">
-            <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="min" name="min">
-        </div>
+                        <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="min" name="min">
+                    </div>
 
-        <div class="col-md-2 col-12 mb-4">
-            <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="max" name="max">
-        </div> -->
+                    <div class="col-md-2 col-12 mb-4">
+                        <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="max" name="max">
+                    </div> -->
 
         <div class="overflow-x-auto">
             <table id="example" class="table table-bordered display nowrap">
@@ -38,7 +38,7 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->nama }}</td>
 
-                            {{-- @if ($row->status == 0)
+                            {{-- @if ($row->status === 0)
                     <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button>
                     </td>
                     @else
@@ -61,7 +61,7 @@
                                             <i class="fas fa-trash"></i>
                                             Hapus</button>
                                     </form>
-                                @elseif($row->status == 0 && auth()->user()->role == 'kepala_perusahaan')
+                                @elseif($row->status === 0 && auth()->user()->role == 'kepala_perusahaan')
                                     {{-- <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
                         style="display: inline-block;">
                         @csrf

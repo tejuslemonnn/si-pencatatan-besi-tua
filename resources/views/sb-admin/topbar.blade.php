@@ -60,10 +60,12 @@
             if ($currentRouteName == 'data-kapal.rekapan') {
                 $indexRouteUrl = route('data-kapal.show', ['data_kapal' => $dataKapal->id]);
             }
+
+            $showCreateButton = $currentRouteName == 'history.index' ? false : $showCreateButton;
         }
     @endphp
     @if ($currentRouteName != 'dashboard')
-    @if ($showCreateButton && Auth::user()->role != "kepala_perusahaan")
+        @if ($showCreateButton && Auth::user()->role != 'kepala_perusahaan')
             <div class="mr-3">
 
                 <a href="{{ $createRouteUrl }}" class="btn bg-purple text-white">

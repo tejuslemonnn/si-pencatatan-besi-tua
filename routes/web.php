@@ -22,8 +22,10 @@ use App\Http\Controllers\BarangMasukBesiTuaController;
 use App\Http\Controllers\BarangKeluarBesiTuaController;
 use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\BarangKeluarBesiScrapController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\RekapanController;
+use App\Models\History;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/markasread/{id}', function ($id) {
         $notification = auth()->user()->unreadNotifications->find($id);
 
@@ -110,6 +113,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('barang-keluar-besi-scrap', BarangKeluarBesiScrapController::class);
     Route::get('/api/barang-keluar-besi-scrap/generatepdf/{id}', [BarangKeluarBesiScrapController::class, 'generatepdf'])->name('barang-keluar-besi-scrap.generatepdf');
+
+    Route::resource('/history', HistoryController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

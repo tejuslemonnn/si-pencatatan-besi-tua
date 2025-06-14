@@ -76,8 +76,8 @@
                             <td>{{ $row->deskripsi }}</td>
                             {{-- <td class=" color by status --}}
                             <td
-                                class="{{ $row->status === 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
-                                {{ $row->status === 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                                class="{{ $row->status == 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
+                                {{ $row->status == 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
                             </td>
                             <td>
                                 <a href="{{ route('surat-jalan.show', ['surat_jalan' => $row->id]) }}"
@@ -97,7 +97,7 @@
                                             Hapus</button>
                                     </form>
                                 @elseif(auth()->user()->role == 'kepala_perusahaan')
-                                    @if ($row->status === null || $row->status === 0)
+                                    @if ($row->status == null || $row->status === 0)
                                         <form action="{{ route('approve-surat-jalan', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf
@@ -105,7 +105,7 @@
                                             <button type="submit" class="btn btn-success">Approve</button>
                                         </form>
                                     @endif
-                                    @if ($row->status === null)
+                                    @if ($row->status == null)
                                         <form action="{{ route('reject-surat-jalan', ['id' => $row->id]) }}" method="POST"
                                             style="display: inline-block;">
                                             @csrf

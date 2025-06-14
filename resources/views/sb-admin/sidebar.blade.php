@@ -105,6 +105,13 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('history.*') ? 'text-purple' : '' }}"
+            href="{{ route('history.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('history.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Riwayat</span></a>
+    </li>
 
     <!-- Divider -->
     {{-- <hr class="sidebar-divider"> --}}

@@ -14,6 +14,7 @@ use App\Models\BarangKeluarBesiTua;
 use App\Http\Controllers\Controller;
 use App\Models\BarangMasukBesiScrap;
 use App\Models\BarangKeluarBesiScrap;
+use App\Models\History;
 use App\Models\Produk;
 
 // use Carbon\Carbon;
@@ -142,6 +143,9 @@ class DashboardController extends Controller
         $perusahaans = Perusahaan::all();
         $produks = Produk::all();
 
+        $historiesAll = History::get();
+        $histories = History::orderBy('id', 'asc')->paginate(10);
+
         return view('admin/dashboard', [
             'title' => 'Dashboard',
             'perusahaans' => $perusahaans,
@@ -154,6 +158,8 @@ class DashboardController extends Controller
             'barangMasukBesiScrapsByMonth' => $barangMasukBesiScrapsByMonth,
             'barangKeluarBesiScraps' => $barangKeluarBesiScraps,
             'barangKeluarBesiScrapsByMonth' => $barangKeluarBesiScrapsByMonth,
+            'historiesAll' => $historiesAll,
+            'histories' => $histories,
         ]);
     }
 }

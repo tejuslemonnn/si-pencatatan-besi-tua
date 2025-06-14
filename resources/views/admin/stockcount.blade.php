@@ -46,7 +46,7 @@
                     <td>{{ $row->schedule }}</td>
                     <td>{{ $row->expired }}</td>
                     <td>{{ $row->stockWarehouse->name }}</td>
-                    @if ($row->status == 0 && $row->expired != date('Y-m-d'))
+                    @if ($row->status === 0 && $row->expired != date('Y-m-d'))
                         <td>
                             <button type="submit" class="btn btn-warning text-white">
                                 Waitting Approval
@@ -61,16 +61,18 @@
                     @endif
 
                     <td>
-                        <a href="/view-stockcount/{{ $row->id }}" class="btn btn-info"><i class="fas fa-eye"></i> Detail</a>
+                        <a href="/view-stockcount/{{ $row->id }}" class="btn btn-info"><i class="fas fa-eye"></i>
+                            Detail</a>
                         @if (auth()->user()->role != 'admin_pengajuan' && $row->status != 1)
-                            <a href="/edit-stock/{{ $row->id }}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i> Ubah</a>
+                            <a href="/edit-stock/{{ $row->id }}" class="btn btn-primary"><i
+                                    class="fa-regular fa-pen-to-square"></i> Ubah</a>
                             <form action="/delete-stockcount/{{ $row->id }}" method="GET"
                                 style="display: inline-block">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i> Hapus</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i>
+                                    Hapus</button>
                             </form>
-                        @elseif($row->status == 0 && auth()->user()->role == "admin_pengajuan" && $row->expired !=
-                            date('Y-m-d'))
+                        @elseif($row->status === 0 && auth()->user()->role == 'admin_pengajuan' && $row->expired != date('Y-m-d'))
                             <form action="{{ route('approveStock', ['id' => $row->id]) }}" method="POST"
                                 style="display: inline-block;">
                                 @csrf

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('data_kapal_id')->references('id')->on('data_kapals')->onDelete('cascade');
             $table->unsignedBigInteger('surat_jalan_id');
             $table->foreign('surat_jalan_id')->references('id')->on('surat_jalans')->onDelete('cascade');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->string('kode');
             $table->date('tanggal');
             $table->integer('bruto_sb');

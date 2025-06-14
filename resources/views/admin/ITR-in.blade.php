@@ -80,7 +80,7 @@
                             {{ $row->destinationWarehouse->name }}
                         </td>
                         {{-- <td><button type="submit" class="btn btn-warning text-dark">Waitting Approval</button></td> --}}
-                        @if ($row->status == 0)
+                        @if ($row->status === 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button></td>
                         @else
                             <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
@@ -97,7 +97,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Hapus</button>
                                 </form>
-                            @elseif($row->status == 0 && auth()->user()->role == 'admin_pengajuan')
+                            @elseif($row->status === 0 && auth()->user()->role == 'admin_pengajuan')
                                 <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf

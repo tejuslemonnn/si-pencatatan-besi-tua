@@ -59,23 +59,27 @@
                         <td>
                             {{ $row->destinationWarehouse->name }}
                         </td>
-                        
-                        @if ($row->status == 0)
+
+                        @if ($row->status === 0)
                             <td><button type="submit" class="btn btn-warning text-white">Waitting Approval</button></td>
                         @else
                             <td><button type="submit" class="btn btn-success text-white">Approval</button></td>
                         @endif
                         <td>
-                            <a href="/view-ITR/{{ $row->id }}" class="btn btn-info"><i class="fas fa-eye"></i> Detail</a>
+                            <a href="/view-ITR/{{ $row->id }}" class="btn btn-info"><i class="fas fa-eye"></i>
+                                Detail</a>
 
                             @if (auth()->user()->role != 'admin_pengajuan' && $row->status != 1)
-                                <a href="/edit-ITR/{{ $row->id }}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i> Ubah</a>
-                                <form action="/delete-ITR/{{ $row->id }}" method="GET" style="display: inline-block;">
+                                <a href="/edit-ITR/{{ $row->id }}" class="btn btn-primary"><i
+                                        class="fa-regular fa-pen-to-square"></i> Ubah</a>
+                                <form action="/delete-ITR/{{ $row->id }}" method="GET"
+                                    style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i> Hapus</button>
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i>
+                                        Hapus</button>
                                 </form>
-                            @elseif($row->status == 0 && auth()->user()->role == 'admin_pengajuan')
+                            @elseif($row->status === 0 && auth()->user()->role == 'admin_pengajuan')
                                 <form action="{{ route('approveITR', ['id' => $row->id]) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf
