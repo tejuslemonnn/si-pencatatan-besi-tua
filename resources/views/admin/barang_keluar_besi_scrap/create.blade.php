@@ -31,7 +31,8 @@
                     $currentDate = Carbon::now()->format('Y/m/d');
                 @endphp
                 <span class="input-group-text" id="basic-addon1">BK-BS-{{ $currentDate }}-</span>
-                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ old('kode') }}">
+                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ $newKode }}"
+                    readonly>
             </div>
         </div>
 
@@ -59,7 +60,7 @@
             </select>
         </div>
 
-        <div class="form-group col-12">
+        {{-- <div class="form-group col-12">
             <label for="surat_jalan_id">Surat Jalan</label>
             <select name="surat_jalan_id" id="surat_jalan_id" class="form-control" required>
                 <option value="" selected>Select</option>
@@ -69,7 +70,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         <div class="form-group col-12">
             <label for="tanggal">Tanggal</label>

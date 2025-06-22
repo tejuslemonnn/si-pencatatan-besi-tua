@@ -9,6 +9,22 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger mt-3">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger mt-3">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="row my-2">
         <div class="col-md-2 col-12">
             <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
@@ -59,8 +75,19 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->kode }}</td>
                             <td>{{ $row->dataKapal->nama_kapal }}</td>
-                            <td>{{ $row->suratJalan->no_surat }}</td>
-                            <td>{{ $row->suratJalan->kendaraan->model }} - {{ $row->suratJalan->kendaraan->nomor_plat }}
+                            <td>
+                                @if ($row->suratJalan != null)
+                                    {{ $row->suratJalan->no_surat }}
+                                @else
+                                    <span class="text-danger">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($row->suratJalan != null)
+                                    {{ $row->suratJalan->kendaraan->model }} - {{ $row->suratJalan->kendaraan->nomor_plat }}
+                                @else
+                                    <span class="text-danger">-</span>
+                                @endif
                             </td>
                             <td>{{ $row->tanggal }}</td>
                             <td>{{ $row->bruto_sb }}</td>
@@ -75,8 +102,8 @@
                             <td>Rp. {{ number_format($row->jumlah_harga, 0, ',', '.') }}</td>
                             <td>{{ $row->perusahaan->nama }}</td>
                             <td
-                                class="{{ $row->status == 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
-                                {{ $row->status == 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                                class="{{ $row->status == 1 ? 'text-success' : ($row->status == null ? 'text-warning' : 'text-danger') }} font-weight-bold">
+                                {{ $row->status == 1 ? 'Disetujui' : ($row->status == null ? 'Menunggu Persetujuan' : 'Tidak Disetujui') }}
                             </td>
                             <td>
                                 <a href="{{ route('barang-keluar-besi-scrap.show', ['barang_keluar_besi_scrap' => $row->id]) }}"
@@ -97,7 +124,7 @@
                                             Hapus</button>
                                     </form>
                                 @elseif(auth()->user()->role == 'kepala_perusahaan')
-                                    @if ($row->status == null || $row->status === 0)
+                                    @if ($row->status != true)
                                         <form action="{{ route('approve-barang-keluar-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf
@@ -105,7 +132,7 @@
                                             <button type="submit" class="btn btn-success">Approve</button>
                                         </form>
                                     @endif
-                                    @if ($row->status == null)
+                                    @if ($row->status === null)
                                         <form action="{{ route('reject-barang-keluar-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf

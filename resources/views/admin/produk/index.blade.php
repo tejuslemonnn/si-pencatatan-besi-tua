@@ -11,14 +11,14 @@
 
     <div class="row my-2">
         <!-- <div class="col-md-2 col-12">
-                        <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="min" name="min">
-                    </div>
+                                        <label for="from_date">Tanggal Mulai<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="min" name="min">
+                                    </div>
 
-                    <div class="col-md-2 col-12 mb-4">
-                        <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="max" name="max">
-                    </div> -->
+                                    <div class="col-md-2 col-12 mb-4">
+                                        <label for="to_date">Tanggal Selesai<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="max" name="max">
+                                    </div> -->
 
         <table id="example" class="table table-bordered display nowrap">
             <thead>
@@ -26,7 +26,7 @@
                     <th>No</th>
                     <th>Kode</th>
                     <th>Nama</th>
-                    <th>Harga</th>
+                    <th>Harga (per kg)</th>
                     {{-- <th>Kategori</th> --}}
                     {{-- <th>Berat</th> --}}
                     <th>Jumlah</th>

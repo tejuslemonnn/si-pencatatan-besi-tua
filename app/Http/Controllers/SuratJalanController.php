@@ -40,10 +40,17 @@ class SuratJalanController extends Controller
      */
     public function create()
     {
-        $barangKeluarBesiTuas = BarangKeluarBesiTua::all();
-        $barangKeluarBesiScraps = BarangKeluarBesiScrap::all();
+        $barangKeluarBesiTuas = BarangKeluarBesiTua::whereNull('surat_jalan_id')->where('status', 1)->get();
+        $barangKeluarBesiScraps = BarangKeluarBesiScrap::whereNull('surat_jalan_id')->where('status', 1)->get();
         $kendaraans = Kendaraan::all();
         $perusahaans = Perusahaan::all();
+
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $lastEntry = SuratJalan::where('no_surat', 'like', 'SJ-' . $currentDate . '-%')
+            ->orderBy('no_surat', 'desc')
+            ->first();
+        $lastNumber = $lastEntry ? (int)explode('-', $lastEntry->no_surat)[2] : 0;
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
 
         return view('admin.surat-jalan.create', [
             'title' => 'Tambah Data Barang Keluar Besi Tua',
@@ -52,6 +59,7 @@ class SuratJalanController extends Controller
             'barangKeluarBesiScraps' => $barangKeluarBesiScraps,
             'kendaraans' => $kendaraans,
             'perusahaans' => $perusahaans,
+            'newKode' => $newNumber,
         ]);
     }
 
@@ -63,15 +71,20 @@ class SuratJalanController extends Controller
         $currentDate = Carbon::now()->format('Y/m/d');
         $request->no_surat = 'SJ-' . $currentDate . '-' . $request->no_surat;
 
+        $request->merge([
+            'barang_keluar_besi_tua_id_or_scrap_id' => $request->barang_keluar_besi_tua_id || $request->barang_keluar_besi_scrap_id ? true : null,
+        ]);
 
         $request->validate([
             'tanggal_surat' => 'required|date',
             'kendaraan_id' => 'required|exists:kendaraans,id',
             'barang_keluar_besi_tua_id' => 'nullable|exists:barang_keluar_besi_tuas,id',
             'barang_keluar_besi_scrap_id' => 'nullable|exists:barang_keluar_besi_scraps,id',
-            // 'penerima' => 'required|string|max:255',
+            'barang_keluar_besi_tua_id_or_scrap_id' => 'required_without_all:barang_keluar_besi_tua_id,barang_keluar_besi_scrap_id',
             'perusahaan_id' => 'required|exists:perusahaans,id',
             'deskripsi' => 'nullable|string',
+        ], [
+            'barang_keluar_besi_tua_id_or_scrap_id.required_without_all' => 'Wajib memilih barang keluar besi tua atau scrap.',
         ]);
 
 
@@ -95,6 +108,18 @@ class SuratJalanController extends Controller
             'deskripsi' => $request->deskripsi,
             'status' => null,
         ]);
+
+        // Update barang keluar besi tua jika ada
+        if ($request->barang_keluar_besi_tua_id) {
+            $barangKeluarBesiTua = BarangKeluarBesiTua::findOrFail($request->barang_keluar_besi_tua_id);
+            $barangKeluarBesiTua->update(['surat_jalan_id' => SuratJalan::latest()->first()->id]);
+        }
+
+        // Update barang keluar besi scrap jika ada
+        if ($request->barang_keluar_besi_scrap_id) {
+            $barangKeluarBesiScrap = BarangKeluarBesiScrap::findOrFail($request->barang_keluar_besi_scrap_id);
+            $barangKeluarBesiScrap->update(['surat_jalan_id' => SuratJalan::latest()->first()->id]);
+        }
 
         return redirect()->route('surat-jalan.index')->with('success', 'Data Surat Jalan berhasil ditambahkan.');
     }
@@ -158,30 +183,30 @@ class SuratJalanController extends Controller
 
         $data = SuratJalan::findOrFail($id);
 
-        $noSurat = $data->no_surat;
-        $noSuratPrefix = '';
-        $noSuratSuffix = '';
+        // $noSurat = $data->no_surat;
+        // $noSuratPrefix = '';
+        // $noSuratSuffix = '';
 
-        if (preg_match('/^(.*?)-(\d+)$/', $noSurat, $matches)) {
-            $noSuratPrefix = $matches[1];
-            $noSuratSuffix = $matches[2];
-        }
+        // if (preg_match('/^(.*?)-(\d+)$/', $noSurat, $matches)) {
+        //     $noSuratPrefix = $matches[1];
+        //     $noSuratSuffix = $matches[2];
+        // }
 
-        $newNoSurat = $noSuratPrefix . '-' . $request->no_surat;
+        // $newNoSurat = $noSuratPrefix . '-' . $request->no_surat;
 
-        $isDuplicate = DB::table('surat_jalans')
-            ->where('no_surat', $newNoSurat)
-            ->where('id', '!=', $id) // Abaikan jika ID sama
-            ->exists();
+        // $isDuplicate = DB::table('surat_jalans')
+        //     ->where('no_surat', $newNoSurat)
+        //     ->where('id', '!=', $id) // Abaikan jika ID sama
+        //     ->exists();
 
-        if ($isDuplicate) {
-            return back()->withErrors(['no_surat' => 'Nomor surat sudah ada.']);
-        }
+        // if ($isDuplicate) {
+        //     return back()->withErrors(['no_surat' => 'Nomor surat sudah ada.']);
+        // }
 
         $data = SuratJalan::findOrFail($id);
 
         $data->update([
-            'no_surat' => $newNoSurat,
+            // 'no_surat' => $newNoSurat,
             'tanggal_surat' => $request->tanggal_surat,
             'kendaraan_id' => $request->kendaraan_id,
             'barang_keluar_besi_tua_id' => $request->barang_keluar_besi_tua_id,

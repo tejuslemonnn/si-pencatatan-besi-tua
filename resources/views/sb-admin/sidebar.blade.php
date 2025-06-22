@@ -37,6 +37,14 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('stock-scrap.*') ? 'text-purple' : '' }}"
+            href="{{ route('stock-scrap.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('stock-scrap.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Stok Scrap</span></a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('perusahaan.*') ? 'text-purple' : '' }}"
             href="{{ route('perusahaan.index') }}">
             {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
@@ -60,8 +68,24 @@
             <span class="font-weight-bold">Surat Jalan</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('barang-masuk.*') ? 'text-purple' : '' }}"
+            href="{{ route('barang-masuk.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('barang-masuk.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Barang Masuk</span></a>
+    </li>
+
 
     <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('barang-keluar.*') ? 'text-purple' : '' }}"
+            href="{{ route('barang-keluar.index') }}">
+            {{-- <i class="fa-duotone fa-solid fa-gauge"></i> --}}
+            <i class="fa-solid fa-box {{ request()->routeIs('barang-keluar.*') ? 'text-purple' : '' }}"></i>
+            <span class="font-weight-bold">Barang Keluar</span></a>
+    </li>
+
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed {{ request()->routeIs('barang-masuk-besi-tua.*') || request()->routeIs('barang-masuk-besi-scrap.*') ? 'text-purple' : '' }}"
             href="#" data-toggle="collapse" data-target="#collapseBarangMasuk" aria-expanded="true"
             aria-controls="collapseBarangMasuk">
@@ -81,9 +105,9 @@
                     href="{{ route('barang-masuk-besi-scrap.index') }}">Besi Scrap</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed {{ request()->routeIs('barang-keluar-besi-tua.*') || request()->routeIs('barang-keluar-besi-scrap.*') ? 'text-purple' : '' }}"
             href="#" data-toggle="collapse" data-target="#collapseBarangKeluar" aria-expanded="true"
             aria-controls="collapseBarangKeluar">
@@ -103,7 +127,7 @@
                     href="{{ route('barang-keluar-besi-scrap.index') }}">Besi Scrap</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('history.*') ? 'text-purple' : '' }}"

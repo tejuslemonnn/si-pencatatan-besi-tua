@@ -67,8 +67,8 @@
                             <td>{{ $row->netto_bersih }}</td>
                             <td>{{ $row->perusahaan->nama }}</td>
                             <td
-                                class="{{ $row->status == 1 ? 'text-success' : ($row->status === 0 ? 'text-danger' : 'text-warning') }} font-weight-bold">
-                                {{ $row->status == 1 ? 'Disetujui' : ($row->status === 0 ? 'Tidak Disetujui' : 'Menunggu Persetujuan') }}
+                                class="{{ $row->status == 1 ? 'text-success' : ($row->status == null ? 'text-warning' : 'text-danger') }} font-weight-bold">
+                                {{ $row->status == 1 ? 'Disetujui' : ($row->status == null ? 'Menunggu Persetujuan' : 'Tidak Disetujui') }}
                             </td>
                             <td>
                                 <a href="{{ route('barang-masuk-besi-scrap.show', ['barang_masuk_besi_scrap' => $row->id]) }}"
@@ -89,7 +89,7 @@
                                             Hapus</button>
                                     </form>
                                 @elseif(auth()->user()->role == 'kepala_perusahaan')
-                                    @if ($row->status == null || $row->status === 0)
+                                    @if ($row->status != true)
                                         <form action="{{ route('approve-barang-masuk-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf
@@ -97,7 +97,7 @@
                                             <button type="submit" class="btn btn-success">Approve</button>
                                         </form>
                                     @endif
-                                    @if ($row->status == null)
+                                    @if ($row->status === null)
                                         <form action="{{ route('reject-barang-masuk-besi-scrap', ['id' => $row->id]) }}"
                                             method="POST" style="display: inline-block;">
                                             @csrf

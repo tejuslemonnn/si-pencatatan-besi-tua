@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DOController;
 use App\Http\Controllers\ITRController;
 use App\Http\Controllers\AuthController;
@@ -11,21 +12,23 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExpiredController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RekapanController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataKapalController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\StockCountController;
+use App\Http\Controllers\StockScrapController;
 use App\Http\Controllers\SuratJalanController;
+use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangMasukBesiTuaController;
 use App\Http\Controllers\BarangKeluarBesiTuaController;
 use App\Http\Controllers\BarangMasukBesiScrapController;
 use App\Http\Controllers\BarangKeluarBesiScrapController;
-use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\PerusahaanController;
-use App\Http\Controllers\RekapanController;
-use App\Models\History;
+use App\Http\Controllers\BarangKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/barang-masuk-besi-tua/total-jumlah', [BarangMasukBesiTuaController::class, 'getTotalJumlah'])->name('barang-masuk-besi-tua.total-jumlah');
     Route::get('/api/barang-masuk-besi-tua/generatepdf/{id}', [BarangMasukBesiTuaController::class, 'generatepdf'])->name('barang-masuk-besi-tua.generatepdf');
 
+    Route::resource('barang-masuk', BarangMasukController::class);
+    Route::resource('barang-keluar', BarangKeluarController::class);
+
+
 
     Route::resource('barang-masuk-besi-scrap', BarangMasukBesiScrapController::class);
     Route::get('/api/barang-masuk-besi-scrap/generatepdf/{id}', [BarangMasukBesiScrapController::class, 'generatepdf'])->name('barang-masuk-besi-scrap.generatepdf');
@@ -106,6 +113,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('perusahaan', PerusahaanController::class);
 
     Route::resource('surat-jalan', SuratJalanController::class);
+    Route::resource('stock-scrap', StockScrapController::class);
 
 
     Route::resource('barang-keluar-besi-tua', BarangKeluarBesiTuaController::class);

@@ -40,7 +40,7 @@
                 @endphp
                 <span class="input-group-text" id="basic-addon1">{{ $kodePrefix }}</span>
                 <input type="text" name="kode" class="form-control" placeholder="Kode"
-                    value="{{ $kodeSuffix ?? old('kode') }}" id="kode">
+                    value="{{ $kodeSuffix ?? old('kode') }}" id="kode" readonly>
             </div>
         </div>
 
@@ -56,7 +56,7 @@
             </select>
         </div>
 
-        <div class="form-group col-12">
+        {{-- <div class="form-group col-12">
             <label for="surat_jalan_id">Surat Jalan</label>
             <select name="surat_jalan_id" id="surat_jalan_id" class="form-control" required>
                 <option value="" selected>Select</option>
@@ -67,7 +67,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         <div class="form-group col-12">
             <label for="tanggal">Tanggal</label>

@@ -45,6 +45,13 @@ class BarangKeluarBesiTuaController extends Controller
         $products = Produk::get();
         $dataKapals = DataKapal::get();
 
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $lastEntry = BarangKeluarBesiTua::where('kode', 'like', 'BK-BT-' . $currentDate . '-%')
+            ->orderBy('kode', 'desc')
+            ->first();
+        $lastNumber = $lastEntry ? (int)explode('-', $lastEntry->kode)[3] : 0;
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+
         return view('admin.barang_keluar_besi_tua.create', [
             'title' => 'Tambah Data Barang Keluar Besi Tua',
             'icon' => 'fa-solid fa-box',
@@ -52,7 +59,8 @@ class BarangKeluarBesiTuaController extends Controller
             'suratJalans' => $suratJalans,
             'perusahaans' => $perusahaans,
             'products' => $products,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'newKode' => $newNumber
         ]);
     }
 
@@ -67,7 +75,7 @@ class BarangKeluarBesiTuaController extends Controller
         $request->validate([
             'tanggal' => 'required|date',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'surat_jalan_id' => 'required|exists:surat_jalans,id',
+            // 'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
@@ -89,7 +97,7 @@ class BarangKeluarBesiTuaController extends Controller
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
             'data_kapal_id' => $request->data_kapal_id,
-            'surat_jalan_id' => $request->surat_jalan_id,
+            // 'surat_jalan_id' => $request->surat_jalan_id,
             'created_by' => auth()->user()->id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
@@ -102,9 +110,9 @@ class BarangKeluarBesiTuaController extends Controller
             'perusahaan_id' => $request->perusahaan_id,
         ]);
 
-        SuratJalan::where('id', $request->surat_jalan_id)->update([
-            'barang_keluar_besi_tua_id' => $barangKeluarBesiTua->id
-        ]);
+        // SuratJalan::where('id', $request->surat_jalan_id)->update([
+        //     'barang_keluar_besi_tua_id' => $barangKeluarBesiTua->id
+        // ]);
 
 
 
@@ -167,7 +175,7 @@ class BarangKeluarBesiTuaController extends Controller
             'tanggal' => 'required|date',
             // 'kendaraan_id' => 'required|exists:kendaraans,id',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'surat_jalan_id' => 'required|exists:surat_jalans,id',
+            // 'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto' => 'required|integer',
             'tara' => 'required|integer',
             'netto' => 'required|integer',
@@ -179,28 +187,28 @@ class BarangKeluarBesiTuaController extends Controller
             'perusahaan_id' => 'required|exists:perusahaans,id',
         ]);
 
-        $kode = $barangKeluarBesiTua->kode;
-        $kodePrefix = '';
-        $kodeSuffix = '';
+        // $kode = $barangKeluarBesiTua->kode;
+        // $kodePrefix = '';
+        // $kodeSuffix = '';
 
-        // Gunakan regex untuk memisahkan prefix dan suffix
-        if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
-            $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
-            $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
-        }
+        // // Gunakan regex untuk memisahkan prefix dan suffix
+        // if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+        //     $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+        //     $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+        // }
 
-        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
+        // $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
         SuratJalan::where('id', $barangKeluarBesiTua->surat_jalan_id)->update([
             'barang_keluar_besi_tua_id' => null
         ]);
 
         $barangKeluarBesiTua->update([
-            'kode' => $request->kode,
+            // 'kode' => $request->kode,
             'tanggal' => $request->tanggal,
             // 'kendaraan_id' => $request->kendaraan_id,'
             'data_kapal_id' => $request->data_kapal_id,
-            'surat_jalan_id' => $request->surat_jalan_id,
+            // 'surat_jalan_id' => $request->surat_jalan_id,
             'bruto' => $request->bruto,
             'tara' => $request->tara,
             'netto' => $request->netto,
@@ -245,6 +253,12 @@ class BarangKeluarBesiTuaController extends Controller
     public function approveBarangKeluarBesiTua(string $id)
     {
         $data = BarangKeluarBesiTua::findOrFail($id);
+        $produk = Produk::findOrFail($data->produk_id);
+
+        if ($produk->qty - $data->netto < 0) {
+            return redirect()->route('barang-keluar-besi-tua.index')->with('error', 'Jumlah barang tidak mencukupi untuk disetujui.');
+        }
+
         $data->update([
             'status' => true,
         ]);
@@ -253,6 +267,8 @@ class BarangKeluarBesiTuaController extends Controller
             'created_by' => $data->created_by,
             'barang_keluar_besi_tuas' => $data->id
         ]);
+
+        $produk->decrement('qty', $data->netto);
 
         return redirect()->route('barang-keluar-besi-tua.index')->with('success', 'Data Barang Keluar Besi Tua berhasil disetujui.');
     }

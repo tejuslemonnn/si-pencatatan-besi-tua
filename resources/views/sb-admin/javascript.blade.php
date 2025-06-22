@@ -31,4 +31,13 @@
     new DataTable('#barang_masuk_besi_tua_table', {
         // 'bSort': false
     });
+    new DataTable('#barang_masuk_besi_scrap_table', {
+        // 'bSort': false
+    });
+    new DataTable('#barang_keluar_besi_tua_table', {
+        // 'bSort': false
+    });
+    new DataTable('#barang_keluar_besi_scrap_table', {
+        // 'bSort': false
+    });
 </script>

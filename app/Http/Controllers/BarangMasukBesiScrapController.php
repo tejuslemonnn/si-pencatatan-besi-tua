@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;
-
 use App\Models\Produk;
+
 use App\Models\DataKapal;
 use App\Models\Perusahaan;
+use App\Models\StockScrap;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
-use App\Models\BarangKeluarBesiScrap;
 use App\Models\BarangMasukBesiScrap;
+use App\Models\BarangKeluarBesiScrap;
 
 class BarangMasukBesiScrapController extends Controller
 {
@@ -38,12 +39,20 @@ class BarangMasukBesiScrapController extends Controller
         $dataKapals = DataKapal::orderBy('nama_kapal', 'ASC')->get();
         $perusahaans = Perusahaan::orderBy('nama', 'ASC')->get();
 
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $lastEntry = BarangMasukBesiScrap::where('kode', 'like', 'BM-BS-' . $currentDate . '-%')
+            ->orderBy('kode', 'desc')
+            ->first();
+        $lastNumber = $lastEntry ? (int)explode('-', $lastEntry->kode)[3] : 0;
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+
         return view('admin.barang_masuk_besi_scrap.create', [
             'title' => 'Tambah Data Barang Masuk Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'products' => $products,
             'dataKapals' => $dataKapals,
-            'perusahaans' => $perusahaans
+            'perusahaans' => $perusahaans,
+            'newKode' => $newNumber
         ]);
     }
 
@@ -53,7 +62,14 @@ class BarangMasukBesiScrapController extends Controller
     public function store(Request $request)
     {
         $currentDate = Carbon::now()->format('Y/m/d');
-        $request->merge(['kode' => 'BM-BS-' . $currentDate . '-' . $request->kode]);
+        $lastEntry = BarangMasukBesiScrap::where('kode', 'like', 'BM-BT-' . $currentDate . '-%')
+            ->orderBy('kode', 'desc')
+            ->first();
+
+        $lastNumber = $lastEntry ? (int)explode('-', $lastEntry->kode)[3] : 0;
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+
+        $request->merge(['kode' => 'BM-BT-' . $currentDate . '-' . $newNumber]);
 
         $data = $request->validate([
             'data_kapal_id' => 'required|exists:data_kapals,id',
@@ -150,17 +166,17 @@ class BarangMasukBesiScrapController extends Controller
 
         $data = BarangMasukBesiScrap::findOrFail($barangMasukBesiScrap->id);
 
-        $kode = $data->kode;
-        $kodePrefix = '';
-        $kodeSuffix = '';
+        // $kode = $data->kode;
+        // $kodePrefix = '';
+        // $kodeSuffix = '';
 
-        // Gunakan regex untuk memisahkan prefix dan suffix
-        if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
-            $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
-            $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
-        }
+        // // Gunakan regex untuk memisahkan prefix dan suffix
+        // if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+        //     $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+        //     $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+        // }
 
-        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
+        // $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
         $isDuplicate = BarangMasukBesiScrap::where('kode', $request->kode)->where('id', '!=', $barangMasukBesiScrap->id)->exists();
 
@@ -212,6 +228,11 @@ class BarangMasukBesiScrapController extends Controller
         $data->update([
             'status' => true,
         ]);
+
+        $stockScrap = StockScrap::findOrFail(1);
+        $stockScrap->increment('netto_total', $data->netto_bersih);
+        $stockScrap->increment('sb_total', $data->netto_sb);
+        $stockScrap->increment('pabrik_total', $data->netto_pabrik);
 
         return redirect()->route('barang-masuk-besi-scrap.index')->with('success', 'Data Barang Masuk Besi Tua berhasil disetujui.');
     }

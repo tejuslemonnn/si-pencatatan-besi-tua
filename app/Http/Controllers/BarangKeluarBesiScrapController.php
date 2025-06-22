@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Produk;
 use App\Models\History;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\DataKapal;
 use App\Models\Kendaraan;
 use App\Models\Perusahaan;
+use App\Models\StockScrap;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
-use App\Models\BarangMasukBesiScrap;
 use App\Models\BarangKeluarBesiScrap;
 
 class BarangKeluarBesiScrapController extends Controller
@@ -43,13 +44,21 @@ class BarangKeluarBesiScrapController extends Controller
         $perusahaans = Perusahaan::get();
         $dataKapals = DataKapal::get();
 
+        $currentDate = Carbon::now()->format('Y/m/d');
+        $lastEntry = BarangKeluarBesiScrap::where('kode', 'like', 'BK-BS-' . $currentDate . '-%')
+            ->orderBy('kode', 'desc')
+            ->first();
+        $lastNumber = $lastEntry ? (int)explode('-', $lastEntry->kode)[3] : 0;
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+
         return view('admin.barang_keluar_besi_scrap.create', [
             'title' => 'Tambah Data Barang Keluar Besi Scrap',
             'icon' => 'fa-solid fa-box',
             'kendaraans' => $kendaraans,
             'suratJalans' => $suratJalans,
             'perusahaans' => $perusahaans,
-            'dataKapals' => $dataKapals
+            'dataKapals' => $dataKapals,
+            'newKode' => $newNumber
         ]);
     }
 
@@ -62,7 +71,7 @@ class BarangKeluarBesiScrapController extends Controller
             'kode' => 'required',
             'tanggal' => 'required|date',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'surat_jalan_id' => 'required|exists:surat_jalans,id',
+            // 'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',
             'netto_sb' => 'required|integer',
@@ -84,14 +93,16 @@ class BarangKeluarBesiScrapController extends Controller
         if ($isDuplicate) {
             return redirect()->back()->with('error', 'Kode sudah digunakan');
         }
-        
+
         $request->merge(['created_by' => auth()->user()->id]);
 
         $BarangKeluarBesiScrap = BarangKeluarBesiScrap::create($request->all());
 
-        SuratJalan::where('id', $request->surat_jalan_id)->update([
-            'barang_keluar_besi_scrap_id' => BarangKeluarBesiScrap::latest()->first()->id
-        ]);
+
+
+        // SuratJalan::where('id', $request->surat_jalan_id)->update([
+        //     'barang_keluar_besi_scrap_id' => BarangKeluarBesiScrap::latest()->first()->id
+        // ]);
 
 
 
@@ -145,10 +156,9 @@ class BarangKeluarBesiScrapController extends Controller
     public function update(Request $request, BarangKeluarBesiScrap $barangKeluarBesiScrap)
     {
         $request->validate([
-            'kode' => 'required',
             'tanggal' => 'required|date',
             'data_kapal_id' => 'required|exists:data_kapals,id',
-            'surat_jalan_id' => 'required|exists:surat_jalans,id',
+            // 'surat_jalan_id' => 'required|exists:surat_jalans,id',
             'bruto_sb' => 'required|integer',
             'tara_sb' => 'required|integer',
             'netto_sb' => 'required|integer',
@@ -163,27 +173,43 @@ class BarangKeluarBesiScrapController extends Controller
             'perusahaan_id' => 'required'
         ]);
 
-        $kode = $barangKeluarBesiScrap->kode;
-        $kodePrefix = '';
-        $kodeSuffix = '';
+        // $kode = $barangKeluarBesiScrap->kode;
+        // $kodePrefix = '';
+        // $kodeSuffix = '';
 
-        // Gunakan regex untuk memisahkan prefix dan suffix
-        if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
-            $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
-            $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
-        }
+        // // Gunakan regex untuk memisahkan prefix dan suffix
+        // if (preg_match('/^(.*?)-(\d+)$/', $kode, $matches)) {
+        //     $kodePrefix = $matches[1]; // Ambil bagian sebelum '-'
+        //     $kodeSuffix = $matches[2]; // Ambil angka setelah '-'
+        // }
 
-        $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
+        // $request->merge(['kode' => $kodePrefix . '-' . $request->kode]);
 
-        SuratJalan::where('id', $barangKeluarBesiScrap->surat_jalan_id)->update([
-            'barang_keluar_besi_scrap_id' => null
+        // SuratJalan::where('id', $barangKeluarBesiScrap->surat_jalan_id)->update([
+        //     'barang_keluar_besi_scrap_id' => null
+        // ]);
+
+        $barangKeluarBesiScrap->update([
+            'tanggal' => $request->tanggal,
+            'data_kapal_id' => $request->data_kapal_id,
+            // 'surat_jalan_id' => $request->surat_jalan_id,
+            'bruto_sb' => $request->bruto_sb,
+            'tara_sb' => $request->tara_sb,
+            'netto_sb' => $request->netto_sb,
+            'bruto_pabrik' => $request->bruto_pabrik,
+            'tara_pabrik' => $request->tara_pabrik,
+            'netto_pabrik' => $request->netto_pabrik,
+            'pot' => $request->pot,
+            'netto_bersih' => $request->netto_bersih,
+            'harga' => $request->harga,
+            'jumlah_harga' => $request->jumlah_harga,
+            // 'pesanan_dari' => $request->pesanan_dari
+            'perusahaan_id' => $request->perusahaan_id
         ]);
 
-        $barangKeluarBesiScrap->update($request->all());
-
-        SuratJalan::where('id', $request->surat_jalan_id)->update([
-            'barang_keluar_besi_scrap_id' => $barangKeluarBesiScrap->id
-        ]);
+        // SuratJalan::where('id', $request->surat_jalan_id)->update([
+        //     'barang_keluar_besi_scrap_id' => $barangKeluarBesiScrap->id
+        // ]);
 
 
         return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data berhasil diubah');
@@ -215,6 +241,16 @@ class BarangKeluarBesiScrapController extends Controller
     public function approveBarangKeluarBesiScrap(string $id)
     {
         $data = BarangKeluarBesiScrap::findOrFail($id);
+        $stockScrap = StockScrap::findOrFail(1);
+
+        if (
+            $stockScrap->netto_total < $data->netto_bersih ||
+            $stockScrap->sb_total < $data->netto_sb ||
+            $stockScrap->pabrik_total < $data->netto_pabrik
+        ) {
+            return redirect()->route('barang-keluar-besi-scrap.index')->with('error', 'Stock tidak mencukupi untuk barang keluar.');
+        }
+
         $data->update([
             'status' => true,
         ]);
@@ -224,7 +260,11 @@ class BarangKeluarBesiScrapController extends Controller
             'barang_keluar_besi_scraps' => $data->id
         ]);
 
-        return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data Barang Keluar Besi Scrap berhasil disetujui.');
+        $stockScrap->decrement('netto_total', $data->netto_bersih);
+        $stockScrap->decrement('sb_total', $data->netto_sb);
+        $stockScrap->decrement('pabrik_total', $data->netto_pabrik);
+
+        return redirect()->route('barang-keluar-besi-scrap.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function rejectBarangKeluarBesiScrap(string $id)

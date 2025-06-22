@@ -53,7 +53,7 @@
                 @endphp
                 <span class="input-group-text" id="basic-addon1">{{ $no_suratPrefix }}</span>
                 <input type="text" name="no_surat" class="form-control" placeholder="No Surat"
-                    value="{{ $no_suratSuffix ?? old('no_surat') }}" id="kode">
+                    value="{{ $no_suratSuffix ?? old('no_surat') }}" id="kode" readonly>
             </div>
         </div>
 
@@ -103,6 +103,41 @@
             </select>
         </div> --}}
 
+        <div class="form-group col-12">
+            <label for="barang_keluar_type">Tipe Barang Keluar</label>
+            <select name="barang_keluar_type" id="barang_keluar_type" class="form-control" required>
+                <option value="" selected>Select</option>
+                <option value="besi_tua">Besi Tua</option>
+                <option value="besi_scrap">Besi Scrap</option>
+            </select>
+        </div>
+
+        <div class="form-group col-12" id="barang_keluar_besi_tua_container" style="display: none;">
+            <label for="barang_keluar_besi_tua_id">Barang Keluar Besi Tua</label>
+            <select name="barang_keluar_besi_tua_id" id="barang_keluar_besi_tua_id" class="form-control">
+                <option value="" selected>Select</option>
+                @foreach ($barangKeluarBesiTuas as $barangKeluarBesiTua)
+                    <option value="{{ $barangKeluarBesiTua->id }}"
+                        {{ old('barang_keluar_besi_tua_id') == $barangKeluarBesiTua->id ? 'selected' : '' }}>
+                        {{ $barangKeluarBesiTua->kode }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group col-12" id="barang_keluar_besi_scrap_container" style="display: none;">
+            <label for="barang_keluar_besi_scrap_id">Barang Keluar Besi Scrap</label>
+            <select name="barang_keluar_besi_scrap_id" id="barang_keluar_besi_scrap_id" class="form-control">
+                <option value="" selected>Select</option>
+                @foreach ($barangKeluarBesiScraps as $barangKeluarBesiScrap)
+                    <option value="{{ $barangKeluarBesiScrap->id }}"
+                        {{ old('barang_keluar_besi_scrap_id') == $barangKeluarBesiScrap->id ? 'selected' : '' }}>
+                        {{ $barangKeluarBesiScrap->kode }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="from-group col-12 my-2">
             {{-- <label for="penerima">Penerima</label>
             <div class="input-group">
@@ -148,6 +183,45 @@
                 width: '100%',
             });
 
+            const barangKeluarBesiScrap =
+                {{ $data->barang_keluar_besi_scrap_id ? json_encode($data->barang_keluar_besi_scrap_id) : 'null' }};
+
+            const barangKeluarBesiTua =
+                {{ $data->barang_keluar_besi_tua_id ? json_encode($data->barang_keluar_besi_tua_id) : 'null' }};
+
+            if (barangKeluarBesiScrap) {
+                $('#barang_keluar_type').val('besi_scrap').trigger('change');
+                $('#barang_keluar_besi_scrap_container').show();
+                $('#barang_keluar_besi_tua_container').hide();
+                $('#barang_keluar_besi_scrap_id').val(barangKeluarBesiScrap).trigger('change');
+            } else if (barangKeluarBesiTua) {
+                $('#barang_keluar_type').val('besi_tua').trigger('change');
+                $('#barang_keluar_besi_tua_container').show();
+                $('#barang_keluar_besi_scrap_container').hide();
+                $('#barang_keluar_besi_tua_id').val(barangKeluarBesiTua).trigger('change');
+            } else {
+                $('#barang_keluar_type').val('').trigger('change');
+            }
+
+            $('#barang_keluar_type').on('change', function() {
+                const selectedType = $(this).val();
+                if (selectedType === 'besi_tua') {
+                    $('#barang_keluar_besi_tua_container').show();
+                    $('#barang_keluar_besi_scrap_container').hide();
+                    $('#barang_keluar_besi_scrap_id').val(null).trigger('change');
+                    $('#barang_keluar_besi_tua_id').val(barangKeluarBesiTua ? barangKeluarBesiTua : null)
+                        .trigger('change');
+                } else if (selectedType === 'besi_scrap') {
+                    $('#barang_keluar_besi_scrap_container').show();
+                    $('#barang_keluar_besi_tua_container').hide();
+                    $('#barang_keluar_besi_tua_id').val().trigger('change');
+                    $('#barang_keluar_besi_scrap_id').val(barangKeluarBesiScrap ? barangKeluarBesiScrap :
+                        null).trigger('change');
+                } else {
+                    $('#barang_keluar_besi_tua_container').hide();
+                    $('#barang_keluar_besi_scrap_container').hide();
+                }
+            });
         });
     </script>
 @endsection

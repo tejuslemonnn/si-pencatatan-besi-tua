@@ -36,15 +36,21 @@
                 Str::endsWith($currentRouteName, '.index-besi-scrap');
 
             $showBack =
-                Str::endsWith($currentRouteName, '.create') ||
-                Str::endsWith($currentRouteName, '.show') ||
-                Str::endsWith($currentRouteName, '.edit') ||
-                Str::endsWith($currentRouteName, '.rekapan');
+                (Str::endsWith($currentRouteName, '.create') ||
+                    Str::endsWith($currentRouteName, '.show') ||
+                    Str::endsWith($currentRouteName, '.edit') ||
+                    Str::endsWith($currentRouteName, '.rekapan')) &&
+                !in_array($currentRouteName, ['barang-masuk.create', 'barang-keluar.create']);
             $showSubmitButton =
-                Str::endsWith($currentRouteName, '.create') || Str::endsWith($currentRouteName, '.edit');
+                (Str::endsWith($currentRouteName, '.create') || Str::endsWith($currentRouteName, '.edit')) &&
+                !in_array($currentRouteName, ['barang-masuk.create', 'barang-keluar.create']);
 
             // If not ".index", create variable for back to ".index"
-            $indexRouteName = Str::before($currentRouteName, '.') . '.index';
+            $indexRouteName = (Str::contains($currentRouteName, 'barang-masuk')
+                    ? 'barang-masuk.index'
+                    : Str::contains($currentRouteName, 'barang-masuk'))
+                ? 'barang-keluar.index'
+                : Str::before($currentRouteName, '.') . '.index';
 
             // Generate the full URL for the "index" route
             $backToIndexUrl = Route::has($indexRouteName) ? route($indexRouteName) : '#';
@@ -61,7 +67,10 @@
                 $indexRouteUrl = route('data-kapal.show', ['data_kapal' => $dataKapal->id]);
             }
 
-            $showCreateButton = $currentRouteName == 'history.index' ? false : $showCreateButton;
+            $showCreateButton =
+                $currentRouteName == 'history.index' || $currentRouteName == 'stock-scrap.index'
+                    ? false
+                    : $showCreateButton;
         }
     @endphp
     @if ($currentRouteName != 'dashboard')

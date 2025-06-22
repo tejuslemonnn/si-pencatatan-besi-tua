@@ -31,7 +31,8 @@
                     $currentDate = Carbon::now()->format('Y/m/d');
                 @endphp
                 <span class="input-group-text" id="basic-addon1">BM-BS-{{ $currentDate }}-</span>
-                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ old('kode') }}">
+                <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ $newKode }}"
+                    readonly>
             </div>
         </div>
 

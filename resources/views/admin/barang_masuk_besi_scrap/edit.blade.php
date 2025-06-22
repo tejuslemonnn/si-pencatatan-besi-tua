@@ -40,7 +40,7 @@
                 @endphp
                 <span class="input-group-text" id="basic-addon1">{{ $kodePrefix }}</span>
                 <input type="text" name="kode" class="form-control" placeholder="Kode" value="{{ $kodeSuffix }}"
-                    id="kode">
+                    id="kode" readonly>
             </div>
         </div>
 
